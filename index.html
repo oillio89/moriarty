@@ -1,0 +1,1933 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Moriarty</title>
+<link rel="manifest" href="data:application/manifest+json;base64,eyJuYW1lIjogIk1vcmlhcnR5IiwgInNob3J0X25hbWUiOiAiTW9yaWFydHkiLCAic3RhcnRfdXJsIjogIi4iLCAiZGlzcGxheSI6ICJzdGFuZGFsb25lIiwgImJhY2tncm91bmRfY29sb3IiOiAiI0Y2RjFFNyIsICJ0aGVtZV9jb2xvciI6ICIjN0M4QjZGIiwgImljb25zIjogW3sic3JjIjogImRhdGE6aW1hZ2UvcG5nO2Jhc2U2NCxpVkJPUncwS0dnb0FBQUFOU1VoRVVnQUFBTUFBQUFEQUNBWUFBQUJTM0d3SEFBQUR3RWxFUVZSNG5PM2RzWTRVUnhSQTBWbi9CdkI3QkphY0l5UkhsaEM1SlFmOEhpQmlFbEtjV1ZxTGhaMlpxdTdxdnVkRXU1dk1hK25kNnRJaysvRHQ2NWZ2RjRqNmJlOEJZRThDSUUwQXBBbUFOQUdRSmdEU0JFQ2FBRWdUQUdrQ0lFMEFwQW1BTkFHUUpnRFNCRUNhQUVnVEFHa0NJRTBBcEFtQU5BR1FKZ0RTQkVDYUFFZ1RBR2tDSUUwQXBBbUFOQUdRSmdEU0JFQ2FBRWdUQUdrQ0lFMEFwQW1BTkFHUUpnRFNCRUNhQUVnVHdNN2VmWGkvOXdocEQvNVQvSDUrLy9PUFI3Ly84OWZmTzAzUzVRMndFeWYvR2dTd2c2ZVdYeFRiY3dYYTBQOFgvTlBIejQ5K2YvbnF4WDgvdjMzOVpwT1o2cndCTm5MdDZlNXRzQTBCYk9EV1pSYkJmQUtZN040bEZzRmNBcGhvMVBLS1lCNEJrQ2FBU1VhZjJ0NENjd2hnZ2xuTEtvTHhCRERZN0NVVndWZ0NHR2lyNVJUQk9BSWdUUUNEYkgwcWV3dU1JWUFCOWxwR0VkeFBBSGZhZXduMy92eWpFd0JwQXJqREtxZnZLbk1ja1FCSUU4Q05WanQxVjV2bktBUndnMVdYYmRXNVZpWUEwZ1J3cGRWUDJkWG5XNDBBU0JQQUZZNXl1aDVsemhVSWdEUUJrQ2FBWnpyYXRlSm84KzVGQUtRSjRCbU9lcG9lZGU0dENZQTBBWkFtZ0Y4NCtqWGk2UFBQSmdEU0JFQ2FBSDdpTE5lSHN6ekhEQUlnVFFDa0NZQTBBVHpoYlBmbXN6M1BLQUlnVFFDa0NZQTBBWkFtQU5JRThBTm4vY2Jrck05MUR3R1FKZ0RTQkVDYUFFZ1RBR2tDSUUwQXBBbUFOQUdRSmdEU0JFQ2FBRWdUQUdrQ0lFMEFwQW1BTkFIOHdOdlhiL1llWVlxelB0YzlCRUNhQUVnVEFHa0NJRTBBcEFuZ0NXZjd4dVJzenpPS0FFZ1RBR2tDSUUwQVAzR1dlL05abm1NR0FaQW1BTklFOEF0SHZ6NGNmZjdaQkVDYUFFZ1R3RE1jOVJweDFMbTNKQURTQlBCTVJ6dE5qemJ2WGdSQW1nQklFOEFWam5LdE9NcWNLeEFBYVFLNDB1cW42K3J6clVZQXBBbmdCcXVlc3F2T3RUSUIzR2kxWlZ0dG5xTVFBR2tDdU1NcXArNHFjeHlSQUVnVHdKMzJQbjMzL3Z5akU4QUFleTJoNWIrZkFBYlplaGt0L3hnQ0lFMEFBMjExS2p2OXh4SEFZTE9YMC9LUEpZQUpaaTJwNVI5UEFKT01YbGJMUDRjQVNCUEFSS05PYmFmL1BBS1k3TjdsdGZ4ekNXQUR0eTZ4NVo5UEFCdTVkcGt0L3pZZXZuMzk4bjN2SVdyZWZYaC91Vnd1bDA4ZlB6LzYrOHRYTHl6K3hyd0JkdkRVa2x2KzdRbGdKNVo5RFFJZ1RRQ2tDWUEwM3dLUjVnMUFtZ0JJRXdCcEFpQk5BS1FKZ0RRQmtDWUEwZ1JBbWdCSUV3QnBBaUJOQUtRSmdEUUJrQ1lBMGdSQW1nQklFd0JwQWlCTkFLUUpnRFFCa0NZQTBnUkFtZ0JJRXdCcEFpQk5BS1FKZ0RRQmtDWUEwZ1JBbWdCSUV3QnBBaUJOQUtUOUN6Vk1zaVVYTDNKY0FBQUFBRWxGVGtTdVFtQ0MiLCAic2l6ZXMiOiAiMTkyeDE5MiIsICJ0eXBlIjogImltYWdlL3BuZyJ9LCB7InNyYyI6ICJkYXRhOmltYWdlL3BuZztiYXNlNjQsaVZCT1J3MEtHZ29BQUFBTlNVaEVVZ0FBQWdBQUFBSUFDQVlBQUFEMGVOVDZBQUFMdTBsRVFWUjRuTzNjUFl0ZVJSaUE0WTM0V3kwRWV4R3NCTEVYTFB5RHFkT2tqY1VHTm9sdmR0K1A4ekV6OTNYMUlYTm1Eanozbk4zazNjY1A3ejg5QVFBcFA1eTlBQURnZUFJQUFJSUVBQUFFQ1FBQUNCSUFBQkFrQUFBZ1NBQUFRSkFBQUlBZ0FRQUFRUUlBQUlJRUFBQUVDUUFBQ0JJQUFCQWtBQUFnU0FBQVFKQUFBSUFnQVFBQVFRSUFBSUlFQUFBRUNRQUFDQklBQUJBa0FBQWdTQUFBUUpBQUFJQWdBUUFBUVFJQUFJSUVBQUFFQ1FBQUNCSUFBQkFrQUFBZ1NBQUFRSkFBQUlBZ0FRQUFRUUlBQUlJRUFBQUVDUUFBQ0JJQUFCQWtBQUFnU0FBQVFKQUFBSUFnQVFBQVFRSUFBSUlFQUFBRUNRQUFDQklBQUJBa0FBQWdTQUFBUUpBQUFJQWdBUUFBUVFJQUFJSUVBQUFFQ1FBQUNCSUFBQkFrQUFBZ1NBQUFRSkFBQUlBZ0FRQUFRUUlBQUlJRUFBQUVDUUFBQ0JJQUFCQWtBQUFnU0FBQVFKQUFBSUFnQVFBQVFRSUFBSUlFQUFBRUNRQUFDQklBQUJBa0FBQWdTQUFBUUpBQUFJQWdBUUFBUVFJQUFJSUVBQUFFQ1FBQUNCSUFBQkFrQUFBZ1NBQUFRSkFBQUlBZ0FRQUFRUUlBQUlJRUFBQUVDUUFBQ0JJQUFCQWtBQUFnU0FBQVFKQUFBSUFnQVFBQVFRSUFBSUlFQUFBRUNRQUFDQklBQUJBa0FBQWdTQUFBUUpBQUFJQWdBUUFBUVFJQUFJSUVBQUFFQ1FBQUNCSUFBQkFrQUFBZ1NBQUFRSkFBQUlBZ0FRQUFRUUlBQUlJRUFBQUVDUUFBQ0JJQUFCQWtBQUFnU0FBQVFOQ1BaeThBMk4vUHYvOXk4NS81NTQrL2QxZ0pNQXBmQUFBZ1NBQUFRSkFBQUlBZ0FRQUFRUUlBRnZmbnYzOGQrdWVBT1FnQVdOaWpRMXdFd0xvRUFDeHFxK0V0QW1CTkFnQVd0UFhRRmdHd0hnRUFpOWxyV0lzQVdJc0FnSVhzUGFSRkFLeERBTUFpamhyT0lnRFdJQUJnQVVjUFpSRUE4eE1BTUxtemhyRUlnTGtKQUpqWTJVUDQ3TDhmdUo4QWdFbU5NbnhIV1Fkd0d3RUFFeHB0Nkk2Mkh1QnRBZ0FtTStxd0hYVmR3R1VDQUNZeStwQWRmWDNBQ3dFQWs1aGx1TTZ5VHFnVEFEQ0IyWWJxYk91RklnRUFnNXQxbU02NmJxZ1FBREN3MllmbzdPdUhsUWtBR05RcXczT1Y1NERWQ0FBQUNCSUFNS0RWYnMyclBRK3NRQURBWUZZZGxxcytGOHhLQU1CQVZoK1NxejhmekVRQXdDQXF3N0h5bkRBNkFRQURxQTNGMnZQQ2lBUUFBQVFKQURoWjlUWmNmVzRZaFFDQUU5V0hZUDM1NFV3Q0FFNWkrRDJ6RDNBT0FRQUFRUUlBVHVEVyt6WDdBY2NUQUhBd3crNHkrd0xIRWdCd0lFUHVkZllIamlNQUFDQklBTUJCM0c2dlk1L2dHQUlBRG1DbzNjWit3ZjRFQUFBRUNRRFltZHZzZmV3YjdFc0F3STRNc2NmWVA5aVBBQUNBSUFFQU8zRjczWVo5aEgwSUFOaUJvYlV0K3duYkV3QUFFQ1FBWUdOdXEvdXdyN0F0QVFBYk1xVDJaWDloT3dJQUFJSUVBR3pFN2ZRWTlobTJJUUFBSUVnQXdBYmNTbzlsditGeEFnQUFnZ1FBUE1odDlCejJIUjRqQU9BQmh0QzU3RC9jVHdBQVFKQUFnRHU1Zlk3Qk9jQjlCQUFBQkFrQXVJTmI1MWljQjl4T0FBQkFrQUNBRzdsdGpzbTV3RzBFQUFBRUNRQzRnVnZtMkp3UFhFOEFBRUNRQUlBcnVWM093VG5CZFFRQUFBUUpBTGlDVytWY25CZThUUUFBUUpBQUFJQWdBUUJ2OERsNVRzNE5YaWNBQUNCSUFNQXIzQ0xuNXZ6Zyt3UUFBQVFKQVBnT3Q4YzFPRWU0VEFBQVFKQUFBSUFnQVFBWCtHeThGdWNKL3ljQUFDQklBTUEzM0JiWDVGemhhd0lBQUlJRUFBQUVDUUQ0Z3MvRWEzTys4RUlBQUVDUUFBQ0FJQUVBbi9rODNPQ2M0WmtBQUlBZ0FRQUFRUUlBbm53V3JuSGVJQUFBSUVrQUFFQ1FBQUNBSUFGQW5wOEhOemwzNmdRQUFBUUpBQUFJRWdDaytRemM1dndwRXdBQUVDUUFBQ0JJQUFCQWtBQWd5ODkvZVhyeUh0QWxBQUFnU0FBQVFKQUFBSUFnQVVDU24vdnlKZThEUlFJQUFJSUVBQUFFQ1FBQUNCSUFBQkFrQU1qeEMxOWM0cjJnUmdBQVFKQUFBSUFnQVFBQVFRSUFBSUlFQUNsKzBZdlhlRDhvRVFBQUVDUUFBQ0JJQUFCQWtBQUFnQ0FCQUFCQkFnQUFnZ1FBR2Y2SkY5ZndubEFoQUFBZ1NBQUFRSkFBQUlBZ0FRQUFRUUlBQUlJRUFBQUVDUUFBQ0JJQUFCQWtBQUFnU0FDUTRIOTM0eGJlRndvRUFBQUVDUUFBQ0JJQUFCQWtBQUFnU0FBQVFKQUFBSUFnQVFBQVFRSUFBSUlFQUFBRUNRQUFDQklBQUJBa0FBQWdTQUFBUUpBQUFJQWdBUUFBUVFJQUFJSUVBQUFFQ1FBQUNCSUFBQkFrQUFBZ1NBQUFRSkFBQUlBZ0FRQUFRUUlBQUlJRUFBQUVDUUFBQ0JJQUpQejIwNjluTDRHSmVGOG9FQUFBRUNRQUFDQklBQUJBa0FBQWdDQUJBQUJCQWdBQWdnUUFBQVFKQUFBSUVnQUFFQ1FBeVBDL3UzRU43d2tWQWdBQWdnUUFBQVFKQUFBSUVnQUFFQ1FBQUNCSUFBQkFrQUFneFQveDRqWGVEMG9FQUFBRUNRQUFDQklBQUJBa0FBQWdTQUNRNHhlOXVNUjdRWTBBQUlBZ0FRQUFRUUlBQUlJRUFBQUVDUUNTL01JWFgvSStVQ1FBQUNCSUFBQkFrQUFBZ0NBQlFKYWYrL0wwNUQyZ1N3QUFRSkFBQUlBZ0FRQUFRUUtBTkQvL2JYUCtsQWtBQUFnU0FBQVFKQURJOHhtNHlibFRKd0FBSUVnQUFFQ1FBQUNBSUFFQVQzNGVYT084UVFBQVFKSUFBSUFnQVFDZitTemM0SnpobVFBQWdDQUJBQUJCQWdDKzRQUHcycHd2dkJBQUFCQWtBQUFnU0FEQU4zd21YcE56aGE4SkFBQUlFZ0J3Z2R2aVdwd24vSjhBQUlBZ0FRQUFRUUlBdnNObjR6VTRSN2hNQUFCQWtBQ0FWN2c5enMzNXdmY0pBQUFJRWdEd0JyZklPVGszZUowQUFJQWdBUUFBUVFJQXJ1Qno4bHljRjd4TkFBQkFrQUNBSzdsVnpzRTV3WFVFQUFBRUNRQzRnZHZsMkp3UFhFOEFBRUNRQUlBYnVXV095Ym5BYlFRQUFBUUpBTGlEMitaWW5BZmNUZ0FBUUpBQWdEdTVkWTdCT2NCOUJBQUFCQWtBZUlEYjU3bnNQOXhQQU1DRERLRnoySGQ0akFBQWdDQUJBQnR3R3oyVy9ZYkhDUUFBQ0JJQXNCRzMwbVBZWjlpR0FBQ0FJQUVBRzNJNzNaZjloZTBJQU5pWUliVVArd3JiRWdBQUVDUUFZQWR1cTl1eW43QTlBUUE3TWJTMllSOWhId0lBQUlJRUFPekk3ZlV4OWcvMkl3QmdaNGJZZmV3YjdFc0FBRUNRQUlBRHVNM2V4bjdCL2dRQUhNUlF1NDU5Z21NSUFBQUlFZ0J3SUxmYjE5a2ZPSTRBZ0lNWmNwZlpGemlXQUlBVEdIWmZzeDl3UEFFQUFFRUNBRTdpMXZ2TVBzQTVCQUNjcUQ3ODZzOFBaeElBY0xMcUVLdytONHhDQUFCQWtBQ0FBZFJ1dzdYbmhSRUpBQmhFWlNoV25oTkdKd0JnSUtzUHg5V2ZEMllpQUdBd3F3N0pWWjhMWmlVQVlFQ3JEY3ZWbmdkV0lBQUFJRWdBd0tCV3VUV3Y4aHl3R2dFQUE1dDllTTYrZmxpWkFJREJ6VHBFWjEwM1ZBZ0FtTUJzdzNTMjlVS1JBSUJKekRKVVoxa24xQWtBbU1qb3czWDA5UUV2QkFCTVp0UWhPK3E2Z01zRUFFeG90R0U3Mm5xQXR3a0FtTlFvUTNlVWRRQzNFUUF3c2JPSDc5bC9QM0EvQVFDVE8yc0lHLzR3TndFQUN6aDZHQnYrTUQ4QkFJczRhaWdiL3JBR0FRQUwyWHM0Ry82d0RnRUFpOWxyU0J2K3NCWUJBQXZhZWxnYi9yQWVBUUNMMm1wb0cvNndKZ0VBQzN0MGVCditzQzRCQUl1N2Q0Z2IvckEyQVFBQVFRSUFBSUlFQUFBRUNRQUFDQklBQUJBa0FBQWdTQUFBUUpBQUFJQWdBUUFBUVFJQUFJSUVBQUFFQ1FBQUNCSUFBQkQwN3VPSDk1L09YZ1FBY0N4ZkFBQWdTQUFBUUpBQUFJQWdBUUFBUVFJQUFJSUVBQUFFQ1FBQUNCSUFBQkFrQUFBZ1NBQUFRSkFBQUlBZ0FRQUFRUUlBQUlJRUFBQUVDUUFBQ0JJQUFCQWtBQUFnU0FBQVFKQUFBSUFnQVFBQVFRSUFBSUlFQUFBRUNRQUFDQklBQUJBa0FBQWdTQUFBUUpBQUFJQWdBUUFBUVFJQUFJSUVBQUFFQ1FBQUNCSUFBQkFrQUFBZ1NBQUFRSkFBQUlBZ0FRQUFRUUlBQUlJRUFBQUVDUUFBQ0JJQUFCQWtBQUFnU0FBQVFKQUFBSUFnQVFBQVFRSUFBSUlFQUFBRUNRQUFDQklBQUJBa0FBQWdTQUFBUUpBQUFJQWdBUUFBUVFJQUFJSUVBQUFFQ1FBQUNCSUFBQkFrQUFBZ1NBQUFRSkFBQUlBZ0FRQUFRUUlBQUlJRUFBQUVDUUFBQ0JJQUFCQWtBQUFnU0FBQVFKQUFBSUFnQVFBQVFRSUFBSUlFQUFBRUNRQUFDQklBQUJBa0FBQWdTQUFBUUpBQUFJQWdBUUFBUVFJQUFJSUVBQUFFQ1FBQUNCSUFBQkFrQUFBZ1NBQUFRSkFBQUlBZ0FRQUFRUUlBQUlJRUFBQUVDUUFBQ0JJQUFCQWtBQUFnU0FBQVFKQUFBSUFnQVFBQVFRSUFBSUlFQUFBRUNRQUFDQklBQUJBa0FBQWdTQUFBUUpBQUFJQWdBUUFBUVFJQUFJTCtBeXJBanFvdWtFQVVBQUFBQUVsRlRrU3VRbUNDIiwgInNpemVzIjogIjUxMng1MTIiLCAidHlwZSI6ICJpbWFnZS9wbmcifV19">
+<link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAYAAAA9zQYyAAADdUlEQVR4nO3dsWoUaxyH4Y14F+rtWQj2IpxKEPsDp/D2VKxtbLWRg5HE7M7Mt/PNm+epsqTYX+DlP8s2ufn+7euPE0Q82XsAbEnQpAiaFEGTImhSBE2KoEkRNCmCJkXQpAiaFEGTImhSBE2KoEkRNCmCJkXQpAiaFEGTImhSBE2KoEkRNCmCJkXQpAiaFEGTImhSBE2KoEkRNCmCJkXQpAiaFEGTImhSBE3K070HPAav/nl96/V/7/7daUmfC02KoAd7//HD3hMeFUEPdF/MIh9H0IM8FK2ox7jxv763dVeonz99ufX6+Ytnt16/fflm6KbHxIXe0NKr61pvR9CkCHoja6+sK70NQW9gqxhFvZ6gV9o6QlGvI+gVRsUn6uUEvdDo6ES9jKBJEfQC17qervTlBH2ha0cm6ssI+gJ7xSXq8wmaFEGfae8ruff7H4WgSRH0GWa5jrPsmJmgHzBbRLPtmY2gSRH0X8x6DWfdNQNBkyJoUgR9j9kf67Pv24ugSRH0HY5y/Y6y85oETYqgSRH0H472GD/a3tEETYqgSRH0b476+D7q7hEETYqgSRE0KYL+5eifQ4++fyuCJkXQpAiaFEGTImhSBH3qfENQ+TvWEDQpgiZF0KQImhRBkyJoUgRNiqBJETQpgiZF0KQImhRBkyJoUgR9Op3evnyz94RNVP6ONQRNiqBJETQpgiZF0KQI+pejf0Nw9P1bETQpgiZF0KQI+jdH/Rx61N0jCJoUQZMi6D8c7fF9tL2jCZoUQZMi6Dsc5TF+lJ3XJGhSBH2P2a/f7Pv2ImhSBE2KoP9i1sf6rLtmIGhSBP2A2a7hbHtmI+gzzBLRLDtmJmhSBH2mva/j3u9/FIImRdAX2OtKus7nE/SFrh2XmC8j6AWuFZmYLydoUgS90Ojr6TovI+gVRkUn5uUEvdLW8Yl5HUFvYKsIxbyeoDeyNkYxb0PQpAh6Q0uvrOu8nZvv377+2HtE0fuPH/7/+fOnL7d+9/zFs9PpJOQRXOhBHopVzGMIeqD7ohXzOIIeTLzXJWhSBE2KoEkRNCm+hybFhSZF0KQImhRBkyJoUgRNiqBJETQpgiZF0KQImhRBkyJoUgRNiqBJETQpgiZF0KQImhRBkyJoUgRNiqBJETQpgiZF0KQImhRBkyJoUgRNiqBJETQpgiZF0KT8BMpooJs4aI3gAAAAAElFTkSuQmCC">
+<link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAYAAAA9zQYyAAADdUlEQVR4nO3dsWoUaxyH4Y14F+rtWQj2IpxKEPsDp/D2VKxtbLWRg5HE7M7Mt/PNm+epsqTYX+DlP8s2ufn+7euPE0Q82XsAbEnQpAiaFEGTImhSBE2KoEkRNCmCJkXQpAiaFEGTImhSBE2KoEkRNCmCJkXQpAiaFEGTImhSBE2KoEkRNCmCJkXQpAiaFEGTImhSBE2KoEkRNCmCJkXQpAiaFEGTImhSBE3K070HPAav/nl96/V/7/7daUmfC02KoAd7//HD3hMeFUEPdF/MIh9H0IM8FK2ox7jxv763dVeonz99ufX6+Ytnt16/fflm6KbHxIXe0NKr61pvR9CkCHoja6+sK70NQW9gqxhFvZ6gV9o6QlGvI+gVRsUn6uUEvdDo6ES9jKBJEfQC17qervTlBH2ha0cm6ssI+gJ7xSXq8wmaFEGfae8ruff7H4WgSRH0GWa5jrPsmJmgHzBbRLPtmY2gSRH0X8x6DWfdNQNBkyJoUgR9j9kf67Pv24ugSRH0HY5y/Y6y85oETYqgSRH0H472GD/a3tEETYqgSRH0b476+D7q7hEETYqgSRE0KYL+5eifQ4++fyuCJkXQpAiaFEGTImhSBH3qfENQ+TvWEDQpgiZF0KQImhRBkyJoUgRNiqBJETQpgiZF0KQImhRBkyJoUgR9Op3evnyz94RNVP6ONQRNiqBJETQpgiZF0KQI+pejf0Nw9P1bETQpgiZF0KQI+jdH/Rx61N0jCJoUQZMi6D8c7fF9tL2jCZoUQZMi6Dsc5TF+lJ3XJGhSBH2P2a/f7Pv2ImhSBE2KoP9i1sf6rLtmIGhSBP2A2a7hbHtmI+gzzBLRLDtmJmhSBH2mva/j3u9/FIImRdAX2OtKus7nE/SFrh2XmC8j6AWuFZmYLydoUgS90Ojr6TovI+gVRkUn5uUEvdLW8Yl5HUFvYKsIxbyeoDeyNkYxb0PQpAh6Q0uvrOu8nZvv377+2HtE0fuPH/7/+fOnL7d+9/zFs9PpJOQRXOhBHopVzGMIeqD7ohXzOIIeTLzXJWhSBE2KoEkRNCm+hybFhSZF0KQImhRBkyJoUgRNiqBJETQpgiZF0KQImhRBkyJoUgRNiqBJETQpgiZF0KQImhRBkyJoUgRNiqBJETQpgiZF0KQImhRBkyJoUgRNiqBJETQpgiZF0KT8BMpooJs4aI3gAAAAAElFTkSuQmCC">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Moriarty">
+<meta name="theme-color" id="themeColorMeta" content="#7C8B6F">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=Libre+Franklin:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #F6F1E7;
+    --paper-raised: #FFFDF8;
+    --ink: #3A3226;
+    --ink-soft: #6B6252;
+    --line: #DCD3BE;
+    --line-soft: #E7DFCB;
+    --sage: #7C8B6F;
+    --sage-soft: #E7EEE3;
+    --clay: #C97B5A;
+    --clay-soft: #F3E1D8;
+    --gold: #B08D28;
+    --gold-soft: #F3EAC9;
+    --danger: #B0503A;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #221F19;
+      --paper-raised: #2B2720;
+      --ink: #EFE8D8;
+      --ink-soft: #B5AB93;
+      --line: #423C2E;
+      --line-soft: #38332777;
+      --sage: #96A688;
+      --sage-soft: #303A2B;
+      --clay: #D89572;
+      --clay-soft: #3B2C24;
+      --gold: #D6B655;
+      --gold-soft: #3A331E;
+      --danger: #D07A61;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #221F19;
+    --paper-raised: #2B2720;
+    --ink: #EFE8D8;
+    --ink-soft: #B5AB93;
+    --line: #423C2E;
+    --line-soft: #38332777;
+    --sage: #96A688;
+    --sage-soft: #303A2B;
+    --clay: #D89572;
+    --clay-soft: #3B2C24;
+    --gold: #D6B655;
+    --gold-soft: #3A331E;
+    --danger: #D07A61;
+  }
+
+  /* ---- Tide (blue) color preset ---- */
+  :root[data-color="blue"] {
+    --paper: #F2F6FA;
+    --paper-raised: #FFFFFF;
+    --ink: #24313E;
+    --ink-soft: #64768A;
+    --line: #D6E2EC;
+    --line-soft: #E5EEF5;
+    --sage: #3E6E96;
+    --sage-soft: #E1EBF3;
+    --clay: #2B5578;
+    --clay-soft: #DCE9F2;
+    --gold: #5C87AC;
+    --gold-soft: #E6EFF6;
+    --danger: #B0503A;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root[data-color="blue"]:not([data-theme="light"]) {
+      --paper: #161C24;
+      --paper-raised: #1E2630;
+      --ink: #E4ECF3;
+      --ink-soft: #93A5B8;
+      --line: #2E3B48;
+      --line-soft: #26313D77;
+      --sage: #6E9BC2;
+      --sage-soft: #24354532;
+      --clay: #8FB4D8;
+      --clay-soft: #1C2E3E;
+      --gold: #7DA3C4;
+      --gold-soft: #1E2E3D;
+      --danger: #D07A61;
+    }
+  }
+  :root[data-color="blue"][data-theme="dark"] {
+    --paper: #161C24;
+    --paper-raised: #1E2630;
+    --ink: #E4ECF3;
+    --ink-soft: #93A5B8;
+    --line: #2E3B48;
+    --line-soft: #26313D77;
+    --sage: #6E9BC2;
+    --sage-soft: #24354532;
+    --clay: #8FB4D8;
+    --clay-soft: #1C2E3E;
+    --gold: #7DA3C4;
+    --gold-soft: #1E2E3D;
+    --danger: #D07A61;
+  }
+
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html, body { height: 100%; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Libre Franklin', sans-serif;
+    overscroll-behavior-y: contain;
+  }
+  h1, h2, h3, .serif { font-family: 'Source Serif 4', serif; }
+
+  #app {
+    max-width: 520px;
+    margin: 0 auto;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 84px;
+  }
+
+  /* ---------- Header ---------- */
+  .app-header {
+    padding: max(20px, env(safe-area-inset-top)) 20px 14px;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+  }
+  .app-header .mark { display: flex; align-items: center; gap: 8px; }
+  .app-header .mark-icon { width: 26px; height: 26px; flex: none; }
+  .app-header .mark-text {
+    font-family: 'Source Serif 4', serif;
+    font-weight: 600;
+    font-size: 19px;
+    letter-spacing: 0.01em;
+  }
+  .app-header .date { font-size: 12px; color: var(--ink-soft); }
+
+  /* ---------- Views ---------- */
+  .view { display: none; padding: 4px 20px 20px; }
+  .view.active { display: block; }
+
+  .greeting { font-size: 24px; font-weight: 600; margin: 4px 0 20px; }
+
+  .divider { border: none; border-top: 1px solid var(--line); margin: 22px 0; position: relative; }
+  .divider::after {
+    content: "❧"; position: absolute; left: 50%; top: -9px; transform: translateX(-50%);
+    background: var(--paper); padding: 0 8px; color: var(--sage); font-size: 13px;
+  }
+
+  .section-label {
+    font-family: 'Source Serif 4', serif; font-style: italic; font-weight: 600;
+    font-size: 13px; color: var(--sage); margin: 0 0 12px;
+  }
+
+  /* ---------- Cards ---------- */
+  .card {
+    background: var(--paper-raised);
+    border: 1px solid var(--line-soft);
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 14px;
+  }
+  .card-title { font-size: 14px; font-weight: 600; margin: 0 0 2px; }
+  .card-sub { font-size: 12px; color: var(--ink-soft); margin: 0; }
+
+  .stat-row { display: flex; gap: 12px; }
+  .stat-box { flex: 1; }
+  .stat-num { font-family: 'Source Serif 4', serif; font-size: 26px; font-weight: 600; line-height: 1.1; }
+  .stat-num.clay { color: var(--clay); }
+  .stat-num.sage { color: var(--sage); }
+  .stat-label { font-size: 11px; color: var(--ink-soft); margin-top: 2px; }
+
+  .today-nav-btn {
+    width: 100%; text-align: left; background: var(--paper-raised);
+    border: 1px solid var(--line-soft); border-radius: 8px; padding: 14px 16px;
+    font-family: inherit; font-size: 13.5px; color: var(--ink); margin-bottom: 10px;
+    display: flex; align-items: center; justify-content: space-between; cursor: pointer;
+  }
+  .today-nav-btn .arrow { color: var(--ink-soft); }
+
+  /* ---------- Entry rows (habits) ---------- */
+  .entry {
+    display: flex; align-items: center; gap: 12px; padding: 11px 0;
+    border-bottom: 1px dashed var(--line);
+  }
+  .entry:last-child { border-bottom: none; }
+  .check {
+    width: 22px; height: 22px; border-radius: 50%; border: 1.5px solid #B9AF95;
+    flex: none; cursor: pointer; position: relative; background: transparent;
+  }
+  .check.done { background: var(--sage); border-color: var(--sage); }
+  .check.done::after {
+    content: "✓"; position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+    color: var(--paper-raised); font-size: 12px;
+  }
+  .entry-body { flex: 1; }
+  .entry-title { font-size: 13.5px; }
+  .entry-sub { font-size: 11px; color: var(--ink-soft); margin-top: 1px; }
+  .entry-del {
+    background: none; border: none; color: var(--ink-soft); font-size: 16px; cursor: pointer; padding: 4px;
+  }
+
+  .add-habit-row { display: flex; gap: 8px; margin-top: 10px; }
+  .add-habit-row input {
+    flex: 1; border: 1px solid var(--line); background: var(--paper); border-radius: 6px;
+    padding: 9px 10px; font-family: inherit; font-size: 13px; color: var(--ink);
+  }
+  .btn {
+    border: none; border-radius: 6px; padding: 9px 14px; font-family: inherit;
+    font-size: 13px; font-weight: 600; cursor: pointer;
+  }
+  .btn-sage { background: var(--sage); color: var(--paper-raised); }
+  .btn-clay { background: var(--clay); color: var(--paper-raised); }
+  .btn-ghost { background: transparent; color: var(--sage); border: 1px solid var(--sage); }
+  .btn-block { width: 100%; }
+
+  /* ---------- Weight ---------- */
+  .weight-form { display: flex; gap: 8px; align-items: flex-end; margin-bottom: 4px; }
+  .field { flex: 1; }
+  .field label { display: block; font-size: 11px; color: var(--ink-soft); margin-bottom: 4px; }
+  .field input, .field select {
+    width: 100%; border: 1px solid var(--line); background: var(--paper); border-radius: 6px;
+    padding: 9px 10px; font-family: inherit; font-size: 13.5px; color: var(--ink);
+  }
+  .sparkline-wrap { margin: 14px 0 4px; }
+  .weight-list-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 9px 0; border-bottom: 1px dashed var(--line); font-size: 13px;
+  }
+  .weight-list-row:last-child { border-bottom: none; }
+  .weight-list-date { color: var(--ink-soft); font-size: 11.5px; }
+  .weight-list-val { font-family: 'Source Serif 4', serif; font-weight: 600; }
+  .diff-up { color: var(--clay); }
+  .diff-down { color: var(--sage); }
+
+  /* ---------- Bowel log ---------- */
+  .bristol-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 12px; }
+  .bristol-opt {
+    border: 1.5px solid var(--line); background: var(--paper); border-radius: 8px;
+    padding: 10px 4px; text-align: center; cursor: pointer; font-size: 10.5px; color: var(--ink-soft);
+  }
+  .bristol-opt .n { font-family: 'Source Serif 4', serif; font-size: 15px; color: var(--ink); display: block; margin-bottom: 2px; }
+  .bristol-opt.selected { border-color: var(--clay); background: var(--clay-soft); color: var(--ink); }
+  .bristol-opt.none-opt { grid-column: span 4; display: flex; align-items: center; justify-content: center; gap: 6px; padding: 9px 4px; }
+  .bristol-opt.none-opt .n { display: inline; margin-bottom: 0; }
+  .bristol-opt.none-opt.selected { border-color: var(--sage); background: var(--sage-soft); }
+  .bowel-note {
+    width: 100%; border: 1px solid var(--line); background: var(--paper); border-radius: 6px;
+    padding: 9px 10px; font-family: inherit; font-size: 13px; color: var(--ink); resize: none; margin-bottom: 10px;
+  }
+  .bowel-row {
+    display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px dashed var(--line);
+  }
+  .bowel-row:last-child { border-bottom: none; }
+  .bowel-badge {
+    width: 30px; height: 30px; border-radius: 50%; background: var(--clay-soft); color: var(--clay);
+    display: flex; align-items: center; justify-content: center; font-family: 'Source Serif 4', serif;
+    font-weight: 600; font-size: 13px; flex: none;
+  }
+  .bowel-time { font-size: 11.5px; color: var(--ink-soft); }
+  .bowel-note-text { font-size: 12.5px; margin-top: 2px; }
+
+  .empty-note {
+    font-family: 'Source Serif 4', serif; font-style: italic; font-size: 12.5px;
+    color: var(--ink-soft); text-align: center; padding: 10px 0;
+  }
+
+  /* ---------- Well-being ---------- */
+  .back-link {
+    background: none; border: none; font-family: inherit; font-size: 12.5px; color: var(--sage);
+    padding: 0; margin-bottom: 10px; cursor: pointer;
+  }
+  .wb-due-row {
+    display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px dashed var(--line);
+  }
+  .wb-due-row:last-child { border-bottom: none; }
+  .wb-due-icon { font-size: 17px; flex: none; }
+  .wb-due-body { flex: 1; }
+  .wb-due-title { font-size: 13px; }
+  .wb-due-sub { font-size: 11px; color: var(--ink-soft); }
+  .wb-due-badge { font-size: 10px; padding: 3px 8px; border-radius: 999px; background: var(--clay-soft); color: var(--clay); font-weight: 600; }
+
+  .wb-space-card { background: var(--paper-raised); border: 1px solid var(--line-soft); border-radius: 8px; margin-bottom: 12px; overflow: hidden; }
+  .wb-space-header {
+    display: flex; align-items: center; gap: 10px; padding: 14px 16px; cursor: pointer;
+  }
+  .wb-space-icon { font-size: 18px; flex: none; }
+  .wb-space-name { flex: 1; font-size: 14px; font-weight: 600; }
+  .wb-space-count { font-size: 11px; color: var(--ink-soft); }
+  .wb-space-chevron { color: var(--ink-soft); font-size: 12px; transition: transform 0.15s ease; }
+  .wb-space-body { display: none; padding: 0 16px 14px; }
+  .wb-space-card.open .wb-space-body { display: block; }
+  .wb-space-card.open .wb-space-chevron { transform: rotate(90deg); }
+
+  .wb-task-row {
+    display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px dashed var(--line);
+  }
+  .wb-task-row:last-child { border-bottom: none; }
+  .wb-task-body { flex: 1; }
+  .wb-task-name { font-size: 13px; }
+  .wb-task-freq { font-size: 11px; color: var(--ink-soft); margin-top: 1px; }
+  .wb-task-status { font-size: 10.5px; font-weight: 600; margin-top: 2px; }
+  .wb-task-status.due { color: var(--clay); }
+  .wb-task-status.overdue { color: var(--danger); }
+  .wb-task-status.ok { color: var(--sage); }
+
+  .wb-add-task-row { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--line-soft); }
+  .wb-add-task-row .row2 { display: flex; gap: 8px; }
+  .wb-add-task-row input, .wb-add-task-row select {
+    border: 1px solid var(--line); background: var(--paper); border-radius: 6px;
+    padding: 8px 9px; font-family: inherit; font-size: 12.5px; color: var(--ink);
+  }
+  .wb-space-remove { background: none; border: none; color: var(--ink-soft); font-size: 15px; cursor: pointer; }
+
+  /* ---------- Insights ---------- */
+  .mood-chart { display: flex; align-items: flex-end; gap: 4px; height: 90px; }
+  .mood-bar-wrap { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; gap: 4px; }
+  .mood-bar { width: 100%; border-radius: 4px 4px 2px 2px; background: var(--line); }
+  .mood-bar.has-value { background: var(--sage); }
+  .mood-bar-label { font-size: 8.5px; color: var(--ink-soft); }
+  .insight-line { font-size: 12px; color: var(--ink-soft); margin-top: 10px; text-align: center; }
+  .insight-row { display: flex; justify-content: space-between; align-items: center; padding: 9px 0; border-bottom: 1px dashed var(--line); }
+  .insight-row:last-child { border-bottom: none; }
+  .insight-name { font-size: 13px; }
+  .insight-bar-track { flex: 1; height: 6px; background: var(--line); border-radius: 3px; margin: 0 10px; overflow: hidden; }
+  .insight-bar-fill { height: 100%; background: var(--sage); }
+  .insight-pct { font-size: 12px; color: var(--ink-soft); width: 34px; text-align: right; flex: none; }
+  .bowel-type-row { display: flex; justify-content: space-between; font-size: 13px; padding: 6px 0; }
+
+  /* ---------- News ---------- */
+  .news-card { background: var(--paper-raised); border: 1px solid var(--line-soft); border-radius: 8px; padding: 14px 16px; margin-bottom: 12px; }
+  .news-cat { font-size: 11px; color: var(--sage); font-weight: 600; margin-bottom: 4px; }
+  .news-headline { font-size: 14px; font-weight: 600; line-height: 1.4; margin-bottom: 6px; }
+  .news-summary { font-size: 13px; line-height: 1.55; color: var(--ink); margin-bottom: 10px; }
+  .news-footer { display: flex; justify-content: space-between; align-items: center; }
+  .news-source { font-size: 11.5px; color: var(--ink-soft); text-decoration: none; border-bottom: 1px dotted var(--ink-soft); }
+  .news-lang-btn {
+    background: var(--sage-soft); color: var(--sage); border: none; border-radius: 999px;
+    padding: 4px 10px; font-size: 11px; font-weight: 600; cursor: pointer; font-family: inherit;
+  }
+  .trivia-card { background: var(--clay-soft); border-color: var(--clay); }
+  .trivia-text { font-size: 13.5px; line-height: 1.55; margin-bottom: 10px; }
+
+  /* ---------- Health sub-tabs ---------- */
+  .subtabs { display: flex; gap: 6px; margin-bottom: 16px; }
+  .subtab {
+    flex: 1; text-align: center; padding: 8px 4px; border-radius: 6px; border: 1px solid var(--line);
+    background: var(--paper-raised); font-family: inherit; font-size: 12px; color: var(--ink-soft); cursor: pointer;
+  }
+  .subtab.active { background: var(--sage); border-color: var(--sage); color: var(--paper-raised); font-weight: 600; }
+  .subview { display: none; }
+  .subview.active { display: block; }
+
+  /* ---------- More / pillar grid ---------- */
+  .pillar-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .pillar-card {
+    background: var(--paper-raised); border: 1px solid var(--line-soft); border-radius: 8px;
+    padding: 16px 12px; text-align: center; cursor: pointer;
+  }
+  .mood-card { text-align: center; }
+  .mood-row { display: flex; justify-content: space-between; gap: 6px; margin-top: 10px; }
+  .mood-btn {
+    flex: 1; background: var(--paper); border: 1.5px solid var(--line); border-radius: 10px;
+    padding: 10px 2px 8px; cursor: pointer; font-family: inherit; display: flex; flex-direction: column;
+    align-items: center; gap: 4px;
+  }
+  .mood-btn .emoji { font-size: 22px; }
+  .mood-btn .label { font-size: 9.5px; color: var(--ink-soft); }
+  .mood-btn.selected { border-color: var(--sage); background: var(--sage-soft); }
+  .mood-btn.selected .label { color: var(--ink); font-weight: 600; }
+
+  .fortune-card { background: var(--gold-soft); border-color: var(--gold); }
+  .fortune-label { font-family: 'Source Serif 4', serif; font-style: italic; font-weight: 600; font-size: 13px; color: var(--ink); margin-bottom: 8px; }
+  .fortune-text { font-size: 13.5px; line-height: 1.5; margin-bottom: 10px; }
+  .fortune-shuffle {
+    background: none; border: 1px solid var(--gold); color: var(--ink); border-radius: 999px;
+    padding: 6px 12px; font-family: inherit; font-size: 11.5px; cursor: pointer;
+  }
+  .fortune-subtitle { font-size: 11.5px; color: var(--ink-soft); margin: -4px 0 10px; }
+
+
+  .theme-swatches { display: flex; gap: 10px; margin-top: 6px; }
+  .theme-swatch {
+    flex: 1; border: 1.5px solid var(--line); background: var(--paper); border-radius: 8px;
+    padding: 12px 8px; text-align: center; cursor: pointer; font-family: inherit; font-size: 12px; color: var(--ink-soft);
+  }
+  .theme-swatch.active { border-color: var(--sage); background: var(--sage-soft); color: var(--ink); font-weight: 600; }
+  .theme-swatch .dots { display: flex; justify-content: center; gap: 4px; margin-bottom: 6px; }
+  .theme-swatch .dot { width: 14px; height: 14px; border-radius: 50%; }
+  .pillar-card .icon { font-size: 22px; margin-bottom: 6px; }
+  .pillar-card .name { font-size: 12.5px; font-weight: 600; }
+  .pillar-card .soon { font-size: 10px; color: var(--ink-soft); margin-top: 2px; }
+
+  /* ---------- Bottom nav ---------- */
+  .navbar {
+    position: fixed; left: 0; right: 0; bottom: 0;
+    display: flex; justify-content: center;
+    background: var(--paper-raised);
+    border-top: 1px solid var(--line-soft);
+    padding: 8px max(16px, env(safe-area-inset-left)) max(10px, env(safe-area-inset-bottom));
+    z-index: 20;
+  }
+  .navbar-inner { display: flex; gap: 8px; max-width: 520px; width: 100%; }
+  .nav-btn {
+    flex: 1; background: none; border: none; font-family: inherit; padding: 6px 4px;
+    display: flex; flex-direction: column; align-items: center; gap: 2px; cursor: pointer; color: var(--ink-soft);
+  }
+  .nav-btn .icon { font-size: 19px; }
+  .nav-btn .label { font-size: 10.5px; }
+  .nav-btn.active { color: var(--sage); }
+
+  /* ---------- Toast ---------- */
+  .toast {
+    position: fixed; left: 50%; bottom: 90px; transform: translateX(-50%) translateY(20px);
+    background: var(--ink); color: var(--paper); font-size: 12.5px; padding: 10px 16px;
+    border-radius: 20px; opacity: 0; transition: all 0.25s ease; pointer-events: none; z-index: 30;
+    max-width: 80%; text-align: center;
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  ::-webkit-scrollbar { display: none; }
+
+  /* ---------- Auth gate (optional Supabase sign-in) ---------- */
+  #authGate {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 100;
+    display: flex; align-items: center; justify-content: center; padding: 20px;
+  }
+  .auth-wrap { width: 100%; max-width: 360px; }
+  .auth-card {
+    background: var(--paper-raised); border: 1px solid var(--line-soft); border-radius: 12px; padding: 24px 20px;
+  }
+  .auth-status { font-size: 12px; color: var(--ink-soft); text-align: center; margin-top: 10px; min-height: 16px; }
+</style>
+</head>
+<body>
+<div id="authGate" style="display:none;">
+  <div class="auth-wrap">
+    <div class="auth-card">
+      <div class="mark" style="justify-content:center; margin-bottom:14px;">
+        <svg class="mark-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="16" cy="16" r="15" stroke="var(--sage)" stroke-width="1.4"/>
+          <path d="M16 24C16 24 9 20.5 9 13.8C9 10.6 11.2 8 14.3 8C15.9 8 16 9.4 16 9.4C16 9.4 16.1 8 17.7 8C20.8 8 23 10.6 23 13.8C23 20.5 16 24 16 24Z" fill="var(--sage-soft)" stroke="var(--sage)" stroke-width="1.2" stroke-linejoin="round"/>
+          <path d="M16 24V11.5" stroke="var(--sage)" stroke-width="1.1" stroke-linecap="round"/>
+        </svg>
+        <div class="mark-text">Moriarty</div>
+      </div>
+      <div class="card-title" style="text-align:center;">Sign in to sync your data</div>
+      <div class="card-sub" style="text-align:center; margin-bottom:16px;">No password — we'll email you a magic link.</div>
+      <div class="field" style="margin-bottom:10px;">
+        <label>Email</label>
+        <input type="email" id="authEmail" placeholder="you@example.com">
+      </div>
+      <button class="btn btn-sage btn-block" onclick="sendMagicLink()">Send magic link</button>
+      <div class="auth-status" id="authStatus"></div>
+      <button class="btn-ghost btn-block" style="margin-top:10px; border:none;" onclick="document.getElementById('authGate').style.display='none';">Continue without an account →</button>
+    </div>
+  </div>
+</div>
+
+<div id="app">
+
+
+  <div class="app-header">
+    <div class="mark">
+      <svg class="mark-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="16" cy="16" r="15" stroke="var(--sage)" stroke-width="1.4"/>
+        <path d="M16 24C16 24 9 20.5 9 13.8C9 10.6 11.2 8 14.3 8C15.9 8 16 9.4 16 9.4C16 9.4 16.1 8 17.7 8C20.8 8 23 10.6 23 13.8C23 20.5 16 24 16 24Z" fill="var(--sage-soft)" stroke="var(--sage)" stroke-width="1.2" stroke-linejoin="round"/>
+        <path d="M16 24V11.5" stroke="var(--sage)" stroke-width="1.1" stroke-linecap="round"/>
+      </svg>
+      <div class="mark-text">Moriarty</div>
+    </div>
+    <div class="date" id="headerDate"></div>
+  </div>
+
+  <!-- TODAY -->
+  <div class="view active" id="view-today">
+    <div class="greeting" id="greetingText">Good morning</div>
+
+    <div class="card mood-card">
+      <div class="card-title">How are you feeling today?</div>
+      <div class="mood-row" id="moodRow"></div>
+    </div>
+
+    <div class="card fortune-card">
+      <div class="fortune-label">🔮 Today's little fortune</div>
+      <div class="fortune-subtitle" id="fortuneSubtitle"></div>
+      <div class="fortune-text" id="fortuneText"></div>
+      <button class="fortune-shuffle" onclick="shuffleFortune()">🔀 Shuffle for fun</button>
+    </div>
+
+    <div class="section-label">Health snapshot</div>
+    <div class="card">
+      <div class="stat-row">
+        <div class="stat-box">
+          <div class="stat-num clay" id="snapWeight">—</div>
+          <div class="stat-label" id="snapWeightLabel">No weight logged yet</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num sage" id="snapHabits">0/0</div>
+          <div class="stat-label">Habits done today</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num" id="snapBowel">0</div>
+          <div class="stat-label">Log entries today</div>
+        </div>
+      </div>
+    </div>
+
+    <button class="today-nav-btn" onclick="goTo('health')">
+      <span>🌱 Open Health</span><span class="arrow">→</span>
+    </button>
+
+    <hr class="divider">
+    <div class="section-label">Well-being</div>
+    <div class="card" id="wbTodayCard" onclick="goTo('wellbeing')" style="cursor:pointer;"></div>
+
+    <div class="section-label" style="margin-top:18px;">Other pillars</div>
+    <div class="empty-note">Wealth, Mind, Career and more are coming in future iterations — tap "More" below for a preview.</div>
+  </div>
+
+  <!-- HEALTH -->
+  <div class="view" id="view-health">
+    <div class="greeting">Health 🌱</div>
+
+    <div class="subtabs">
+      <button class="subtab active" data-sub="habits" onclick="setHealthSub('habits')">Habits</button>
+      <button class="subtab" data-sub="weight" onclick="setHealthSub('weight')">Weight</button>
+      <button class="subtab" data-sub="bowel" onclick="setHealthSub('bowel')">Bowel log</button>
+    </div>
+
+    <!-- Habits -->
+    <div class="subview active" id="sub-habits">
+      <div class="card" id="habitsCard">
+        <div id="habitsList"></div>
+        <div class="add-habit-row">
+          <input type="text" id="newHabitInput" placeholder="Add a health habit…" maxlength="40">
+          <button class="btn btn-sage" onclick="addHabit()">Add</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Weight -->
+    <div class="subview" id="sub-weight">
+      <div class="card">
+        <div class="card-title">Log today's weight</div>
+        <div class="card-sub" style="margin-bottom:12px;">Track how your weight moves over time</div>
+        <div class="weight-form">
+          <div class="field">
+            <label>Weight</label>
+            <input type="number" id="weightInput" inputmode="decimal" step="0.1" placeholder="e.g. 68.5">
+          </div>
+          <div class="field" style="flex:0 0 78px;">
+            <label>Unit</label>
+            <select id="weightUnit">
+              <option value="kg">kg</option>
+              <option value="lb">lb</option>
+            </select>
+          </div>
+          <button class="btn btn-clay" onclick="addWeight()" style="height:38px;">Save</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Trend</div>
+        <div class="sparkline-wrap" id="sparklineWrap"></div>
+        <div id="weightList"></div>
+      </div>
+    </div>
+
+    <!-- Bowel -->
+    <div class="subview" id="sub-bowel">
+      <div class="card">
+        <div class="card-title">New entry</div>
+        <div class="card-sub" style="margin-bottom:12px;">Bristol stool scale — tap the closest match</div>
+        <div class="bristol-grid" id="bristolGrid"></div>
+        <textarea class="bowel-note" id="bowelNoteInput" rows="2" placeholder="Optional note…"></textarea>
+        <button class="btn btn-clay btn-block" onclick="addBowel()">Save entry</button>
+      </div>
+      <div class="card">
+        <div class="card-title">Today's log</div>
+        <div id="bowelList"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WELL-BEING -->
+  <div class="view" id="view-wellbeing">
+    <button class="back-link" onclick="goTo('more')">← More</button>
+    <div class="greeting">Well-being 🌤️</div>
+    <div class="card-sub" style="margin:-10px 0 18px;">Keeping your spaces cared for</div>
+
+    <div class="section-label">Due today</div>
+    <div class="card" id="wbDueCard"></div>
+
+    <hr class="divider">
+    <div class="section-label">Spaces</div>
+    <div id="wbSpaces"></div>
+
+    <div class="card">
+      <div class="add-habit-row">
+        <input type="text" id="newSpaceInput" placeholder="Add a space (e.g. Balcony)…" maxlength="30">
+        <button class="btn btn-sage" onclick="addSpace()">Add</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- INSIGHTS -->
+  <div class="view" id="view-insights">
+    <button class="back-link" onclick="goTo('more')">← More</button>
+    <div class="greeting">Insights 📊</div>
+    <div class="card-sub" style="margin:-10px 0 18px;">A look back at the last couple of weeks</div>
+
+    <div class="section-label">Mood — last 14 days</div>
+    <div class="card">
+      <div class="mood-chart" id="moodChart"></div>
+      <div class="insight-line" id="moodAvgLine"></div>
+    </div>
+
+    <hr class="divider">
+    <div class="section-label">Habits — last 7 days</div>
+    <div class="card" id="habitInsightsCard"></div>
+
+    <hr class="divider">
+    <div class="section-label">Weight</div>
+    <div class="card" id="weightInsightsCard"></div>
+
+    <hr class="divider">
+    <div class="section-label">Bowel log — last 7 days</div>
+    <div class="card" id="bowelInsightsCard"></div>
+  </div>
+
+  <!-- NEWS -->
+  <div class="view" id="view-news">
+    <button class="back-link" onclick="goTo('more')">← More</button>
+    <div class="greeting">News 📰</div>
+    <div class="card-sub" id="newsUpdatedLine" style="margin:-10px 0 18px;"></div>
+
+    <div class="section-label">Today's world roundup</div>
+    <div id="newsList"></div>
+
+    <hr class="divider">
+    <div class="section-label">🧠 Random know-how</div>
+    <div class="card trivia-card">
+      <div class="trivia-text" id="triviaText"></div>
+      <button class="fortune-shuffle" onclick="shuffleTrivia()">🔀 Another one</button>
+    </div>
+
+    <div class="empty-note" style="margin-top:16px;">These headlines are a snapshot from when this was last put together — ask in chat any time to refresh them with the latest news.</div>
+  </div>
+
+  <!-- MORE -->
+  <div class="view" id="view-more">
+    <div class="greeting">Your pillars</div>
+    <div class="pillar-grid" id="pillarGrid"></div>
+
+    <button class="today-nav-btn" onclick="goTo('insights')" style="margin-top:14px;">
+      <span>📊 Insights</span><span class="arrow">→</span>
+    </button>
+
+    <hr class="divider">
+    <div class="section-label">Data & Sync</div>
+    <div class="card" id="syncCard"></div>
+    <div class="card">
+      <div class="card-title">Backup</div>
+      <div class="card-sub" style="margin-bottom:12px;">Save a copy of everything you've logged, or restore from one.</div>
+      <div style="display:flex; gap:8px;">
+        <button class="btn btn-sage" style="flex:1;" onclick="exportBackup()">⬇️ Export</button>
+        <button class="btn btn-ghost" style="flex:1;" onclick="document.getElementById('importFileInput').click();">⬆️ Import</button>
+      </div>
+      <input type="file" id="importFileInput" accept="application/json,.json" style="display:none;" onchange="importBackup(event)">
+      <div id="backupTextWrap" style="display:none; margin-top:12px;">
+        <div class="card-sub" style="margin-bottom:6px;">If the download didn't start, copy the text below and save it as a .json file yourself:</div>
+        <textarea id="backupTextArea" readonly rows="6" style="width:100%; font-family:monospace; font-size:11px; border:1px solid var(--line); border-radius:6px; padding:8px; background:var(--paper); color:var(--ink);"></textarea>
+      </div>
+    </div>
+
+    <hr class="divider">
+    <div class="section-label">Appearance</div>
+    <div class="card">
+      <div class="card-title">Color preset</div>
+      <div class="card-sub">Choose the palette that feels right</div>
+      <div class="theme-swatches">
+        <button class="theme-swatch" id="swatch-meadow" onclick="setColorTheme('meadow')">
+          <div class="dots"><span class="dot" style="background:#7C8B6F;"></span><span class="dot" style="background:#C97B5A;"></span><span class="dot" style="background:#B08D28;"></span></div>
+          Meadow
+        </button>
+        <button class="theme-swatch" id="swatch-blue" onclick="setColorTheme('blue')">
+          <div class="dots"><span class="dot" style="background:#3E6E96;"></span><span class="dot" style="background:#2B5578;"></span><span class="dot" style="background:#5C87AC;"></span></div>
+          Tide
+        </button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="navbar">
+  <div class="navbar-inner">
+    <button class="nav-btn active" data-view="today" onclick="goTo('today')">
+      <span class="icon">☀️</span><span class="label">Today</span>
+    </button>
+    <button class="nav-btn" data-view="health" onclick="goTo('health')">
+      <span class="icon">🌱</span><span class="label">Health</span>
+    </button>
+    <button class="nav-btn" data-view="more" onclick="goTo('more')">
+      <span class="icon">✳️</span><span class="label">More</span>
+    </button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  // ---------- Storage ----------
+  const STORAGE_KEY = 'moriarty_data_v1';
+  function defaultWellbeing() {
+    return {
+      version: 2,
+      spaces: [
+        { id: 'sp1', name: 'Kitchen', icon: '🍳', tasks: [
+          { id: 't1', name: 'Normal cleaning', frequency: { type: 'weekly', weekday: 3 }, lastDone: null },
+          { id: 't11', name: 'Clean out fridge', frequency: { type: 'interval', months: 1 }, lastDone: null },
+          { id: 't12', name: 'Wash trash bins', frequency: { type: 'interval', months: 1 }, lastDone: null }
+        ]},
+        { id: 'sp2', name: 'Bedroom', icon: '🛏️', tasks: [
+          { id: 't2', name: 'Make the bed', frequency: { type: 'daily' }, lastDone: null },
+          { id: 't3', name: 'Normal cleaning', frequency: { type: 'weekly', weekday: 3 }, lastDone: null },
+          { id: 't4', name: 'Change bedsheets', frequency: { type: 'interval', months: 1 }, lastDone: null },
+          { id: 't5', name: 'Air conditioner service', frequency: { type: 'interval', months: 6 }, lastDone: null },
+          { id: 't13', name: 'Vacuum floor', frequency: { type: 'weekly', weekday: 6 }, lastDone: null },
+          { id: 't14', name: 'Declutter', frequency: { type: 'interval', months: 1 }, lastDone: null }
+        ]},
+        { id: 'sp3', name: 'Bathroom', icon: '🚿', tasks: [
+          { id: 't6', name: 'Normal cleaning', frequency: { type: 'weekly', weekday: 5 }, lastDone: null },
+          { id: 't15', name: 'Deep scrub toilet & grout', frequency: { type: 'interval', months: 1 }, lastDone: null },
+          { id: 't16', name: 'Restock supplies', frequency: { type: 'interval', months: 1 }, lastDone: null }
+        ]},
+        { id: 'sp4', name: 'Living Room', icon: '🛋️', tasks: [
+          { id: 't7', name: 'Normal cleaning', frequency: { type: 'weekly', weekday: 5 }, lastDone: null },
+          { id: 't8', name: 'Air conditioner service', frequency: { type: 'interval', months: 6 }, lastDone: null },
+          { id: 't17', name: 'Dust surfaces', frequency: { type: 'weekly', weekday: 6 }, lastDone: null },
+          { id: 't18', name: 'Water plants', frequency: { type: 'weekly', weekday: 0 }, lastDone: null }
+        ]},
+        { id: 'sp5', name: 'Car', icon: '🚗', tasks: [
+          { id: 't9', name: 'Cleaning', frequency: { type: 'interval', months: 1 }, lastDone: null },
+          { id: 't10', name: 'Check tire air pressure', frequency: { type: 'interval', months: 1 }, lastDone: null },
+          { id: 't19', name: 'Oil change', frequency: { type: 'interval', months: 6 }, lastDone: null },
+          { id: 't20', name: 'Check wiper fluid', frequency: { type: 'interval', months: 1 }, lastDone: null },
+          { id: 't21', name: 'Renew insurance & tax', frequency: { type: 'interval', months: 12 }, lastDone: null }
+        ]},
+        { id: 'sp6', name: 'Whole Home', icon: '🏠', tasks: [
+          { id: 't22', name: 'Replace aircon filter', frequency: { type: 'interval', months: 3 }, lastDone: null },
+          { id: 't23', name: 'Test smoke detector battery', frequency: { type: 'interval', months: 12 }, lastDone: null },
+          { id: 't24', name: 'Pest control', frequency: { type: 'interval', months: 6 }, lastDone: null }
+        ]}
+      ]
+    };
+  }
+  // Adds the v2 suggested tasks to an existing (already-saved) well-being object without
+  // touching anything the person has already customized or completed.
+  function migrateWellbeingV2(wb) {
+    const additions = {
+      'Kitchen': [
+        { name: 'Clean out fridge', frequency: { type: 'interval', months: 1 } },
+        { name: 'Wash trash bins', frequency: { type: 'interval', months: 1 } }
+      ],
+      'Bedroom': [
+        { name: 'Vacuum floor', frequency: { type: 'weekly', weekday: 6 } },
+        { name: 'Declutter', frequency: { type: 'interval', months: 1 } }
+      ],
+      'Bathroom': [
+        { name: 'Deep scrub toilet & grout', frequency: { type: 'interval', months: 1 } },
+        { name: 'Restock supplies', frequency: { type: 'interval', months: 1 } }
+      ],
+      'Living Room': [
+        { name: 'Dust surfaces', frequency: { type: 'weekly', weekday: 6 } },
+        { name: 'Water plants', frequency: { type: 'weekly', weekday: 0 } }
+      ],
+      'Car': [
+        { name: 'Oil change', frequency: { type: 'interval', months: 6 } },
+        { name: 'Check wiper fluid', frequency: { type: 'interval', months: 1 } },
+        { name: 'Renew insurance & tax', frequency: { type: 'interval', months: 12 } }
+      ]
+    };
+    wb.spaces.forEach(space => {
+      const toAdd = additions[space.name];
+      if (!toAdd) return;
+      toAdd.forEach(a => {
+        const exists = space.tasks.some(t => t.name.toLowerCase() === a.name.toLowerCase());
+        if (!exists) space.tasks.push({ id: uid(), name: a.name, frequency: a.frequency, lastDone: null });
+      });
+    });
+    if (!wb.spaces.some(s => s.name === 'Whole Home')) {
+      wb.spaces.push({ id: uid(), name: 'Whole Home', icon: '🏠', tasks: [
+        { id: uid(), name: 'Replace aircon filter', frequency: { type: 'interval', months: 3 }, lastDone: null },
+        { id: uid(), name: 'Test smoke detector battery', frequency: { type: 'interval', months: 12 }, lastDone: null },
+        { id: uid(), name: 'Pest control', frequency: { type: 'interval', months: 6 }, lastDone: null }
+      ]});
+    }
+    wb.version = 2;
+    return wb;
+  }
+  function loadData() {
+    let d = null;
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (raw) d = JSON.parse(raw);
+    } catch (e) { console.warn('Could not load data', e); }
+    if (!d) {
+      d = {
+        habits: [
+          { id: 'h1', name: 'Drink 8 glasses of water' },
+          { id: 'h2', name: '30 min of movement' },
+          { id: 'h3', name: 'Sleep by 11pm' }
+        ],
+        habitLogs: {},     // { "2026-09-17": ["h1","h2"] }
+        weightEntries: [],  // { id, date, value, unit }
+        bowelEntries: []     // { id, date, time, type, note }
+      };
+    }
+    if (!d.moodLogs) d.moodLogs = {}; // { "2026-09-17": 4 }
+    if (!d.profile) d.profile = { birthDate: '1989-12-16', birthTime: '20:50', birthPlace: 'Nakhon Ratchasima, Thailand' };
+    if (!d.wellbeing) d.wellbeing = defaultWellbeing();
+    else if (d.wellbeing.version !== 2) d.wellbeing = migrateWellbeingV2(d.wellbeing);
+    return d;
+  }
+  // ---------- Optional external sync (Supabase) ----------
+  // Fill these in from your Supabase project (Settings -> API) to enable
+  // cross-device sync once this is deployed on its own domain (e.g. GitHub
+  // Pages). Leave as-is to stay fully local — nothing else needs to change.
+  const SUPABASE_URL = 'YOUR_SUPABASE_URL';
+  const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
+  const supabaseEnabled = SUPABASE_URL.startsWith('http') && SUPABASE_ANON_KEY.length > 20;
+  let supabaseClient = null;
+  let currentUserId = null;
+  let currentUserEmail = null;
+  let remoteSaveTimer = null;
+
+  function saveData() {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); }
+    catch (e) { console.warn('Could not save data', e); }
+    queueRemoteSave();
+  }
+
+  let data = loadData();
+  saveData();
+
+  function queueRemoteSave() {
+    if (!supabaseClient || !currentUserId) return;
+    clearTimeout(remoteSaveTimer);
+    remoteSaveTimer = setTimeout(async () => {
+      try {
+        await supabaseClient.from('moriarty_data').upsert({
+          user_id: currentUserId, data, updated_at: new Date().toISOString()
+        });
+      } catch (e) { console.warn('Remote save failed (expected inside the claude.ai preview)', e); }
+    }, 800);
+  }
+  async function fetchRemoteData(userId) {
+    try {
+      const { data: row, error } = await supabaseClient.from('moriarty_data').select('data').eq('user_id', userId).maybeSingle();
+      if (error) throw error;
+      return row ? row.data : null;
+    } catch (e) { console.warn('Remote fetch failed', e); return null; }
+  }
+  async function sendMagicLink() {
+    const email = document.getElementById('authEmail').value.trim();
+    const statusEl = document.getElementById('authStatus');
+    if (!email) { statusEl.textContent = 'Enter your email first.'; return; }
+    statusEl.textContent = 'Sending…';
+    try {
+      const { error } = await supabaseClient.auth.signInWithOtp({ email, options: { emailRedirectTo: window.location.href } });
+      if (error) throw error;
+      statusEl.textContent = 'Check your inbox for the sign-in link.';
+    } catch (e) {
+      statusEl.textContent = 'Could not send link right now.';
+      console.warn(e);
+    }
+  }
+  async function signOutSupabase() {
+    if (supabaseClient) { try { await supabaseClient.auth.signOut(); } catch (e) {} }
+    location.reload();
+  }
+  async function onSupabaseSignedIn(user) {
+    currentUserId = user.id;
+    currentUserEmail = user.email;
+    const remote = await fetchRemoteData(currentUserId);
+    if (remote) data = remote; else queueRemoteSave();
+    const gate = document.getElementById('authGate');
+    if (gate) gate.style.display = 'none';
+    renderApp();
+  }
+  async function initSupabaseSync() {
+    // This never blocks the initial render (already done by the time this
+    // runs) — it only enhances things further if/when it succeeds.
+    if (!supabaseEnabled || !window.supabase) return;
+    try {
+      supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+      supabaseClient.auth.onAuthStateChange((event, session) => {
+        if (event === 'SIGNED_IN' && session && session.user.id !== currentUserId) {
+          onSupabaseSignedIn(session.user);
+        }
+      });
+      const { data: sessionData } = await supabaseClient.auth.getSession();
+      if (sessionData && sessionData.session) {
+        await onSupabaseSignedIn(sessionData.session.user);
+      } else {
+        const gate = document.getElementById('authGate');
+        if (gate) gate.style.display = 'flex';
+      }
+    } catch (e) {
+      console.warn('Supabase sync unavailable, staying local-only', e);
+    }
+  }
+
+  function exportBackup() {
+    try {
+      const json = JSON.stringify(data, null, 2);
+      const blob = new Blob([json], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      const stamp = todayKey();
+      a.href = url;
+      a.download = `moriarty-backup-${stamp}.json`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(() => URL.revokeObjectURL(url), 2000);
+
+      // Always also show the raw text, in case the download itself is blocked
+      // by the environment this page is opened in.
+      const wrap = document.getElementById('backupTextWrap');
+      const area = document.getElementById('backupTextArea');
+      area.value = json;
+      wrap.style.display = 'block';
+      area.focus();
+      area.select();
+      showToast('Backup ready — download started, or copy the text below');
+    } catch (e) {
+      console.warn('Export failed', e);
+      showToast('Could not export — try copying manually below');
+      const wrap = document.getElementById('backupTextWrap');
+      const area = document.getElementById('backupTextArea');
+      area.value = JSON.stringify(data, null, 2);
+      wrap.style.display = 'block';
+    }
+  }
+  function importBackup(event) {
+    const file = event.target.files && event.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      try {
+        const parsed = JSON.parse(reader.result);
+        if (typeof parsed !== 'object' || parsed === null) throw new Error('Not a valid backup file');
+        data = parsed;
+        if (!data.wellbeing) data.wellbeing = defaultWellbeing();
+        if (!data.moodLogs) data.moodLogs = {};
+        if (!data.profile) data.profile = { birthDate: '1989-12-16', birthTime: '20:50', birthPlace: 'Nakhon Ratchasima, Thailand' };
+        saveData();
+        renderApp();
+        showToast('Backup restored');
+      } catch (e) {
+        console.warn('Import failed', e);
+        showToast('That file could not be read as a Moriarty backup');
+      }
+    };
+    reader.readAsText(file);
+    event.target.value = '';
+  }
+
+  function renderSyncCard() {
+    const el = document.getElementById('syncCard');
+    if (!el) return;
+    if (!supabaseEnabled) {
+      el.innerHTML = `
+        <div class="card-title">Local only</div>
+        <div class="card-sub">Your data stays in this browser. It's still here every time you come back.</div>`;
+    } else if (currentUserId) {
+      el.innerHTML = `
+        <div class="card-title">Synced ☁️</div>
+        <div class="card-sub" style="margin-bottom:10px;">Signed in as ${escapeHtml(currentUserEmail || 'your account')}</div>
+        <button class="btn btn-ghost btn-block" onclick="signOutSupabase()">Sign out</button>`;
+    } else {
+      el.innerHTML = `
+        <div class="card-title">Not signed in</div>
+        <div class="card-sub" style="margin-bottom:10px;">Sign in to sync this data across devices.</div>
+        <button class="btn btn-sage btn-block" onclick="document.getElementById('authGate').style.display='flex';">Sign in</button>`;
+    }
+  }
+
+  function renderApp() {
+    loadColorTheme();
+    renderHeader();
+    renderMood();
+    renderFortune();
+    renderHabits();
+    renderWeight();
+    renderBristolGrid();
+    renderBowel();
+    renderPillarGrid();
+    renderToday();
+    renderSyncCard();
+  }
+  setTimeout(renderApp, 0);
+  setTimeout(initSupabaseSync, 50); // after the guaranteed first render, never blocking it
+
+
+  function todayKey() {
+    const d = new Date();
+    return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+  }
+  function uid() { return Math.random().toString(36).slice(2, 9); }
+
+  // ---------- Toast ----------
+  let toastTimer;
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => t.classList.remove('show'), 1800);
+  }
+
+  // ---------- Header date / greeting ----------
+  function renderHeader() {
+    const now = new Date();
+    document.getElementById('headerDate').textContent = now.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
+    const h = now.getHours();
+    document.getElementById('greetingText').textContent = h < 12 ? 'Good morning' : (h < 18 ? 'Good afternoon' : 'Good evening');
+  }
+
+  // ---------- Navigation ----------
+  function goTo(view) {
+    document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+    document.getElementById('view-' + view).classList.add('active');
+    const navKey = (view === 'wellbeing' || view === 'insights' || view === 'news') ? 'more' : view;
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.toggle('active', b.dataset.view === navKey));
+    if (view === 'today') renderToday();
+    if (view === 'wellbeing') renderWellbeing();
+    if (view === 'insights') renderInsights();
+    if (view === 'news') renderNews();
+  }
+  function setHealthSub(sub) {
+    document.querySelectorAll('.subtab').forEach(t => t.classList.toggle('active', t.dataset.sub === sub));
+    document.querySelectorAll('.subview').forEach(v => v.classList.remove('active'));
+    document.getElementById('sub-' + sub).classList.add('active');
+  }
+
+  // ---------- Habits ----------
+  function renderHabits() {
+    const key = todayKey();
+    const doneToday = data.habitLogs[key] || [];
+    const list = document.getElementById('habitsList');
+    list.innerHTML = '';
+    if (data.habits.length === 0) {
+      list.innerHTML = '<div class="empty-note">No habits yet — add your first one below.</div>';
+    }
+    data.habits.forEach(h => {
+      const done = doneToday.includes(h.id);
+      const row = document.createElement('div');
+      row.className = 'entry';
+      row.innerHTML = `
+        <button class="check ${done ? 'done' : ''}" onclick="toggleHabit('${h.id}')"></button>
+        <div class="entry-body">
+          <div class="entry-title">${escapeHtml(h.name)}</div>
+        </div>
+        <button class="entry-del" onclick="removeHabit('${h.id}')">✕</button>
+      `;
+      list.appendChild(row);
+    });
+  }
+  function toggleHabit(id) {
+    const key = todayKey();
+    if (!data.habitLogs[key]) data.habitLogs[key] = [];
+    const idx = data.habitLogs[key].indexOf(id);
+    if (idx >= 0) data.habitLogs[key].splice(idx, 1);
+    else data.habitLogs[key].push(id);
+    saveData(); renderHabits(); renderToday();
+  }
+  function removeHabit(id) {
+    data.habits = data.habits.filter(h => h.id !== id);
+    saveData(); renderHabits(); renderToday();
+  }
+  function addHabit() {
+    const input = document.getElementById('newHabitInput');
+    const name = input.value.trim();
+    if (!name) return;
+    data.habits.push({ id: uid(), name });
+    input.value = '';
+    saveData(); renderHabits(); renderToday();
+    showToast('Habit added');
+  }
+
+  // ---------- Weight ----------
+  function addWeight() {
+    const val = parseFloat(document.getElementById('weightInput').value);
+    const unit = document.getElementById('weightUnit').value;
+    if (isNaN(val) || val <= 0) { showToast('Enter a valid weight'); return; }
+    data.weightEntries.push({ id: uid(), date: todayKey(), value: val, unit, ts: Date.now() });
+    document.getElementById('weightInput').value = '';
+    saveData(); renderWeight(); renderToday();
+    showToast('Weight logged');
+  }
+  function deleteWeight(id) {
+    data.weightEntries = data.weightEntries.filter(w => w.id !== id);
+    saveData(); renderWeight(); renderToday();
+  }
+  function renderWeight() {
+    const entries = [...data.weightEntries].sort((a,b) => a.ts - b.ts);
+    const wrap = document.getElementById('sparklineWrap');
+    if (entries.length < 2) {
+      wrap.innerHTML = '<div class="empty-note">Log at least two entries to see a trend line.</div>';
+    } else {
+      const last = entries.slice(-14);
+      const vals = last.map(e => e.value);
+      const min = Math.min(...vals), max = Math.max(...vals);
+      const range = (max - min) || 1;
+      const w = 280, h = 70, pad = 6;
+      const points = last.map((e,i) => {
+        const x = pad + (i / (last.length - 1)) * (w - pad*2);
+        const y = h - pad - ((e.value - min) / range) * (h - pad*2);
+        return `${x.toFixed(1)},${y.toFixed(1)}`;
+      }).join(' ');
+      wrap.innerHTML = `
+        <svg viewBox="0 0 ${w} ${h}" style="width:100%; height:70px; display:block;">
+          <polyline points="${points}" fill="none" stroke="var(--clay)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>`;
+    }
+    const list = document.getElementById('weightList');
+    list.innerHTML = '';
+    const sorted = [...data.weightEntries].sort((a,b) => b.ts - a.ts);
+    if (sorted.length === 0) {
+      list.innerHTML = '<div class="empty-note">No entries yet.</div>';
+      return;
+    }
+    sorted.forEach((e, i) => {
+      const prev = sorted[i+1];
+      let diffHtml = '';
+      if (prev && prev.unit === e.unit) {
+        const diff = (e.value - prev.value);
+        const sign = diff > 0 ? '+' : '';
+        diffHtml = `<span class="${diff > 0 ? 'diff-up' : (diff < 0 ? 'diff-down' : '')}">${sign}${diff.toFixed(1)}</span>`;
+      }
+      const row = document.createElement('div');
+      row.className = 'weight-list-row';
+      row.innerHTML = `
+        <div>
+          <div class="weight-list-val">${e.value} ${e.unit} ${diffHtml}</div>
+          <div class="weight-list-date">${formatDate(e.date)}</div>
+        </div>
+        <button class="entry-del" onclick="deleteWeight('${e.id}')">✕</button>
+      `;
+      list.appendChild(row);
+    });
+  }
+
+  // ---------- Bowel log ----------
+  const BRISTOL_TYPES = [
+    { n: 1, label: 'Hard lumps' },
+    { n: 2, label: 'Lumpy log' },
+    { n: 3, label: 'Cracked log' },
+    { n: 4, label: 'Smooth log' },
+    { n: 5, label: 'Soft blobs' },
+    { n: 6, label: 'Mushy' },
+    { n: 7, label: 'Liquid' },
+    { n: 'none', label: 'None today', icon: '—' }
+  ];
+  let selectedBristol = null;
+  function renderBristolGrid() {
+    const grid = document.getElementById('bristolGrid');
+    grid.innerHTML = '';
+    BRISTOL_TYPES.forEach(t => {
+      const opt = document.createElement('div');
+      opt.className = 'bristol-opt' + (selectedBristol === t.n ? ' selected' : '') + (t.n === 'none' ? ' none-opt' : '');
+      opt.innerHTML = `<span class="n">${t.icon || t.n}</span>${t.label}`;
+      opt.onclick = () => { selectedBristol = t.n; renderBristolGrid(); };
+      grid.appendChild(opt);
+    });
+  }
+  function addBowel() {
+    if (!selectedBristol) { showToast('Choose a type first'); return; }
+    const note = document.getElementById('bowelNoteInput').value.trim();
+    const now = new Date();
+    data.bowelEntries.push({
+      id: uid(), date: todayKey(),
+      time: now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }),
+      type: selectedBristol, note, ts: Date.now()
+    });
+    selectedBristol = null;
+    document.getElementById('bowelNoteInput').value = '';
+    renderBristolGrid();
+    saveData(); renderBowel(); renderToday();
+    showToast('Entry logged');
+  }
+  function deleteBowel(id) {
+    data.bowelEntries = data.bowelEntries.filter(b => b.id !== id);
+    saveData(); renderBowel(); renderToday();
+  }
+  function renderBowel() {
+    const key = todayKey();
+    const list = document.getElementById('bowelList');
+    list.innerHTML = '';
+    const todays = data.bowelEntries.filter(b => b.date === key).sort((a,b) => b.ts - a.ts);
+    if (todays.length === 0) {
+      list.innerHTML = '<div class="empty-note">Nothing logged today.</div>';
+      return;
+    }
+    todays.forEach(b => {
+      const typeInfo = BRISTOL_TYPES.find(t => t.n === b.type);
+      const row = document.createElement('div');
+      row.className = 'bowel-row';
+      row.innerHTML = `
+        <div class="bowel-badge">${b.type === 'none' ? '—' : b.type}</div>
+        <div class="entry-body">
+          <div class="entry-title">${typeInfo.label}</div>
+          <div class="bowel-time">${b.time}${b.note ? ' · ' + escapeHtml(b.note) : ''}</div>
+        </div>
+        <button class="entry-del" onclick="deleteBowel('${b.id}')">✕</button>
+      `;
+      list.appendChild(row);
+    });
+  }
+
+  // ---------- Birth chart (sun sign, Chinese zodiac, moon phase — all fun, not a full natal chart) ----------
+  function getZodiacSign(month, day) {
+    const signs = [
+      { name: 'Capricorn', symbol: '♑', end: [1,19] },
+      { name: 'Aquarius', symbol: '♒', end: [2,18] },
+      { name: 'Pisces', symbol: '♓', end: [3,20] },
+      { name: 'Aries', symbol: '♈', end: [4,19] },
+      { name: 'Taurus', symbol: '♉', end: [5,20] },
+      { name: 'Gemini', symbol: '♊', end: [6,20] },
+      { name: 'Cancer', symbol: '♋', end: [7,22] },
+      { name: 'Leo', symbol: '♌', end: [8,22] },
+      { name: 'Virgo', symbol: '♍', end: [9,22] },
+      { name: 'Libra', symbol: '♎', end: [10,22] },
+      { name: 'Scorpio', symbol: '♏', end: [11,21] },
+      { name: 'Sagittarius', symbol: '♐', end: [12,21] },
+      { name: 'Capricorn', symbol: '♑', end: [12,31] }
+    ];
+    for (const s of signs) {
+      const [m,d] = s.end;
+      if (month < m || (month === m && day <= d)) return s;
+    }
+    return signs[signs.length-1];
+  }
+  function getChineseZodiac(year) {
+    const animals = ['Rat','Ox','Tiger','Rabbit','Dragon','Snake','Horse','Goat','Monkey','Rooster','Dog','Pig'];
+    const emojis = ['🐀','🐂','🐅','🐇','🐉','🐍','🐎','🐐','🐒','🐓','🐕','🐖'];
+    const elements = ['Metal','Metal','Water','Water','Wood','Wood','Fire','Fire','Earth','Earth'];
+    const idx = ((year - 1984) % 12 + 12) % 12;
+    const elIdx = ((year - 1984) % 10 + 10) % 10;
+    return { animal: animals[idx], emoji: emojis[idx], element: elements[elIdx] };
+  }
+  function getMoonPhase(dateObj) {
+    const synodic = 29.530588853;
+    const knownNewMoon = Date.UTC(2000, 0, 6, 18, 14, 0) / 1000;
+    const diffDays = (dateObj.getTime()/1000 - knownNewMoon) / 86400;
+    let phase = (diffDays % synodic) / synodic;
+    if (phase < 0) phase += 1;
+    const phases = [
+      { max: 0.033, name: 'New Moon', emoji: '🌑' },
+      { max: 0.216, name: 'Waxing Crescent', emoji: '🌒' },
+      { max: 0.284, name: 'First Quarter', emoji: '🌓' },
+      { max: 0.466, name: 'Waxing Gibbous', emoji: '🌔' },
+      { max: 0.533, name: 'Full Moon', emoji: '🌕' },
+      { max: 0.716, name: 'Waning Gibbous', emoji: '🌖' },
+      { max: 0.784, name: 'Last Quarter', emoji: '🌗' },
+      { max: 0.966, name: 'Waning Crescent', emoji: '🌘' },
+      { max: 1.001, name: 'New Moon', emoji: '🌑' }
+    ];
+    for (const p of phases) if (phase <= p.max) return p;
+    return phases[phases.length-1];
+  }
+  function getBirthChart() {
+    const p = data.profile;
+    if (!p || !p.birthDate) return null;
+    const [y,m,d] = p.birthDate.split('-').map(Number);
+    const dateObj = new Date(y, m-1, d, p.birthTime ? parseInt(p.birthTime.split(':')[0],10) : 12, p.birthTime ? parseInt(p.birthTime.split(':')[1],10) : 0);
+    return {
+      sign: getZodiacSign(m, d),
+      chinese: getChineseZodiac(y),
+      moon: getMoonPhase(dateObj),
+      weekday: WEEKDAYS[dateObj.getDay()],
+      place: p.birthPlace || ''
+    };
+  }
+
+  // ---------- Mood check-in ----------
+  const MOODS = [
+    { value: 1, emoji: '😞', label: 'Rough' },
+    { value: 2, emoji: '🙁', label: 'Meh' },
+    { value: 3, emoji: '😐', label: 'Okay' },
+    { value: 4, emoji: '🙂', label: 'Good' },
+    { value: 5, emoji: '😄', label: 'Great' }
+  ];
+  function renderMood() {
+    const row = document.getElementById('moodRow');
+    const selected = data.moodLogs[todayKey()];
+    row.innerHTML = '';
+    MOODS.forEach(m => {
+      const btn = document.createElement('button');
+      btn.className = 'mood-btn' + (selected === m.value ? ' selected' : '');
+      btn.innerHTML = `<span class="emoji">${m.emoji}</span><span class="label">${m.label}</span>`;
+      btn.onclick = () => setMood(m.value);
+      row.appendChild(btn);
+    });
+  }
+  function setMood(value) {
+    const key = todayKey();
+    data.moodLogs[key] = (data.moodLogs[key] === value) ? undefined : value;
+    if (data.moodLogs[key] === undefined) delete data.moodLogs[key];
+    saveData(); renderMood();
+  }
+
+  // ---------- Daily fortune (just for fun, not real astrology) ----------
+  const FORTUNES = [
+    "A small kindness today will circle back to you.",
+    "Today favors slow starts and good coffee.",
+    "Something you almost forgot will turn out fine.",
+    "Say yes to the thing you'd normally skip.",
+    "Your lucky color today is whatever you're already wearing.",
+    "A tidy space today, a clear head tomorrow.",
+    "Expect a message you've been waiting for.",
+    "Today's a good day to water the plants — literally or otherwise.",
+    "Patience pays off before sunset.",
+    "The universe has no strong opinion today. Do what you want.",
+    "Good things come to those who nap responsibly.",
+    "You'll find something you lost — maybe not today, but soon.",
+    "Say hi to a stranger; low stakes, mild plot twist.",
+    "Your energy is contagious today, use it wisely.",
+    "A snack will solve about 60% of today's problems.",
+    "Today rewards curiosity over certainty.",
+    "Something small will make you smile more than expected.",
+    "Trust the process, or at least trust your gut.",
+    "The stars are busy elsewhere. You're on your own today, and that's fine.",
+    "Today's forecast: mostly you, with a chance of good decisions.",
+    "A short walk will fix more than you think.",
+    "Someone will laugh at a joke you weren't sure about.",
+    "Today's a fine day to finally reply to that one message.",
+    "Small progress still counts as progress.",
+    "{sign} energy is strong today — lean into it.",
+    "Today, channel your inner {sign} and trust your first instinct.",
+    "The best idea today arrives while you're doing something else entirely.",
+    "A door you thought was closed is actually just stuck.",
+    "Today's a good day to ask for the discount.",
+    "Whatever you're procrastinating on is easier than it looks.",
+    "You'll get a compliment you didn't expect — accept it gracefully.",
+    "Today favors the person who double-checks before hitting send.",
+    "A little stretch this morning saves a lot of regret this evening.",
+    "The thing you're overthinking will resolve itself by Thursday.",
+    "Today's a great day to finally throw out that thing you don't need.",
+    "Someone is thinking of reaching out to you — beat them to it.",
+    "Your gut feeling about that plan is worth listening to today.",
+    "A small detour today leads somewhere better than the plan.",
+    "Today rewards finishing over starting something new.",
+    "Say the kind thing you're thinking — it'll land better than you expect.",
+    "The universe suggests an early night tonight.",
+    "You're one honest conversation away from feeling lighter.",
+    "Today's lucky number is however many tabs you have open right now.",
+    "A little bit of sunlight will do more for you than a little bit of scrolling.",
+    "The answer you need is already in your notes somewhere.",
+    "Today's a fine day to let someone else pick the restaurant.",
+    "Your patience today will impress future-you.",
+    "Something you built a while ago quietly pays off today.",
+    "Today's forecast: 80% chance of getting more done than you expect.",
+    "The {sign} in you already knows what to do — just start."
+  ];
+  function hashStr(str) {
+    let h = 0;
+    for (let i = 0; i < str.length; i++) h = (h * 31 + str.charCodeAt(i)) >>> 0;
+    return h;
+  }
+  let currentFortuneIndex = hashStr(todayKey()) % FORTUNES.length;
+  function renderFortune() {
+    const chart = getBirthChart();
+    const subtitleEl = document.getElementById('fortuneSubtitle');
+    if (chart) {
+      subtitleEl.textContent = `✨ ${chart.sign.symbol} ${chart.sign.name} · ${chart.chinese.emoji} ${chart.chinese.element} ${chart.chinese.animal}`;
+    } else {
+      subtitleEl.textContent = '';
+    }
+    let text = FORTUNES[currentFortuneIndex];
+    text = text.replace(/\{sign\}/g, chart ? chart.sign.name : 'your');
+    document.getElementById('fortuneText').textContent = text;
+  }
+  function shuffleFortune() {
+    if (FORTUNES.length <= 1) return;
+    let idx;
+    do { idx = Math.floor(Math.random() * FORTUNES.length); } while (idx === currentFortuneIndex);
+    currentFortuneIndex = idx;
+    renderFortune();
+  }
+
+  // ---------- Insights ----------
+  function dateKeyDaysAgo(n) {
+    const d = new Date();
+    d.setDate(d.getDate() - n);
+    return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+  }
+  function renderInsights() {
+    // Mood — last 14 days
+    const days = [];
+    for (let i = 13; i >= 0; i--) days.push(dateKeyDaysAgo(i));
+    const chart = document.getElementById('moodChart');
+    chart.innerHTML = days.map(key => {
+      const val = data.moodLogs[key];
+      const heightPct = val ? (val / 5) * 100 : 6;
+      const dLabel = parseKey(key).toLocaleDateString('en-US', { day: 'numeric' });
+      return `
+        <div class="mood-bar-wrap">
+          <div class="mood-bar ${val ? 'has-value' : ''}" style="height:${heightPct}%;" title="${val ? MOODS.find(m=>m.value===val).label : 'No entry'}"></div>
+          <div class="mood-bar-label">${dLabel}</div>
+        </div>`;
+    }).join('');
+    const loggedMoods = days.map(k => data.moodLogs[k]).filter(v => v);
+    document.getElementById('moodAvgLine').textContent = loggedMoods.length
+      ? `Average mood: ${(loggedMoods.reduce((a,b)=>a+b,0)/loggedMoods.length).toFixed(1)} / 5 over ${loggedMoods.length} logged day${loggedMoods.length>1?'s':''}`
+      : 'No mood check-ins yet in this window.';
+
+    // Habits — last 7 days completion rate + best streak
+    const last7 = []; for (let i = 6; i >= 0; i--) last7.push(dateKeyDaysAgo(i));
+    const habitCard = document.getElementById('habitInsightsCard');
+    if (data.habits.length === 0) {
+      habitCard.innerHTML = '<div class="empty-note">No habits set up yet.</div>';
+    } else {
+      habitCard.innerHTML = data.habits.map(h => {
+        const doneCount = last7.filter(k => (data.habitLogs[k] || []).includes(h.id)).length;
+        const pct = Math.round((doneCount / 7) * 100);
+        let streak = 0;
+        for (let i = 0; i < 365; i++) {
+          const k = dateKeyDaysAgo(i);
+          if ((data.habitLogs[k] || []).includes(h.id)) streak++; else break;
+        }
+        return `
+          <div class="insight-row">
+            <div class="insight-name">${escapeHtml(h.name)}</div>
+            <div class="insight-bar-track"><div class="insight-bar-fill" style="width:${pct}%;"></div></div>
+            <div class="insight-pct">${doneCount}/7</div>
+          </div>
+          <div class="insight-line" style="text-align:left; margin:-4px 0 8px;">🔥 ${streak}-day streak</div>`;
+      }).join('');
+    }
+
+    // Weight
+    const weightCard = document.getElementById('weightInsightsCard');
+    const wSorted = [...data.weightEntries].sort((a,b) => b.ts - a.ts);
+    if (wSorted.length === 0) {
+      weightCard.innerHTML = '<div class="empty-note">No weight entries yet.</div>';
+    } else {
+      const first = wSorted[wSorted.length - 1];
+      const latest = wSorted[0];
+      const totalChange = (latest.unit === first.unit) ? (latest.value - first.value) : null;
+      weightCard.innerHTML = `
+        <div class="insight-line" style="text-align:left; margin-top:0;">Latest: <b>${latest.value} ${latest.unit}</b></div>
+        <div class="insight-line" style="text-align:left;">Logged ${wSorted.length} time${wSorted.length>1?'s':''} total${totalChange !== null ? ` · ${totalChange >= 0 ? '+' : ''}${totalChange.toFixed(1)} ${latest.unit} since your first entry` : ''}</div>`;
+    }
+
+    // Bowel — last 7 days
+    const bowelCard = document.getElementById('bowelInsightsCard');
+    const recentBowel = data.bowelEntries.filter(b => last7.includes(b.date));
+    if (recentBowel.length === 0) {
+      bowelCard.innerHTML = '<div class="empty-note">No entries logged in the last 7 days.</div>';
+    } else {
+      const counts = {};
+      recentBowel.forEach(b => { counts[b.type] = (counts[b.type] || 0) + 1; });
+      const rows = Object.entries(counts).sort((a,b) => b[1]-a[1]).map(([type,count]) => {
+        const label = type === 'none' ? 'None' : BRISTOL_TYPES.find(t => t.n === (isNaN(type) ? type : Number(type))).label;
+        return `<div class="bowel-type-row"><span>${label}</span><span>${count}×</span></div>`;
+      }).join('');
+      bowelCard.innerHTML = `
+        <div class="insight-line" style="text-align:left; margin-top:0;">${recentBowel.length} entr${recentBowel.length>1?'ies':'y'} in the last 7 days</div>
+        ${rows}`;
+    }
+  }
+
+  // ---------- News (static snapshot — refresh by asking Claude in chat) ----------
+  const NEWS_UPDATED = '2026-09-21';
+  const NEWS_ITEMS = [
+    {
+      emoji: '🦠', category: 'Asia / Health',
+      en: "Bangladesh's measles outbreak has grown more severe, with seven more child deaths reported in a single day, pushing the national death toll past 1,000. Health authorities plan to resume a nationwide vaccination campaign on September 25 to contain the outbreak.",
+      th: 'การระบาดของโรคหัดในบังกลาเทศทวีความรุนแรงขึ้น หลังมีเด็กเสียชีวิตเพิ่มอีก 7 รายในวันเดียว ทำให้ยอดผู้เสียชีวิตทั่วประเทศทะลุ 1,000 รายแล้ว ทางการสาธารณสุขเตรียมเริ่มแคมเปญฉีดวัคซีนทั่วประเทศอีกครั้งในวันที่ 25 กันยายน เพื่อควบคุมการระบาด',
+      source: 'Wikipedia — Current events', url: 'https://en.wikipedia.org/wiki/Portal:Current_events/September_2026'
+    },
+    {
+      emoji: '🔥', category: 'World / Disaster',
+      en: "A fire broke out on a cargo ship at the port of Qingdao in China's Shandong province, killing at least 20 people, with five others still reported missing as search efforts continue.",
+      th: 'เกิดเหตุไฟไหม้เรือบรรทุกสินค้าที่ท่าเรือชิงเต่า มณฑลซานตง ประเทศจีน ทำให้มีผู้เสียชีวิตอย่างน้อย 20 ราย และยังมีผู้สูญหายอีก 5 รายที่ทีมกู้ภัยกำลังเร่งค้นหา',
+      source: 'Wikipedia — Current events', url: 'https://en.wikipedia.org/wiki/Portal:Current_events/September_2026'
+    },
+    {
+      emoji: '📊', category: 'World / Economy',
+      en: "The IMF said the global economy remains on track to grow about 3% in 2026, even with the ongoing war in Iran factored in, though it cautioned that risks to the outlook remain elevated.",
+      th: 'IMF ระบุว่าเศรษฐกิจโลกยังคงมีแนวโน้มเติบโตราว 3% ในปี 2026 แม้จะมีสงครามในอิหร่านที่ยังดำเนินอยู่ แต่ก็เตือนว่าความเสี่ยงต่อแนวโน้มดังกล่าวยังอยู่ในระดับสูง',
+      source: 'Wikipedia — Current events', url: 'https://en.wikipedia.org/wiki/Portal:Current_events/September_2026'
+    },
+    {
+      emoji: '📰', category: 'US / Politics',
+      en: "The White House confirmed it has barred CNN, MS NOW, and Politico from West Wing access. The administration attributed the move to what it called unfavorable coverage, and signaled that restrictions on other media outlets could follow.",
+      th: 'ทำเนียบขาวยืนยันว่าได้สั่งห้าม CNN, MS NOW และ Politico เข้าพื้นที่ West Wing โดยรัฐบาลระบุว่าเป็นเพราะการรายงานข่าวในแง่ลบ และส่งสัญญาณว่าอาจมีการจำกัดสื่ออื่นๆ เพิ่มเติมตามมา',
+      source: 'NPR', url: 'https://www.npr.org/sections/national/'
+    },
+    {
+      emoji: '🤝', category: 'World / Diplomacy',
+      en: "Algeria severed diplomatic relations with the UAE, accusing Abu Dhabi of \"provocative and hostile\" actions after years of rising tension, and closed its airspace to UAE-registered aircraft. The UAE said it hopes the rupture will be temporary.",
+      th: "แอลจีเรียประกาศตัดความสัมพันธ์ทางการทูตกับสหรัฐอาหรับเอมิเรตส์ โดยกล่าวหาว่าอาบูดาบีมีพฤติกรรม 'ยั่วยุและไม่เป็นมิตร' หลังความตึงเครียดสะสมมาหลายปี พร้อมทั้งปิดน่านฟ้าสำหรับเครื่องบินที่จดทะเบียนในยูเออี ฝ่ายยูเออีระบุว่าหวังว่าการตัดสัมพันธ์นี้จะเป็นเพียงชั่วคราว",
+      source: 'Al Jazeera', url: 'https://www.aljazeera.com/news/2026/9/10/algeria-says-cutting-diplomatic-ties-with-uae'
+    }
+  ];
+  const newsLangState = {};
+
+  function toggleNewsLang(i) {
+    newsLangState[i] = (newsLangState[i] === 'th') ? 'en' : 'th';
+    renderNews();
+  }
+  function renderNews() {
+    document.getElementById('newsUpdatedLine').textContent =
+      'Updated ' + parseKey(NEWS_UPDATED).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+    const list = document.getElementById('newsList');
+    list.innerHTML = NEWS_ITEMS.map((item, i) => {
+      const lang = newsLangState[i] || 'en';
+      return `
+        <div class="news-card">
+          <div class="news-cat">${item.emoji} ${item.category}</div>
+          <div class="news-summary">${escapeHtml(lang === 'th' ? item.th : item.en)}</div>
+          <div class="news-footer">
+            <a class="news-source" href="${item.url}" target="_blank" rel="noopener">${escapeHtml(item.source)} ↗</a>
+            <button class="news-lang-btn" onclick="toggleNewsLang(${i})">${lang === 'th' ? 'English' : 'แปลไทย'}</button>
+          </div>
+        </div>`;
+    }).join('');
+    renderTrivia();
+  }
+
+  const TRIVIA = [
+    "Honey never spoils — sealed jars found in ancient Egyptian tombs are still edible.",
+    "Octopuses have three hearts, and two of them stop beating when it swims.",
+    "A day on Venus is longer than its year — it rotates slower than it orbits the Sun.",
+    "Bananas are berries, but strawberries technically aren't.",
+    "The Eiffel Tower grows about 15cm taller in summer as the iron expands with heat.",
+    "Wombat poop is cube-shaped, which stops it from rolling away and marks their territory.",
+    "There are more possible chess games than atoms in the observable universe.",
+    "Sharks existed before trees — sharks are about 400 million years old, trees about 350 million.",
+    "A group of flamingos is called a 'flamboyance.'",
+    "Your nose can remember up to 50,000 different scents.",
+    "The shortest war in recorded history lasted about 38 minutes (Britain vs. Zanzibar, 1896).",
+    "Cows have best friends and get stressed when separated from them.",
+    "The inventor of the Pringles can is now partially buried in one, per his request.",
+    "Hot water can freeze faster than cold water under certain conditions — it's called the Mpemba effect.",
+    "An octopus can taste through its arms via specialized suckers.",
+    "The Great Wall of China is not actually visible from space with the naked eye.",
+    "Butterflies taste with their feet.",
+    "A single cloud can weigh over a million kilograms.",
+    "The dot over a lowercase 'i' or 'j' has a name: a tittle.",
+    "Some turtles can breathe through their butts during hibernation.",
+    "Scotland's national animal is the unicorn.",
+    "It rains diamonds on Jupiter and Saturn, according to atmospheric models.",
+    "The longest recorded flight of a chicken is about 13 seconds.",
+    "Humans share about 60% of their DNA with bananas.",
+    "The unicorn's mythical cousin, the narwhal, has a tusk that's actually an oversized tooth.",
+    "A bolt of lightning is about five times hotter than the surface of the Sun.",
+    "The human heart beats about 100,000 times a day without you thinking about it once.",
+    "Venice is slowly sinking — about 1-2mm per year, worsened by rising sea levels.",
+    "A single strand of spider silk is stronger than a steel strand of the same thickness.",
+    "The word 'set' has more definitions than any other word in the English language.",
+    "Mount Everest grows about 4mm taller every year due to tectonic activity.",
+    "There's a species of jellyfish (Turritopsis dohrnii) that can revert to its juvenile form and is biologically immortal.",
+    "The first computer 'bug' was an actual moth found stuck in a Harvard Mark II relay in 1947.",
+    "Saturn would float in water if you had a bathtub big enough — it's less dense than water.",
+    "Koalas have fingerprints so similar to humans that they've confused crime scene investigators.",
+    "The Great Barrier Reef is the largest living structure on Earth, visible from space.",
+    "Ketchup was sold as medicine in the 1830s, marketed to cure indigestion.",
+    "A blue whale's heart is roughly the size of a small car and can weigh about 180kg.",
+    "The Sahara Desert was once a lush green savanna about 6,000 years ago.",
+    "Antarctica is technically the world's largest desert — deserts are defined by low precipitation, not heat.",
+    "Humans and giraffes have the same number of neck vertebrae: seven.",
+    "The inventor of the frisbee was turned into a frisbee himself after he died (his ashes were molded into memorial discs).",
+    "A 'jiffy' is an actual unit of time — 1/100th of a second.",
+    "Peanuts aren't nuts; they're legumes, related to beans and lentils.",
+    "The Mona Lisa has no eyebrows — it was fashionable in Renaissance Florence to shave them off.",
+    "Space is completely silent because there's no atmosphere to carry sound waves.",
+    "A snail can sleep for up to three years at a time.",
+    "The world's oldest known recipe is for beer, dating back about 5,000 years in Sumer.",
+    "Cleopatra lived closer in time to the Moon landing than to the construction of the Great Pyramid of Giza.",
+    "Polar bears have black skin under their translucent, hollow fur.",
+    "The longest word in English without a vowel is 'rhythms.'",
+    "A group of crows is called a 'murder.'",
+    "Bubble wrap was originally invented in 1957 as a textured wallpaper.",
+    "The average person walks about 5 times around the Earth's circumference in their lifetime.",
+    "Iceland has no mosquitoes — one of the only places on Earth without them.",
+    "The dot-com company 'Amazon' was almost named 'Cadabra' before Jeff Bezos changed it.",
+    "Starfish don't have brains or blood — they use seawater to pump nutrients through their bodies.",
+    "The shortest commercial flight in the world lasts under 2 minutes, between two Scottish islands.",
+    "Wearing headphones for just an hour can increase the bacteria in your ear by 700 times.",
+    "The Twitter bird's name is Larry, after basketball legend Larry Bird.",
+    "There are more stars in the universe than grains of sand on all of Earth's beaches.",
+    "A shrimp's heart is located in its head.",
+    "The tallest mountain in the solar system is Olympus Mons on Mars — about 2.5 times taller than Everest.",
+    "Vending machines kill more people each year than sharks do (from tipping over).",
+    "The dot pattern on dice always adds up to 7 on opposite sides.",
+    "Onions make you cry because they release a gas that irritates the eyes into producing tears.",
+    "The Eiffel Tower is painted in three shades of brown, darker at the bottom, so it looks like one uniform color from the ground.",
+    "A hummingbird's heart beats up to 1,260 times per minute during flight.",
+    "The first oranges weren't orange — the original citrus from Southeast Asia was actually green.",
+    "It would take about 1.2 million Earths to fill up the Sun.",
+    "The Amazon rainforest produces about 20% of the world's oxygen.",
+    "Astronauts can grow up to 5cm taller in space because there's no gravity compressing their spine.",
+    "A single bolt of lightning contains enough energy to toast about 100,000 slices of bread.",
+    "The word 'nerd' first appeared in a Dr. Seuss book, 'If I Ran the Zoo,' in 1950.",
+    "Otters hold hands while sleeping so they don't drift apart from each other.",
+    "The Library of Alexandria wasn't destroyed in one event — it declined gradually over centuries.",
+    "A day on Mercury lasts longer than its year — one Mercury day equals about 176 Earth days.",
+    "Cows can walk up stairs but not down stairs, due to how their knees are structured."
+  ];
+  function shuffleTrivia() {
+    if (TRIVIA.length <= 1) return;
+    let idx;
+    do { idx = Math.floor(Math.random() * TRIVIA.length); } while (idx === currentTriviaIndex);
+    currentTriviaIndex = idx;
+    document.getElementById('triviaText').textContent = TRIVIA[currentTriviaIndex];
+  }
+  let currentTriviaIndex = hashStr(NEWS_UPDATED + 'trivia') % TRIVIA.length;
+  function renderTrivia() {
+    const el = document.getElementById('triviaText');
+    if (el) el.textContent = TRIVIA[currentTriviaIndex];
+  }
+
+  // ---------- Today snapshot ----------
+  function renderToday() {
+    const key = todayKey();
+    const doneToday = (data.habitLogs[key] || []).length;
+    document.getElementById('snapHabits').textContent = `${doneToday}/${data.habits.length}`;
+
+    const sortedW = [...data.weightEntries].sort((a,b) => b.ts - a.ts);
+    if (sortedW.length > 0) {
+      document.getElementById('snapWeight').textContent = `${sortedW[0].value} ${sortedW[0].unit}`;
+      if (sortedW[1] && sortedW[1].unit === sortedW[0].unit) {
+        const diff = sortedW[0].value - sortedW[1].value;
+        const sign = diff > 0 ? '+' : '';
+        document.getElementById('snapWeightLabel').textContent = `${sign}${diff.toFixed(1)} ${sortedW[0].unit} from last entry`;
+      } else {
+        document.getElementById('snapWeightLabel').textContent = 'Latest weight';
+      }
+    } else {
+      document.getElementById('snapWeight').textContent = '—';
+      document.getElementById('snapWeightLabel').textContent = 'No weight logged yet';
+    }
+
+    const bowelToday = data.bowelEntries.filter(b => b.date === key).length;
+    document.getElementById('snapBowel').textContent = bowelToday;
+
+    let wbDueCount = 0;
+    data.wellbeing.spaces.forEach(space => {
+      space.tasks.forEach(task => { if (computeTaskStatus(task).dueToday) wbDueCount++; });
+    });
+    const wbCard = document.getElementById('wbTodayCard');
+    if (wbCard) {
+      wbCard.innerHTML = wbDueCount === 0
+        ? '<div class="card-title">🌤️ All caught up</div><div class="card-sub">No home tasks due today</div>'
+        : `<div class="card-title">🌤️ ${wbDueCount} task${wbDueCount > 1 ? 's' : ''} due today</div><div class="card-sub">Tap to see what needs attention</div>`;
+    }
+  }
+
+  // ---------- More / pillars ----------
+  const OTHER_PILLARS = [
+    { icon: '🪙', name: 'Wealth' },
+    { icon: '📖', name: 'Knowledge' },
+    { icon: '🌤️', name: 'Well-being', view: 'wellbeing' },
+    { icon: '🧭', name: 'Career' },
+    { icon: '🌷', name: 'Love & Self-Care' },
+    { icon: '🎨', name: 'Hobbies' },
+    { icon: '🕊️', name: 'Mind' },
+    { icon: '📰', name: 'News', view: 'news' }
+  ];
+  function renderPillarGrid() {
+    const grid = document.getElementById('pillarGrid');
+    grid.innerHTML = '';
+    OTHER_PILLARS.forEach(p => {
+      const card = document.createElement('div');
+      card.className = 'pillar-card';
+      card.innerHTML = `<div class="icon">${p.icon}</div><div class="name">${p.name}</div><div class="soon">${p.view ? 'Open →' : 'Coming soon'}</div>`;
+      card.onclick = () => p.view ? goTo(p.view) : showToast(`${p.name} is coming in a future update`);
+      grid.appendChild(card);
+    });
+  }
+
+  // ---------- Well-being ----------
+  const WEEKDAYS = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  const FREQ_OPTIONS = [
+    { key: 'daily', label: 'Daily', freq: { type: 'daily' } },
+    { key: 'weekly', label: 'Weekly', freq: { type: 'weekly', weekday: 3 } },
+    { key: 'monthly', label: 'Monthly', freq: { type: 'interval', months: 1 } },
+    { key: '3months', label: 'Every 3 months', freq: { type: 'interval', months: 3 } },
+    { key: '6months', label: 'Every 6 months', freq: { type: 'interval', months: 6 } },
+    { key: 'yearly', label: 'Every year', freq: { type: 'interval', months: 12 } }
+  ];
+  function parseKey(key) {
+    const [y,m,d] = key.split('-').map(Number);
+    return new Date(y, m-1, d);
+  }
+  function addMonths(dateObj, n) {
+    const d = new Date(dateObj);
+    d.setMonth(d.getMonth() + n);
+    return d;
+  }
+  function sameDay(a, b) {
+    return a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate();
+  }
+  function formatFrequency(f) {
+    if (f.type === 'daily') return 'Daily';
+    if (f.type === 'weekly') return 'Every ' + WEEKDAYS[f.weekday];
+    if (f.type === 'interval') {
+      if (f.months === 1) return 'Monthly';
+      if (f.months % 12 === 0) { const y = f.months / 12; return `Every ${y} year${y > 1 ? 's' : ''}`; }
+      return `Every ${f.months} months`;
+    }
+    return '';
+  }
+  function computeTaskStatus(task) {
+    const today = new Date();
+    const tKey = todayKey();
+    const f = task.frequency;
+    if (f.type === 'daily') {
+      const done = task.lastDone === tKey;
+      return { dueToday: !done, overdue: false, text: done ? 'Done today' : 'Due today', cls: done ? 'ok' : 'due' };
+    }
+    if (f.type === 'weekly') {
+      const done = task.lastDone === tKey;
+      const isTargetDay = today.getDay() === f.weekday;
+      if (done) return { dueToday: false, overdue: false, text: 'Done today', cls: 'ok' };
+      if (isTargetDay) return { dueToday: true, overdue: false, text: 'Due today', cls: 'due' };
+      return { dueToday: false, overdue: false, text: 'Next: ' + WEEKDAYS[f.weekday], cls: '' };
+    }
+    if (f.type === 'interval') {
+      if (!task.lastDone) return { dueToday: true, overdue: false, text: 'Not started yet', cls: 'due' };
+      const nextDue = addMonths(parseKey(task.lastDone), f.months);
+      const overdue = today > nextDue && !sameDay(today, nextDue);
+      const dueTodayFlag = sameDay(today, nextDue);
+      if (overdue) return { dueToday: true, overdue: true, text: 'Overdue', cls: 'overdue' };
+      if (dueTodayFlag) return { dueToday: true, overdue: false, text: 'Due today', cls: 'due' };
+      return { dueToday: false, overdue: false, text: 'Next: ' + nextDue.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }), cls: '' };
+    }
+    return { dueToday: false, overdue: false, text: '', cls: '' };
+  }
+  function toggleTaskDone(spaceId, taskId) {
+    const space = data.wellbeing.spaces.find(s => s.id === spaceId);
+    const task = space.tasks.find(t => t.id === taskId);
+    const tKey = todayKey();
+    task.lastDone = (task.lastDone === tKey) ? null : tKey;
+    saveData(); renderWellbeing(); renderToday();
+  }
+  function toggleSpaceOpen(spaceId) {
+    const el = document.getElementById('wbspace-' + spaceId);
+    if (el) el.classList.toggle('open');
+  }
+  function addSpace() {
+    const input = document.getElementById('newSpaceInput');
+    const name = input.value.trim();
+    if (!name) return;
+    data.wellbeing.spaces.push({ id: uid(), name, icon: '🏠', tasks: [] });
+    input.value = '';
+    saveData(); renderWellbeing();
+    showToast('Space added');
+  }
+  function removeSpace(spaceId) {
+    data.wellbeing.spaces = data.wellbeing.spaces.filter(s => s.id !== spaceId);
+    saveData(); renderWellbeing(); renderToday();
+  }
+  function addTaskToSpace(spaceId) {
+    const nameInput = document.getElementById('wbtaskname-' + spaceId);
+    const freqSelect = document.getElementById('wbtaskfreq-' + spaceId);
+    const weekdaySelect = document.getElementById('wbtaskweekday-' + spaceId);
+    const name = nameInput.value.trim();
+    if (!name) return;
+    const opt = FREQ_OPTIONS.find(o => o.key === freqSelect.value);
+    let freq = JSON.parse(JSON.stringify(opt.freq));
+    if (freq.type === 'weekly') freq.weekday = parseInt(weekdaySelect.value, 10);
+    const space = data.wellbeing.spaces.find(s => s.id === spaceId);
+    space.tasks.push({ id: uid(), name, frequency: freq, lastDone: null });
+    nameInput.value = '';
+    saveData(); renderWellbeing();
+    showToast('Task added');
+  }
+  function removeTask(spaceId, taskId) {
+    const space = data.wellbeing.spaces.find(s => s.id === spaceId);
+    space.tasks = space.tasks.filter(t => t.id !== taskId);
+    saveData(); renderWellbeing(); renderToday();
+  }
+  function renderWellbeing() {
+    // Due today, aggregated
+    const dueCard = document.getElementById('wbDueCard');
+    const dueItems = [];
+    data.wellbeing.spaces.forEach(space => {
+      space.tasks.forEach(task => {
+        const status = computeTaskStatus(task);
+        if (status.dueToday) dueItems.push({ space, task, status });
+      });
+    });
+    dueItems.sort((a,b) => (b.status.overdue ? 1 : 0) - (a.status.overdue ? 1 : 0));
+    if (dueItems.length === 0) {
+      dueCard.innerHTML = '<div class="empty-note">Nothing due today — enjoy the calm.</div>';
+    } else {
+      dueCard.innerHTML = dueItems.map(({space, task, status}) => `
+        <div class="wb-due-row">
+          <div class="wb-due-icon">${space.icon}</div>
+          <div class="wb-due-body">
+            <div class="wb-due-title">${escapeHtml(task.name)}</div>
+            <div class="wb-due-sub">${escapeHtml(space.name)} · ${formatFrequency(task.frequency)}</div>
+          </div>
+          <button class="check" onclick="toggleTaskDone('${space.id}','${task.id}')" style="${status.overdue ? 'border-color:var(--danger);' : ''}"></button>
+        </div>
+      `).join('');
+    }
+
+    // Spaces accordion
+    const spacesWrap = document.getElementById('wbSpaces');
+    spacesWrap.innerHTML = '';
+    data.wellbeing.spaces.forEach(space => {
+      const dueCount = space.tasks.filter(t => computeTaskStatus(t).dueToday).length;
+      const card = document.createElement('div');
+      card.className = 'wb-space-card';
+      card.id = 'wbspace-' + space.id;
+
+      const tasksHtml = space.tasks.length === 0
+        ? '<div class="empty-note">No tasks yet.</div>'
+        : space.tasks.map(task => {
+            const status = computeTaskStatus(task);
+            const done = task.lastDone === todayKey();
+            return `
+              <div class="wb-task-row">
+                <button class="check ${done ? 'done' : ''}" onclick="toggleTaskDone('${space.id}','${task.id}')"></button>
+                <div class="wb-task-body">
+                  <div class="wb-task-name">${escapeHtml(task.name)}</div>
+                  <div class="wb-task-freq">${formatFrequency(task.frequency)}</div>
+                  <div class="wb-task-status ${status.cls}">${status.text}</div>
+                </div>
+                <button class="entry-del" onclick="removeTask('${space.id}','${task.id}')">✕</button>
+              </div>`;
+          }).join('');
+
+      const weekdayOptions = WEEKDAYS.map((w,i) => `<option value="${i}">${w}</option>`).join('');
+      const freqOptions = FREQ_OPTIONS.map(o => `<option value="${o.key}">${o.label}</option>`).join('');
+
+      card.innerHTML = `
+        <div class="wb-space-header" onclick="toggleSpaceOpen('${space.id}')">
+          <div class="wb-space-icon">${space.icon}</div>
+          <div class="wb-space-name">${escapeHtml(space.name)}</div>
+          <div class="wb-space-count">${dueCount > 0 ? dueCount + ' due' : space.tasks.length + ' tasks'}</div>
+          <div class="wb-space-chevron">▸</div>
+        </div>
+        <div class="wb-space-body">
+          ${tasksHtml}
+          <div class="wb-add-task-row">
+            <input type="text" id="wbtaskname-${space.id}" placeholder="New task name…" maxlength="40">
+            <div class="row2">
+              <select id="wbtaskfreq-${space.id}" style="flex:1;" onchange="onWbFreqChange('${space.id}')">
+                ${freqOptions}
+              </select>
+              <select id="wbtaskweekday-${space.id}" style="flex:1; display:none;">
+                ${weekdayOptions}
+              </select>
+            </div>
+            <div style="display:flex; gap:8px;">
+              <button class="btn btn-sage" style="flex:1;" onclick="addTaskToSpace('${space.id}')">Add task</button>
+              <button class="wb-space-remove" onclick="removeSpace('${space.id}')" title="Remove space">✕ Remove space</button>
+            </div>
+          </div>
+        </div>
+      `;
+      spacesWrap.appendChild(card);
+    });
+  }
+  function onWbFreqChange(spaceId) {
+    const freqSelect = document.getElementById('wbtaskfreq-' + spaceId);
+    const weekdaySelect = document.getElementById('wbtaskweekday-' + spaceId);
+    weekdaySelect.style.display = (freqSelect.value === 'weekly') ? 'block' : 'none';
+  }
+
+  // ---------- Helpers ----------
+  function escapeHtml(str) {
+    const d = document.createElement('div');
+    d.textContent = str;
+    return d.innerHTML;
+  }
+  function formatDate(key) {
+    const [y,m,d] = key.split('-').map(Number);
+    const dt = new Date(y, m-1, d);
+    return dt.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+  }
+
+  // ---------- Appearance ----------
+  const THEME_KEY = 'moriarty_color_theme';
+  function loadColorTheme() {
+    let theme = 'blue';
+    try { theme = localStorage.getItem(THEME_KEY) || 'blue'; } catch (e) {}
+    applyColorTheme(theme);
+  }
+  function applyColorTheme(theme) {
+    if (theme === 'blue') document.documentElement.setAttribute('data-color', 'blue');
+    else document.documentElement.removeAttribute('data-color');
+    document.querySelectorAll('.theme-swatch').forEach(s => s.classList.remove('active'));
+    const el = document.getElementById(theme === 'blue' ? 'swatch-blue' : 'swatch-meadow');
+    if (el) el.classList.add('active');
+    const meta = document.getElementById('themeColorMeta');
+    if (meta) meta.setAttribute('content', theme === 'blue' ? '#3E6E96' : '#7C8B6F');
+  }
+  function setColorTheme(theme) {
+    applyColorTheme(theme);
+    try { localStorage.setItem(THEME_KEY, theme); } catch (e) {}
+    showToast(theme === 'blue' ? 'Tide theme applied' : 'Meadow theme applied');
+  }
+
+</script>
+</body>
+</html>
