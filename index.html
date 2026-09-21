@@ -844,8 +844,8 @@
   // Fill these in from your Supabase project (Settings -> API) to enable
   // cross-device sync once this is deployed on its own domain (e.g. GitHub
   // Pages). Leave as-is to stay fully local — nothing else needs to change.
-  const SUPABASE_URL = 'YOUR_SUPABASE_URL';
-  const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
+  const SUPABASE_URL = 'https://prylzmsbcebtldmbeygm.supabase.co';
+  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InByeWx6bXNiY2VidGxkbWJleWdtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODk5NzIwNjEsImV4cCI6MjEwNTU0ODA2MX0.i2AO6VWRJKqSRUgkSxvYD_Ad4PJBqVIxJyztDLhCtmo';
   const supabaseEnabled = SUPABASE_URL.startsWith('http') && SUPABASE_ANON_KEY.length > 20;
   let supabaseClient = null;
   let currentUserId = null;
