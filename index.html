@@ -446,6 +446,15 @@
     background: var(--paper-raised); border: 1px solid var(--line-soft); border-radius: 12px; padding: 24px 20px;
   }
   .auth-status { font-size: 12px; color: var(--ink-soft); text-align: center; margin-top: 10px; min-height: 16px; }
+  .auth-divider {
+    font-size: 11px; color: var(--ink-soft); text-align: center; margin: 18px 0 10px;
+    position: relative;
+  }
+  .auth-divider::before, .auth-divider::after {
+    content: ""; position: absolute; top: 50%; width: 30%; border-top: 1px solid var(--line);
+  }
+  .auth-divider::before { left: 0; }
+  .auth-divider::after { right: 0; }
 </style>
 </head>
 <body>
@@ -471,6 +480,17 @@
       </div>
       <button class="btn btn-sage btn-block" onclick="sendMagicLink()">Send magic link</button>
       <div class="auth-status" id="authStatus"></div>
+
+      <div class="auth-divider">or, if you opened this from a Home Screen icon</div>
+      <div class="card-sub" style="margin-bottom:8px;">
+        Tapping the email link opens a regular browser tab instead of this app icon, so it won't sign in here. Instead: in Mail, <b>long-press the link → Copy Link</b>, come back here, and paste it below.
+      </div>
+      <div class="field" style="margin-bottom:8px;">
+        <label>Pasted sign-in link</label>
+        <input type="text" id="authPastedLink" placeholder="Paste the link here">
+      </div>
+      <button class="btn btn-ghost btn-block" onclick="signInWithPastedLink()">Confirm sign-in</button>
+
       <button class="btn-ghost btn-block" style="margin-top:10px; border:none;" onclick="document.getElementById('authGate').style.display='none';">Continue without an account →</button>
     </div>
   </div>
@@ -899,6 +919,47 @@
     } catch (e) {
       statusEl.textContent = 'Could not send link right now.';
       console.warn(e);
+    }
+  }
+  async function signInWithPastedLink() {
+    const raw = document.getElementById('authPastedLink').value.trim();
+    const statusEl = document.getElementById('authStatus');
+    if (!raw) { statusEl.textContent = 'Paste the link from your email first.'; return; }
+    statusEl.textContent = 'Signing in…';
+    try {
+      let url;
+      try { url = new URL(raw); } catch (e) { throw new Error('That doesn\'t look like a full link.'); }
+
+      // PKCE-style link: has ?code=... in the query string.
+      const code = url.searchParams.get('code');
+      if (code) {
+        const { data: sessionData, error } = await supabaseClient.auth.exchangeCodeForSession(raw);
+        if (error) throw error;
+        if (sessionData && sessionData.session) {
+          await onSupabaseSignedIn(sessionData.session.user);
+          statusEl.textContent = '';
+          return;
+        }
+      }
+
+      // Implicit-style link: has #access_token=...&refresh_token=... in the hash.
+      const hashParams = new URLSearchParams(url.hash.replace(/^#/, ''));
+      const accessToken = hashParams.get('access_token');
+      const refreshToken = hashParams.get('refresh_token');
+      if (accessToken && refreshToken) {
+        const { data: sessionData, error } = await supabaseClient.auth.setSession({ access_token: accessToken, refresh_token: refreshToken });
+        if (error) throw error;
+        if (sessionData && sessionData.session) {
+          await onSupabaseSignedIn(sessionData.session.user);
+          statusEl.textContent = '';
+          return;
+        }
+      }
+
+      throw new Error('Could not find sign-in details in that link.');
+    } catch (e) {
+      console.warn('Paste sign-in failed', e);
+      statusEl.textContent = 'That link didn\'t work — try copying it fresh from the email.';
     }
   }
   async function signOutSupabase() {
@@ -1535,20 +1596,25 @@
   ];
   const newsLangState = {};
 
-  // ---------- News: optional live refresh (GNews) + on-demand translation (MyMemory) ----------
-  // Both are free services with no server needed. Fill in a GNews key to
-  // enable the "Refresh with live news" button — get one free at gnews.io.
-  // Leave as-is to keep using only the static snapshot above. Neither of
-  // these works from inside the claude.ai preview (blocked by its sandbox);
-  // both work fine once this page is deployed on its own domain.
-  const GNEWS_API_KEY = '1695af259fb2a1227211083318d2c9d4';
-  const newsApiEnabled = GNEWS_API_KEY.length > 10 && GNEWS_API_KEY !== 'YOUR_GNEWS_API_KEY';
+  // ---------- News: live refresh (rss2json + BBC World News) + on-demand translation (MyMemory) ----------
+  // Both are free, need no signup, and work with CORS from any real domain —
+  // unlike some news APIs (GNews included) whose free tiers only allow CORS
+  // from localhost. Neither works from inside the claude.ai preview (blocked
+  // by its sandbox); both work fine once this page is deployed on its own
+  // domain (e.g. GitHub Pages).
+  const RSS_FEED_URL = 'https://feeds.bbci.co.uk/news/world/rss.xml';
   const LIVE_NEWS_CACHE_KEY = 'moriarty_live_news_v1';
   let liveNewsItems = null; // null = showing the static snapshot; array = showing live results
   try {
     const cachedLiveNews = localStorage.getItem(LIVE_NEWS_CACHE_KEY);
     if (cachedLiveNews) liveNewsItems = JSON.parse(cachedLiveNews);
   } catch (e) { /* ignore, just stay on the static snapshot */ }
+
+  function stripHtml(html) {
+    const tmp = document.createElement('div');
+    tmp.innerHTML = html || '';
+    return (tmp.textContent || tmp.innerText || '').trim();
+  }
 
   async function translateToThai(text) {
     const res = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=en|th`);
@@ -1561,25 +1627,21 @@
 
   async function refreshLiveNews() {
     const btn = document.getElementById('refreshNewsBtn');
-    if (!newsApiEnabled) {
-      showToast('Add a free GNews API key in the code to enable live news — see SETUP.md');
-      return;
-    }
     btn.disabled = true;
     btn.textContent = '🔄 Fetching latest news…';
     try {
-      const res = await fetch(`https://gnews.io/api/v4/top-headlines?lang=en&max=5&apikey=${GNEWS_API_KEY}`);
-      if (!res.ok) throw new Error('GNews request failed: ' + res.status);
+      const res = await fetch(`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(RSS_FEED_URL)}`);
+      if (!res.ok) throw new Error('rss2json request failed: ' + res.status);
       const json = await res.json();
-      const articles = json.articles || [];
-      if (articles.length === 0) throw new Error('No articles returned');
-      liveNewsItems = articles.map(a => ({
+      const items = json.items || [];
+      if (items.length === 0) throw new Error('No articles returned');
+      liveNewsItems = items.slice(0, 5).map(a => ({
         emoji: '📰',
-        category: (a.source && a.source.name) || 'Live',
-        en: a.description || a.title,
+        category: 'BBC World',
+        en: stripHtml(a.description) || a.title,
         th: null, // translated on demand
-        source: (a.source && a.source.name) || 'Source',
-        url: a.url,
+        source: 'BBC News',
+        url: a.link,
         fetchedAt: new Date().toISOString()
       }));
       try { localStorage.setItem(LIVE_NEWS_CACHE_KEY, JSON.stringify(liveNewsItems)); } catch (e) {}
