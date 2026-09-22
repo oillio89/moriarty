@@ -917,7 +917,7 @@
       if (error) throw error;
       statusEl.textContent = 'Check your inbox for the sign-in link.';
     } catch (e) {
-      statusEl.textContent = 'Could not send link right now.';
+      statusEl.textContent = 'Could not send link: ' + (e && e.message ? e.message : 'unknown error');
       console.warn(e);
     }
   }
@@ -1602,7 +1602,7 @@
   // from localhost. Neither works from inside the claude.ai preview (blocked
   // by its sandbox); both work fine once this page is deployed on its own
   // domain (e.g. GitHub Pages).
-  const RSS_FEED_URL = 'https://feeds.bbci.co.uk/news/world/rss.xml';
+  const RSS_FEED_URL = 'https://feeds.bbci.co.uk/news/rss.xml'; // BBC Top Stories — mixed categories
   const LIVE_NEWS_CACHE_KEY = 'moriarty_live_news_v1';
   let liveNewsItems = null; // null = showing the static snapshot; array = showing live results
   try {
@@ -1637,7 +1637,7 @@
       if (items.length === 0) throw new Error('No articles returned');
       liveNewsItems = items.slice(0, 5).map(a => ({
         emoji: '📰',
-        category: 'BBC World',
+        category: (a.categories && a.categories[0]) || 'BBC News',
         en: stripHtml(a.description) || a.title,
         th: null, // translated on demand
         source: 'BBC News',
