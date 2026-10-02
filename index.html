@@ -295,6 +295,7 @@
   .wb-due-title { font-size: 13px; }
   .wb-due-sub { font-size: 11px; color: var(--ink-soft); }
   .wb-due-badge { font-size: 10px; padding: 3px 8px; border-radius: 999px; background: var(--clay-soft); color: var(--clay); font-weight: 600; }
+  .wb-due-badge.upcoming { background: var(--gold-soft); color: var(--gold); }
 
   .wb-space-card { background: var(--paper-raised); border: 1px solid var(--line-soft); border-radius: 8px; margin-bottom: 12px; overflow: hidden; }
   .wb-space-header {
@@ -318,6 +319,7 @@
   .wb-task-status { font-size: 10.5px; font-weight: 600; margin-top: 2px; }
   .wb-task-status.due { color: var(--clay); }
   .wb-task-status.overdue { color: var(--danger); }
+  .wb-task-status.upcoming { color: var(--gold); }
   .wb-task-status.ok { color: var(--sage); }
 
   .wb-add-task-row { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--line-soft); }
@@ -343,6 +345,16 @@
   .insight-pct { font-size: 12px; color: var(--ink-soft); width: 34px; text-align: right; flex: none; }
   .bowel-type-row { display: flex; justify-content: space-between; font-size: 13px; padding: 6px 0; }
 
+  /* ---------- Exercise ---------- */
+  .exercise-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 12px; }
+  .exercise-opt {
+    border: 1.5px solid var(--line); background: var(--paper); border-radius: 8px;
+    padding: 10px 4px; text-align: center; cursor: pointer; font-size: 10.5px; color: var(--ink-soft);
+  }
+  .exercise-opt .em { font-size: 20px; display: block; margin-bottom: 3px; }
+  .exercise-opt.selected { border-color: var(--clay); background: var(--clay-soft); color: var(--ink); }
+  .exercise-badge { font-size: 16px; }
+
   /* ---------- News ---------- */
   .news-card { background: var(--paper-raised); border: 1px solid var(--line-soft); border-radius: 8px; padding: 14px 16px; margin-bottom: 12px; }
   .news-cat { font-size: 11px; color: var(--sage); font-weight: 600; margin-bottom: 4px; }
@@ -359,6 +371,24 @@
 
   /* ---------- Health sub-tabs ---------- */
   .subtabs { display: flex; gap: 6px; margin-bottom: 16px; }
+  .habit-date-nav {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 10px; padding: 0 2px;
+  }
+  .date-nav-btn {
+    background: var(--paper-raised); border: 1px solid var(--line-soft); border-radius: 6px;
+    width: 32px; height: 32px; font-size: 14px; color: var(--ink); cursor: pointer; font-family: inherit;
+  }
+  .date-nav-btn:disabled { opacity: 0.35; cursor: default; }
+  .date-nav-picker { position: relative; flex: 1; }
+  .date-nav-label {
+    font-size: 13.5px; font-weight: 600; text-align: center; padding: 6px 8px; border-radius: 6px;
+    border: 1px dashed var(--line);
+  }
+  .date-nav-label::before { content: "🗓 "; }
+  .date-nav-hidden-input {
+    position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; border: none; cursor: pointer;
+  }
   .subtab {
     flex: 1; text-align: center; padding: 8px 4px; border-radius: 6px; border: 1px solid var(--line);
     background: var(--paper-raised); font-family: inherit; font-size: 12px; color: var(--ink-soft); cursor: pointer;
@@ -446,15 +476,6 @@
     background: var(--paper-raised); border: 1px solid var(--line-soft); border-radius: 12px; padding: 24px 20px;
   }
   .auth-status { font-size: 12px; color: var(--ink-soft); text-align: center; margin-top: 10px; min-height: 16px; }
-  .auth-divider {
-    font-size: 11px; color: var(--ink-soft); text-align: center; margin: 18px 0 10px;
-    position: relative;
-  }
-  .auth-divider::before, .auth-divider::after {
-    content: ""; position: absolute; top: 50%; width: 30%; border-top: 1px solid var(--line);
-  }
-  .auth-divider::before { left: 0; }
-  .auth-divider::after { right: 0; }
 </style>
 </head>
 <body>
@@ -475,23 +496,23 @@
         <div class="mark-text">Moriarty</div>
       </div>
       <div class="card-title" style="text-align:center;">Sign in to sync your data</div>
-      <div class="card-sub" style="text-align:center; margin-bottom:16px;">No password — we'll email you a magic link.</div>
+      <div class="card-sub" style="text-align:center; margin-bottom:16px;">No password — we'll email you a 6-digit code.</div>
       <div class="field" style="margin-bottom:10px;">
         <label>Email</label>
         <input type="email" id="authEmail" placeholder="you@example.com">
       </div>
-      <button class="btn btn-sage btn-block" onclick="sendMagicLink()">Send magic link</button>
+      <div id="authStep1">
+        <button class="btn btn-sage btn-block" onclick="sendOtpCode()">Send code</button>
+      </div>
+      <div id="authStep2" style="display:none;">
+        <div class="card-sub" style="margin-bottom:8px;">Enter the 6-digit code from your email:</div>
+        <div class="field" style="margin-bottom:8px;">
+          <label>Code</label>
+          <input type="text" inputmode="numeric" maxlength="6" id="authOtpCode" placeholder="123456">
+        </div>
+        <button class="btn btn-sage btn-block" onclick="verifyOtpCode()">Verify code</button>
+      </div>
       <div class="auth-status" id="authStatus"></div>
-
-      <div class="auth-divider">or, if you opened this from a Home Screen icon</div>
-      <div class="card-sub" style="margin-bottom:8px;">
-        Tapping the email link opens a regular browser tab instead of this app icon, so it won't sign in here. Instead: in Mail, <b>long-press the link → Copy Link</b>, come back here, and paste it below.
-      </div>
-      <div class="field" style="margin-bottom:8px;">
-        <label>Pasted sign-in link</label>
-        <input type="text" id="authPastedLink" placeholder="Paste the link here">
-      </div>
-      <button class="btn btn-ghost btn-block" onclick="signInWithPastedLink()">Confirm sign-in</button>
 
       <button class="btn-ghost btn-block" style="margin-top:10px; border:none;" onclick="document.getElementById('authGate').style.display='none';">Continue without an account →</button>
     </div>
@@ -550,6 +571,7 @@
           <div class="stat-label">Log entries today</div>
         </div>
       </div>
+      <div class="insight-line" id="snapExercise" style="text-align:left; margin-top:12px;"></div>
     </div>
 
     <button class="today-nav-btn" onclick="goTo('health')">
@@ -571,11 +593,21 @@
     <div class="subtabs">
       <button class="subtab active" data-sub="habits" onclick="setHealthSub('habits')">Habits</button>
       <button class="subtab" data-sub="weight" onclick="setHealthSub('weight')">Weight</button>
+      <button class="subtab" data-sub="exercise" onclick="setHealthSub('exercise')">Exercise</button>
       <button class="subtab" data-sub="bowel" onclick="setHealthSub('bowel')">Bowel log</button>
     </div>
 
     <!-- Habits -->
     <div class="subview active" id="sub-habits">
+      <div class="habit-date-nav">
+        <button class="date-nav-btn" onclick="shiftHabitDate(-1)">◀</button>
+        <div class="date-nav-picker">
+          <div class="date-nav-label" id="habitDateLabel">Today</div>
+          <input type="date" class="date-nav-hidden-input" id="habitDateInput" onchange="setHabitDate(this.value)">
+        </div>
+        <button type="button" class="date-nav-btn" onclick="openCalendarPicker('habitDateInput')" aria-label="Open calendar">📅</button>
+        <button class="date-nav-btn" id="habitDateNextBtn" onclick="shiftHabitDate(1)">▶</button>
+      </div>
       <div class="card" id="habitsCard">
         <div id="habitsList"></div>
         <div class="add-habit-row">
@@ -588,8 +620,12 @@
     <!-- Weight -->
     <div class="subview" id="sub-weight">
       <div class="card">
-        <div class="card-title">Log today's weight</div>
-        <div class="card-sub" style="margin-bottom:12px;">Track how your weight moves over time</div>
+        <div class="card-title">Log weight</div>
+        <div class="card-sub" style="margin-bottom:12px;">Track how your weight moves over time — logging for an earlier day works too</div>
+        <div class="field" style="margin-bottom:10px;">
+          <label>Date</label>
+          <input type="date" id="weightDateInput">
+        </div>
         <div class="weight-form">
           <div class="field">
             <label>Weight</label>
@@ -613,17 +649,70 @@
       </div>
     </div>
 
+    <!-- Exercise -->
+    <div class="subview" id="sub-exercise">
+      <div class="card">
+        <div class="card-title">Log a workout</div>
+        <div class="card-sub" style="margin-bottom:12px;">Tap a type and add how long. Logging for an earlier day works too.</div>
+        <div class="exercise-grid" id="exerciseTypeGrid"></div>
+        <div style="display:flex; gap:8px; margin-bottom:10px;">
+          <div class="field">
+            <label>Minutes</label>
+            <input type="number" id="exerciseMinutes" inputmode="numeric" min="1" max="1440" placeholder="e.g. 30">
+          </div>
+          <div class="field">
+            <label>Intensity</label>
+            <select id="exerciseIntensity">
+              <option value="Light">Light</option>
+              <option value="Moderate" selected>Moderate</option>
+              <option value="Hard">Hard</option>
+            </select>
+          </div>
+        </div>
+        <div style="display:flex; gap:8px; margin-bottom:10px;">
+          <div class="field">
+            <label>Date</label>
+            <input type="date" id="exerciseDateInput">
+          </div>
+          <div class="field">
+            <label>Time (optional)</label>
+            <input type="time" id="exerciseTimeInput">
+          </div>
+        </div>
+        <textarea class="bowel-note" id="exerciseNoteInput" rows="2" placeholder="Optional note…"></textarea>
+        <button class="btn btn-clay btn-block" onclick="addExercise()">Save workout</button>
+      </div>
+      <div class="card">
+        <div class="card-title">Last 7 days</div>
+        <div class="stat-row" id="exerciseSummary" style="margin-top:10px;"></div>
+      </div>
+      <div class="card">
+        <div class="card-title">Recent workouts</div>
+        <div id="exerciseList"></div>
+      </div>
+    </div>
+
     <!-- Bowel -->
     <div class="subview" id="sub-bowel">
       <div class="card">
         <div class="card-title">New entry</div>
-        <div class="card-sub" style="margin-bottom:12px;">Bristol stool scale — tap the closest match</div>
+        <div class="card-sub" style="margin-bottom:12px;">Bristol stool scale — tap the closest match. Logging for an earlier day works too.</div>
+        <div style="display:flex; gap:8px; margin-bottom:12px;">
+          <div class="field">
+            <label>Date</label>
+            <input type="date" id="bowelDateInput">
+          </div>
+          <div class="field">
+            <label>Time</label>
+            <input type="time" id="bowelTimeInput">
+          </div>
+        </div>
         <div class="bristol-grid" id="bristolGrid"></div>
         <textarea class="bowel-note" id="bowelNoteInput" rows="2" placeholder="Optional note…"></textarea>
         <button class="btn btn-clay btn-block" onclick="addBowel()">Save entry</button>
       </div>
       <div class="card">
-        <div class="card-title">Today's log</div>
+        <div class="card-title">Recent entries</div>
         <div id="bowelList"></div>
       </div>
     </div>
@@ -638,8 +727,21 @@
     <div class="section-label">Due today</div>
     <div class="card" id="wbDueCard"></div>
 
+    <div class="section-label">Coming up this week</div>
+    <div class="card" id="wbUpcomingCard"></div>
+
     <hr class="divider">
     <div class="section-label">Spaces</div>
+    <div class="habit-date-nav">
+      <button class="date-nav-btn" onclick="shiftWellbeingDate(-1)">◀</button>
+      <div class="date-nav-picker">
+        <div class="date-nav-label" id="wbDateLabel">Today</div>
+        <input type="date" class="date-nav-hidden-input" id="wbDateInput" onchange="setWellbeingDate(this.value)">
+      </div>
+      <button type="button" class="date-nav-btn" onclick="openCalendarPicker('wbDateInput')" aria-label="Open calendar">📅</button>
+      <button class="date-nav-btn" id="wbDateNextBtn" onclick="shiftWellbeingDate(1)">▶</button>
+    </div>
+    <div class="empty-note" id="wbDateHint" style="display:none; margin-top:-8px;"></div>
     <div id="wbSpaces"></div>
 
     <div class="card">
@@ -665,6 +767,10 @@
     <hr class="divider">
     <div class="section-label">Habits — last 7 days</div>
     <div class="card" id="habitInsightsCard"></div>
+
+    <hr class="divider">
+    <div class="section-label">Exercise — last 7 days</div>
+    <div class="card" id="exerciseInsightsCard"></div>
 
     <hr class="divider">
     <div class="section-label">Weight</div>
@@ -848,29 +954,35 @@
     wb.version = 2;
     return wb;
   }
+  // Fills in any missing fields with defaults. Used for local data, cloud-synced
+  // data and imported backups alike, so data saved by an older version of the
+  // app never breaks a newer one.
+  function ensureDataShape(d) {
+    if (!d || typeof d !== 'object') d = {};
+    if (!Array.isArray(d.habits)) {
+      d.habits = [
+        { id: 'h1', name: 'Drink 8 glasses of water' },
+        { id: 'h2', name: '30 min of movement' },
+        { id: 'h3', name: 'Sleep by 11pm' }
+      ];
+    }
+    if (!d.habitLogs) d.habitLogs = {};        // { "2026-09-17": ["h1","h2"] }
+    if (!Array.isArray(d.weightEntries)) d.weightEntries = [];  // { id, date, value, unit }
+    if (!Array.isArray(d.bowelEntries)) d.bowelEntries = [];    // { id, date, time, type, note }
+    if (!Array.isArray(d.exerciseEntries)) d.exerciseEntries = []; // { id, date, type, minutes, intensity, note, time, ts }
+    if (!d.moodLogs) d.moodLogs = {};          // { "2026-09-17": 4 }
+    if (!d.profile) d.profile = { birthDate: '1989-12-16', birthTime: '20:50', birthPlace: 'Nakhon Ratchasima, Thailand' };
+    if (!d.wellbeing) d.wellbeing = defaultWellbeing();
+    else if (d.wellbeing.version !== 2) d.wellbeing = migrateWellbeingV2(d.wellbeing);
+    return d;
+  }
   function loadData() {
     let d = null;
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
       if (raw) d = JSON.parse(raw);
     } catch (e) { console.warn('Could not load data', e); }
-    if (!d) {
-      d = {
-        habits: [
-          { id: 'h1', name: 'Drink 8 glasses of water' },
-          { id: 'h2', name: '30 min of movement' },
-          { id: 'h3', name: 'Sleep by 11pm' }
-        ],
-        habitLogs: {},     // { "2026-09-17": ["h1","h2"] }
-        weightEntries: [],  // { id, date, value, unit }
-        bowelEntries: []     // { id, date, time, type, note }
-      };
-    }
-    if (!d.moodLogs) d.moodLogs = {}; // { "2026-09-17": 4 }
-    if (!d.profile) d.profile = { birthDate: '1989-12-16', birthTime: '20:50', birthPlace: 'Nakhon Ratchasima, Thailand' };
-    if (!d.wellbeing) d.wellbeing = defaultWellbeing();
-    else if (d.wellbeing.version !== 2) d.wellbeing = migrateWellbeingV2(d.wellbeing);
-    return d;
+    return ensureDataShape(d);
   }
   // ---------- Optional external sync (Supabase) ----------
   // Fill these in from your Supabase project (Settings -> API) to enable
@@ -911,59 +1023,45 @@
       return row ? row.data : null;
     } catch (e) { console.warn('Remote fetch failed', e); return null; }
   }
-  async function sendMagicLink() {
+  let pendingOtpEmail = null;
+  async function sendOtpCode() {
     const email = document.getElementById('authEmail').value.trim();
     const statusEl = document.getElementById('authStatus');
     if (!email) { statusEl.textContent = 'Enter your email first.'; return; }
     statusEl.textContent = 'Sending…';
     try {
-      const { error } = await supabaseClient.auth.signInWithOtp({ email, options: { emailRedirectTo: window.location.href } });
+      // No emailRedirectTo here on purpose — we want the emailed code, not a
+      // clickable link (links open in a separate browser context on iOS
+      // Home Screen apps and never make it back here).
+      const { error } = await supabaseClient.auth.signInWithOtp({ email });
       if (error) throw error;
-      statusEl.textContent = 'Check your inbox for the sign-in link.';
+      pendingOtpEmail = email;
+      document.getElementById('authStep1').style.display = 'none';
+      document.getElementById('authStep2').style.display = 'block';
+      statusEl.textContent = 'Code sent — check your email.';
     } catch (e) {
-      statusEl.textContent = 'Could not send link: ' + (e && e.message ? e.message : 'unknown error');
+      statusEl.textContent = 'Could not send code: ' + (e && e.message ? e.message : 'unknown error');
       console.warn(e);
     }
   }
-  async function signInWithPastedLink() {
-    const raw = document.getElementById('authPastedLink').value.trim();
+  async function verifyOtpCode() {
+    const token = document.getElementById('authOtpCode').value.trim();
     const statusEl = document.getElementById('authStatus');
-    if (!raw) { statusEl.textContent = 'Paste the link from your email first.'; return; }
-    statusEl.textContent = 'Signing in…';
+    if (!token) { statusEl.textContent = 'Enter the code from your email.'; return; }
+    if (!pendingOtpEmail) { statusEl.textContent = 'Send a code first.'; return; }
+    statusEl.textContent = 'Verifying…';
     try {
-      let url;
-      try { url = new URL(raw); } catch (e) { throw new Error('That doesn\'t look like a full link.'); }
-
-      // PKCE-style link: has ?code=... in the query string.
-      const code = url.searchParams.get('code');
-      if (code) {
-        const { data: sessionData, error } = await supabaseClient.auth.exchangeCodeForSession(raw);
-        if (error) throw error;
-        if (sessionData && sessionData.session) {
-          await onSupabaseSignedIn(sessionData.session.user);
-          statusEl.textContent = '';
-          return;
-        }
+      const { data: sessionData, error } = await supabaseClient.auth.verifyOtp({ email: pendingOtpEmail, token, type: 'email' });
+      if (error) throw error;
+      if (sessionData && sessionData.session) {
+        await onSupabaseSignedIn(sessionData.session.user);
+        statusEl.textContent = '';
+      } else {
+        throw new Error('No session returned');
       }
-
-      // Implicit-style link: has #access_token=...&refresh_token=... in the hash.
-      const hashParams = new URLSearchParams(url.hash.replace(/^#/, ''));
-      const accessToken = hashParams.get('access_token');
-      const refreshToken = hashParams.get('refresh_token');
-      if (accessToken && refreshToken) {
-        const { data: sessionData, error } = await supabaseClient.auth.setSession({ access_token: accessToken, refresh_token: refreshToken });
-        if (error) throw error;
-        if (sessionData && sessionData.session) {
-          await onSupabaseSignedIn(sessionData.session.user);
-          statusEl.textContent = '';
-          return;
-        }
-      }
-
-      throw new Error('Could not find sign-in details in that link.');
     } catch (e) {
-      console.warn('Paste sign-in failed', e);
-      statusEl.textContent = 'That link didn\'t work — try copying it fresh from the email.';
+      console.warn('OTP verify failed', e);
+      statusEl.textContent = 'That code didn\'t work: ' + (e && e.message ? e.message : 'try again');
     }
   }
   async function signOutSupabase() {
@@ -974,7 +1072,7 @@
     currentUserId = user.id;
     currentUserEmail = user.email;
     const remote = await fetchRemoteData(currentUserId);
-    if (remote) data = remote; else queueRemoteSave();
+    if (remote) data = ensureDataShape(remote); else queueRemoteSave();
     const gate = document.getElementById('authGate');
     if (gate) gate.style.display = 'none';
     renderApp();
@@ -1042,10 +1140,7 @@
       try {
         const parsed = JSON.parse(reader.result);
         if (typeof parsed !== 'object' || parsed === null) throw new Error('Not a valid backup file');
-        data = parsed;
-        if (!data.wellbeing) data.wellbeing = defaultWellbeing();
-        if (!data.moodLogs) data.moodLogs = {};
-        if (!data.profile) data.profile = { birthDate: '1989-12-16', birthTime: '20:50', birthPlace: 'Nakhon Ratchasima, Thailand' };
+        data = ensureDataShape(parsed);
         saveData();
         renderApp();
         showToast('Backup restored');
@@ -1078,6 +1173,20 @@
     }
   }
 
+  function initHealthDateDefaults() {
+    const today = todayKey();
+    const wd = document.getElementById('weightDateInput');
+    if (wd) { wd.max = today; if (!wd.value) wd.value = today; }
+    const bd = document.getElementById('bowelDateInput');
+    if (bd) { bd.max = today; if (!bd.value) bd.value = today; }
+    const ed = document.getElementById('exerciseDateInput');
+    if (ed) { ed.max = today; if (!ed.value) ed.value = today; }
+    const bt = document.getElementById('bowelTimeInput');
+    if (bt && !bt.value) {
+      const now = new Date();
+      bt.value = String(now.getHours()).padStart(2, '0') + ':' + String(now.getMinutes()).padStart(2, '0');
+    }
+  }
   function renderApp() {
     loadColorTheme();
     renderHeader();
@@ -1085,11 +1194,13 @@
     renderFortune();
     renderHabits();
     renderWeight();
+    renderExercise();
     renderBristolGrid();
     renderBowel();
     renderPillarGrid();
     renderToday();
     renderSyncCard();
+    initHealthDateDefaults();
   }
   setTimeout(renderApp, 0);
   setTimeout(initSupabaseSync, 50); // after the guaranteed first render, never blocking it
@@ -1137,16 +1248,60 @@
   }
 
   // ---------- Habits ----------
+  let selectedHabitDate = todayKey();
+  function addDaysToKey(key, delta) {
+    const d = parseKey(key);
+    d.setDate(d.getDate() + delta);
+    return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+  }
+  function openCalendarPicker(inputId) {
+    const input = document.getElementById(inputId);
+    if (!input) return;
+    // showPicker() is the reliable, modern way to open a native date picker
+    // from a button tap (supported in iOS Safari 16.4+, recent Chrome/Edge).
+    // The transparent input-over-label overlay this also sits behind is
+    // flaky specifically on iOS Safari, so this button is the dependable path.
+    if (typeof input.showPicker === 'function') {
+      try { input.showPicker(); return; } catch (e) { /* fall through */ }
+    }
+    input.focus();
+    input.click();
+  }
+  function shiftHabitDate(delta) {
+    const newKey = addDaysToKey(selectedHabitDate, delta);
+    if (newKey > todayKey()) return; // never allow viewing/logging the future
+    selectedHabitDate = newKey;
+    renderHabits();
+  }
+  function setHabitDate(val) {
+    if (!val) return;
+    if (val > todayKey()) { showToast("Can't view a future date"); renderHabits(); return; }
+    selectedHabitDate = val;
+    renderHabits();
+  }
+  function renderHabitDateLabel() {
+    const label = document.getElementById('habitDateLabel');
+    const nextBtn = document.getElementById('habitDateNextBtn');
+    const input = document.getElementById('habitDateInput');
+    if (!label) return;
+    if (selectedHabitDate === todayKey()) {
+      label.textContent = 'Today';
+    } else {
+      label.textContent = parseKey(selectedHabitDate).toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+    }
+    if (nextBtn) nextBtn.disabled = (selectedHabitDate === todayKey());
+    if (input) { input.value = selectedHabitDate; input.max = todayKey(); }
+  }
   function renderHabits() {
-    const key = todayKey();
-    const doneToday = data.habitLogs[key] || [];
+    renderHabitDateLabel();
+    const doneOnDate = data.habitLogs[selectedHabitDate] || [];
     const list = document.getElementById('habitsList');
     list.innerHTML = '';
     if (data.habits.length === 0) {
       list.innerHTML = '<div class="empty-note">No habits yet — add your first one below.</div>';
     }
     data.habits.forEach(h => {
-      const done = doneToday.includes(h.id);
+      const done = doneOnDate.includes(h.id);
       const row = document.createElement('div');
       row.className = 'entry';
       row.innerHTML = `
@@ -1160,7 +1315,7 @@
     });
   }
   function toggleHabit(id) {
-    const key = todayKey();
+    const key = selectedHabitDate;
     if (!data.habitLogs[key]) data.habitLogs[key] = [];
     const idx = data.habitLogs[key].indexOf(id);
     if (idx >= 0) data.habitLogs[key].splice(idx, 1);
@@ -1185,11 +1340,14 @@
   function addWeight() {
     const val = parseFloat(document.getElementById('weightInput').value);
     const unit = document.getElementById('weightUnit').value;
+    const dateStr = document.getElementById('weightDateInput').value || todayKey();
     if (isNaN(val) || val <= 0) { showToast('Enter a valid weight'); return; }
-    data.weightEntries.push({ id: uid(), date: todayKey(), value: val, unit, ts: Date.now() });
+    if (dateStr > todayKey()) { showToast("Can't log a future date"); return; }
+    const ts = (dateStr === todayKey()) ? Date.now() : parseKey(dateStr).getTime();
+    data.weightEntries.push({ id: uid(), date: dateStr, value: val, unit, ts });
     document.getElementById('weightInput').value = '';
     saveData(); renderWeight(); renderToday();
-    showToast('Weight logged');
+    showToast(dateStr === todayKey() ? 'Weight logged' : `Weight logged for ${formatDate(dateStr)}`);
   }
   function deleteWeight(id) {
     data.weightEntries = data.weightEntries.filter(w => w.id !== id);
@@ -1244,6 +1402,109 @@
     });
   }
 
+  // ---------- Exercise ----------
+  const EXERCISE_TYPES = [
+    { key: 'walk',  emoji: '🚶', label: 'Walk' },
+    { key: 'run',   emoji: '🏃', label: 'Run' },
+    { key: 'cycle', emoji: '🚴', label: 'Cycle' },
+    { key: 'gym',   emoji: '🏋️', label: 'Gym' },
+    { key: 'yoga',  emoji: '🧘', label: 'Yoga' },
+    { key: 'swim',  emoji: '🏊', label: 'Swim' },
+    { key: 'sport', emoji: '⚽', label: 'Sport' },
+    { key: 'other', emoji: '✨', label: 'Other' }
+  ];
+  let selectedExerciseType = null;
+  function renderExerciseTypeGrid() {
+    const grid = document.getElementById('exerciseTypeGrid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    EXERCISE_TYPES.forEach(t => {
+      const opt = document.createElement('div');
+      opt.className = 'exercise-opt' + (selectedExerciseType === t.key ? ' selected' : '');
+      opt.innerHTML = `<span class="em">${t.emoji}</span>${t.label}`;
+      opt.onclick = () => { selectedExerciseType = t.key; renderExerciseTypeGrid(); };
+      grid.appendChild(opt);
+    });
+  }
+  function addExercise() {
+    if (!selectedExerciseType) { showToast('Choose a type first'); return; }
+    const minutes = parseInt(document.getElementById('exerciseMinutes').value, 10);
+    if (isNaN(minutes) || minutes <= 0 || minutes > 1440) { showToast('Enter how many minutes (1–1440)'); return; }
+    const intensity = document.getElementById('exerciseIntensity').value;
+    const note = document.getElementById('exerciseNoteInput').value.trim();
+    const dateStr = document.getElementById('exerciseDateInput').value || todayKey();
+    const timeStr = document.getElementById('exerciseTimeInput').value; // "HH:MM" or empty
+    if (dateStr > todayKey()) { showToast("Can't log a future date"); return; }
+
+    const d = parseKey(dateStr);
+    let time = '', ts;
+    if (timeStr) {
+      const [hh, mm] = timeStr.split(':').map(Number);
+      d.setHours(hh, mm, 0, 0);
+      time = d.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+      ts = d.getTime();
+    } else if (dateStr === todayKey()) {
+      const now = new Date();
+      time = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+      ts = now.getTime();
+    } else {
+      d.setHours(12, 0, 0, 0); // earlier day with no time given: sort it around midday, show no time
+      ts = d.getTime();
+    }
+    data.exerciseEntries.push({ id: uid(), date: dateStr, type: selectedExerciseType, minutes, intensity, note, time, ts });
+    selectedExerciseType = null;
+    document.getElementById('exerciseMinutes').value = '';
+    document.getElementById('exerciseNoteInput').value = '';
+    renderExerciseTypeGrid();
+    saveData(); renderExercise(); renderToday();
+    showToast(dateStr === todayKey() ? 'Workout logged' : `Workout logged for ${formatDate(dateStr)}`);
+  }
+  function deleteExercise(id) {
+    data.exerciseEntries = data.exerciseEntries.filter(e => e.id !== id);
+    saveData(); renderExercise(); renderToday();
+  }
+  function renderExercise() {
+    renderExerciseTypeGrid();
+
+    // Last 7 days summary
+    const cutoff7 = dateKeyDaysAgo(6);
+    const week = data.exerciseEntries.filter(e => e.date >= cutoff7);
+    const totalMin = week.reduce((s, e) => s + e.minutes, 0);
+    const activeDays = new Set(week.map(e => e.date)).size;
+    document.getElementById('exerciseSummary').innerHTML = `
+      <div class="stat-box"><div class="stat-num clay">${totalMin}</div><div class="stat-label">minutes</div></div>
+      <div class="stat-box"><div class="stat-num sage">${week.length}</div><div class="stat-label">workout${week.length === 1 ? '' : 's'}</div></div>
+      <div class="stat-box"><div class="stat-num">${activeDays}/7</div><div class="stat-label">active days</div></div>`;
+
+    // Recent list — last 14 days
+    const list = document.getElementById('exerciseList');
+    list.innerHTML = '';
+    const cutoff14 = dateKeyDaysAgo(13);
+    const recent = data.exerciseEntries.filter(e => e.date >= cutoff14).sort((a, b) => b.ts - a.ts);
+    if (recent.length === 0) {
+      list.innerHTML = '<div class="empty-note">No workouts logged in the last 14 days.</div>';
+      return;
+    }
+    const todayStr = todayKey();
+    recent.forEach(e => {
+      const t = EXERCISE_TYPES.find(x => x.key === e.type) || EXERCISE_TYPES[EXERCISE_TYPES.length - 1];
+      const dateLabel = e.date === todayStr ? 'Today' : formatDate(e.date);
+      const bits = [dateLabel + (e.time ? ' · ' + e.time : ''), e.intensity];
+      if (e.note) bits.push(escapeHtml(e.note));
+      const row = document.createElement('div');
+      row.className = 'bowel-row';
+      row.innerHTML = `
+        <div class="bowel-badge exercise-badge">${t.emoji}</div>
+        <div class="entry-body">
+          <div class="entry-title">${t.label} · ${e.minutes} min</div>
+          <div class="bowel-time">${bits.join(' · ')}</div>
+        </div>
+        <button class="entry-del" onclick="deleteExercise('${e.id}')">✕</button>
+      `;
+      list.appendChild(row);
+    });
+  }
+
   // ---------- Bowel log ----------
   const BRISTOL_TYPES = [
     { n: 1, label: 'Hard lumps' },
@@ -1270,40 +1531,54 @@
   function addBowel() {
     if (!selectedBristol) { showToast('Choose a type first'); return; }
     const note = document.getElementById('bowelNoteInput').value.trim();
-    const now = new Date();
+    const dateStr = document.getElementById('bowelDateInput').value || todayKey();
+    const timeStr = document.getElementById('bowelTimeInput').value; // "HH:MM" 24h, or empty
+    if (dateStr > todayKey()) { showToast("Can't log a future date"); return; }
+    const d = parseKey(dateStr);
+    let displayTime, ts;
+    if (timeStr) {
+      const [hh, mm] = timeStr.split(':').map(Number);
+      d.setHours(hh, mm, 0, 0);
+      displayTime = d.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+      ts = d.getTime();
+    } else {
+      const now = new Date();
+      displayTime = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+      ts = (dateStr === todayKey()) ? Date.now() : d.getTime();
+    }
     data.bowelEntries.push({
-      id: uid(), date: todayKey(),
-      time: now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }),
-      type: selectedBristol, note, ts: Date.now()
+      id: uid(), date: dateStr, time: displayTime, type: selectedBristol, note, ts
     });
     selectedBristol = null;
     document.getElementById('bowelNoteInput').value = '';
     renderBristolGrid();
     saveData(); renderBowel(); renderToday();
-    showToast('Entry logged');
+    showToast(dateStr === todayKey() ? 'Entry logged' : `Entry logged for ${formatDate(dateStr)}`);
   }
   function deleteBowel(id) {
     data.bowelEntries = data.bowelEntries.filter(b => b.id !== id);
     saveData(); renderBowel(); renderToday();
   }
   function renderBowel() {
-    const key = todayKey();
     const list = document.getElementById('bowelList');
     list.innerHTML = '';
-    const todays = data.bowelEntries.filter(b => b.date === key).sort((a,b) => b.ts - a.ts);
-    if (todays.length === 0) {
-      list.innerHTML = '<div class="empty-note">Nothing logged today.</div>';
+    const cutoff = dateKeyDaysAgo(6); // last 7 days including today
+    const recent = data.bowelEntries.filter(b => b.date >= cutoff).sort((a,b) => b.ts - a.ts);
+    if (recent.length === 0) {
+      list.innerHTML = '<div class="empty-note">Nothing logged in the last 7 days.</div>';
       return;
     }
-    todays.forEach(b => {
+    const todayStr = todayKey();
+    recent.forEach(b => {
       const typeInfo = BRISTOL_TYPES.find(t => t.n === b.type);
+      const dateLabel = b.date === todayStr ? 'Today' : formatDate(b.date);
       const row = document.createElement('div');
       row.className = 'bowel-row';
       row.innerHTML = `
         <div class="bowel-badge">${b.type === 'none' ? '—' : b.type}</div>
         <div class="entry-body">
           <div class="entry-title">${typeInfo.label}</div>
-          <div class="bowel-time">${b.time}${b.note ? ' · ' + escapeHtml(b.note) : ''}</div>
+          <div class="bowel-time">${dateLabel} · ${b.time}${b.note ? ' · ' + escapeHtml(b.note) : ''}</div>
         </div>
         <button class="entry-del" onclick="deleteBowel('${b.id}')">✕</button>
       `;
@@ -1561,6 +1836,31 @@
       }).join('');
     }
 
+    // Exercise — minutes per day, last 7 days
+    const exerciseCard = document.getElementById('exerciseInsightsCard');
+    const minutesByDay = last7.map(k => data.exerciseEntries.filter(e => e.date === k).reduce((s, e) => s + e.minutes, 0));
+    const exTotal = minutesByDay.reduce((a, b) => a + b, 0);
+    if (exTotal === 0) {
+      exerciseCard.innerHTML = '<div class="empty-note">No workouts logged in the last 7 days.</div>';
+    } else {
+      const maxMin = Math.max(...minutesByDay);
+      const exSessions = data.exerciseEntries.filter(e => last7.includes(e.date)).length;
+      const exActiveDays = minutesByDay.filter(m => m > 0).length;
+      const bars = last7.map((k, i) => {
+        const m = minutesByDay[i];
+        const heightPct = m > 0 ? Math.max(8, (m / maxMin) * 100) : 6;
+        const dayLabel = parseKey(k).toLocaleDateString('en-US', { weekday: 'narrow' });
+        return `
+          <div class="mood-bar-wrap">
+            <div class="mood-bar ${m > 0 ? 'has-value' : ''}" style="height:${heightPct}%;" title="${m} min"></div>
+            <div class="mood-bar-label">${dayLabel}</div>
+          </div>`;
+      }).join('');
+      exerciseCard.innerHTML = `
+        <div class="mood-chart">${bars}</div>
+        <div class="insight-line">${exTotal} min across ${exSessions} workout${exSessions === 1 ? '' : 's'} on ${exActiveDays} of 7 days</div>`;
+    }
+
     // Weight
     const weightCard = document.getElementById('weightInsightsCard');
     const wSorted = [...data.weightEntries].sort((a,b) => b.ts - a.ts);
@@ -1722,7 +2022,10 @@
   function renderNews() {
     const items = liveNewsItems || NEWS_ITEMS;
     if (liveNewsItems) {
-      document.getElementById('newsUpdatedLine').textContent = 'Live headlines, just fetched';
+      const fetchedAt = items[0] && items[0].fetchedAt ? new Date(items[0].fetchedAt) : new Date();
+      const dateStr = fetchedAt.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+      const timeStr = fetchedAt.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+      document.getElementById('newsUpdatedLine').textContent = `Live — fetched ${dateStr} at ${timeStr}`;
       document.getElementById('newsFootnote').textContent = 'These are live results from BBC News. Tap Refresh again any time for the latest.';
     } else {
       document.getElementById('newsUpdatedLine').textContent =
@@ -1893,6 +2196,11 @@
     const bowelToday = data.bowelEntries.filter(b => b.date === key).length;
     document.getElementById('snapBowel').textContent = bowelToday;
 
+    const exerciseTodayMin = data.exerciseEntries.filter(e => e.date === key).reduce((s, e) => s + e.minutes, 0);
+    document.getElementById('snapExercise').textContent = exerciseTodayMin > 0
+      ? `💪 Exercise today: ${exerciseTodayMin} min`
+      : '💪 No workout logged today';
+
     let wbDueCount = 0;
     data.wellbeing.spaces.forEach(space => {
       space.tasks.forEach(task => { if (computeTaskStatus(task).dueToday) wbDueCount++; });
@@ -1976,22 +2284,58 @@
       return { dueToday: false, overdue: false, text: 'Next: ' + WEEKDAYS[f.weekday], cls: '' };
     }
     if (f.type === 'interval') {
-      if (!task.lastDone) return { dueToday: true, overdue: false, text: 'Not started yet', cls: 'due' };
+      if (!task.lastDone) return { dueToday: true, overdue: false, upcoming: false, text: 'Not started yet', cls: 'due' };
       const nextDue = addMonths(parseKey(task.lastDone), f.months);
       const overdue = today > nextDue && !sameDay(today, nextDue);
       const dueTodayFlag = sameDay(today, nextDue);
-      if (overdue) return { dueToday: true, overdue: true, text: 'Overdue', cls: 'overdue' };
-      if (dueTodayFlag) return { dueToday: true, overdue: false, text: 'Due today', cls: 'due' };
-      return { dueToday: false, overdue: false, text: 'Next: ' + nextDue.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }), cls: '' };
+      const daysUntil = Math.ceil((nextDue.setHours(0,0,0,0) - new Date(today.getFullYear(),today.getMonth(),today.getDate()).getTime()) / 86400000);
+      if (overdue) return { dueToday: true, overdue: true, upcoming: false, text: 'Overdue', cls: 'overdue' };
+      if (dueTodayFlag) return { dueToday: true, overdue: false, upcoming: false, text: 'Due today', cls: 'due' };
+      if (daysUntil > 0 && daysUntil <= 7) {
+        return { dueToday: false, overdue: false, upcoming: true, daysUntil, text: `Due in ${daysUntil} day${daysUntil === 1 ? '' : 's'}`, cls: 'upcoming' };
+      }
+      return { dueToday: false, overdue: false, upcoming: false, text: 'Next: ' + nextDue.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }), cls: '' };
     }
-    return { dueToday: false, overdue: false, text: '', cls: '' };
+    return { dueToday: false, overdue: false, upcoming: false, text: '', cls: '' };
   }
-  function toggleTaskDone(spaceId, taskId) {
+  let selectedWellbeingDate = todayKey();
+  function shiftWellbeingDate(delta) {
+    const newKey = addDaysToKey(selectedWellbeingDate, delta);
+    if (newKey > todayKey()) return; // never allow logging the future
+    selectedWellbeingDate = newKey;
+    renderWellbeing();
+  }
+  function setWellbeingDate(val) {
+    if (!val) return;
+    if (val > todayKey()) { showToast("Can't log a future date"); renderWellbeing(); return; }
+    selectedWellbeingDate = val;
+    renderWellbeing();
+  }
+  function renderWellbeingDateLabel() {
+    const label = document.getElementById('wbDateLabel');
+    const nextBtn = document.getElementById('wbDateNextBtn');
+    const hint = document.getElementById('wbDateHint');
+    const input = document.getElementById('wbDateInput');
+    if (!label) return;
+    const isToday = selectedWellbeingDate === todayKey();
+    label.textContent = isToday ? 'Today' : parseKey(selectedWellbeingDate).toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+    if (nextBtn) nextBtn.disabled = isToday;
+    if (hint) {
+      hint.style.display = isToday ? 'none' : 'block';
+      hint.textContent = `Checking a task off logs it for ${label.textContent}, not today.`;
+    }
+    if (input) { input.value = selectedWellbeingDate; input.max = todayKey(); }
+  }
+  function toggleTaskDoneOn(spaceId, taskId, dateKey) {
     const space = data.wellbeing.spaces.find(s => s.id === spaceId);
     const task = space.tasks.find(t => t.id === taskId);
-    const tKey = todayKey();
-    task.lastDone = (task.lastDone === tKey) ? null : tKey;
+    task.lastDone = (task.lastDone === dateKey) ? null : dateKey;
     saveData(); renderWellbeing(); renderToday();
+  }
+  function toggleTaskDone(spaceId, taskId) {
+    // Used by the Spaces accordion below — respects whatever date is
+    // currently being browsed via the date-nav.
+    toggleTaskDoneOn(spaceId, taskId, selectedWellbeingDate);
   }
   function toggleSpaceOpen(spaceId) {
     const el = document.getElementById('wbspace-' + spaceId);
@@ -2031,6 +2375,7 @@
     saveData(); renderWellbeing(); renderToday();
   }
   function renderWellbeing() {
+    renderWellbeingDateLabel();
     // Due today, aggregated
     const dueCard = document.getElementById('wbDueCard');
     const dueItems = [];
@@ -2051,7 +2396,33 @@
             <div class="wb-due-title">${escapeHtml(task.name)}</div>
             <div class="wb-due-sub">${escapeHtml(space.name)} · ${formatFrequency(task.frequency)}</div>
           </div>
-          <button class="check" onclick="toggleTaskDone('${space.id}','${task.id}')" style="${status.overdue ? 'border-color:var(--danger);' : ''}"></button>
+          <button class="check" onclick="toggleTaskDoneOn('${space.id}','${task.id}','${todayKey()}')" style="${status.overdue ? 'border-color:var(--danger);' : ''}"></button>
+        </div>
+      `).join('');
+    }
+
+    // Coming up this week — interval tasks (Monthly, Every N months/years)
+    // due within the next 7 days. A heads-up, not something to check off yet.
+    const upcomingCard = document.getElementById('wbUpcomingCard');
+    const upcomingItems = [];
+    data.wellbeing.spaces.forEach(space => {
+      space.tasks.forEach(task => {
+        const status = computeTaskStatus(task);
+        if (status.upcoming) upcomingItems.push({ space, task, status });
+      });
+    });
+    upcomingItems.sort((a, b) => a.status.daysUntil - b.status.daysUntil);
+    if (upcomingItems.length === 0) {
+      upcomingCard.innerHTML = '<div class="empty-note">Nothing due in the next 7 days.</div>';
+    } else {
+      upcomingCard.innerHTML = upcomingItems.map(({space, task, status}) => `
+        <div class="wb-due-row">
+          <div class="wb-due-icon">${space.icon}</div>
+          <div class="wb-due-body">
+            <div class="wb-due-title">${escapeHtml(task.name)}</div>
+            <div class="wb-due-sub">${escapeHtml(space.name)} · ${formatFrequency(task.frequency)}</div>
+          </div>
+          <div class="wb-due-badge ${status.cls}">${escapeHtml(status.text)}</div>
         </div>
       `).join('');
     }
@@ -2069,7 +2440,7 @@
         ? '<div class="empty-note">No tasks yet.</div>'
         : space.tasks.map(task => {
             const status = computeTaskStatus(task);
-            const done = task.lastDone === todayKey();
+            const done = task.lastDone === selectedWellbeingDate;
             return `
               <div class="wb-task-row">
                 <button class="check ${done ? 'done' : ''}" onclick="toggleTaskDone('${space.id}','${task.id}')"></button>
