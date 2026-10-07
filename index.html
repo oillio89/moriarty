@@ -217,10 +217,11 @@
   }
 
   .add-habit-row { display: flex; gap: 8px; margin-top: 10px; }
-  .add-habit-row input {
-    flex: 1; border: 1px solid var(--line); background: var(--paper); border-radius: 6px;
-    padding: 9px 10px; font-family: inherit; font-size: 13px; color: var(--ink);
+  .add-habit-row input, .add-habit-row select {
+    flex: 1; min-width: 0; width: 100%; max-width: 100%; border: 1px solid var(--line); background: var(--paper); border-radius: 6px;
+    padding: 9px 10px; font-family: inherit; font-size: 13px; color: var(--ink); box-sizing: border-box;
   }
+  .shopping-cat-badge { font-size: 10px; color: var(--ink-soft); }
   .btn {
     border: none; border-radius: 6px; padding: 9px 14px; font-family: inherit;
     font-size: 13px; font-weight: 600; cursor: pointer;
@@ -731,6 +732,25 @@
     <div class="card" id="wbUpcomingCard"></div>
 
     <hr class="divider">
+    <div class="section-label">🛒 Shopping list</div>
+    <div class="card">
+      <div class="add-habit-row">
+        <input type="text" id="newShoppingInput" placeholder="Add an item…" maxlength="60" style="flex:2;" onkeydown="if(event.key==='Enter')addShoppingItem()">
+        <select id="newShoppingCategory" style="flex:1;" onchange="toggleOtherCategoryInput()"></select>
+      </div>
+      <input type="text" id="newShoppingOtherInput" placeholder="What kind of item is this?" maxlength="30" style="display:none; margin-top:8px; width:100%; min-width:0; max-width:100%; box-sizing:border-box; border:1px solid var(--line); background:var(--paper); border-radius:6px; padding:9px 10px; font-family:inherit; font-size:13px; color:var(--ink);">
+      <button class="btn btn-sage btn-block" onclick="addShoppingItem()" style="margin-top:8px;">Add</button>
+      <div id="shoppingList" style="margin-top:12px;"></div>
+    </div>
+    <div class="card">
+      <div class="wb-space-header" onclick="toggleShoppingHistory()" style="cursor:pointer; padding:0;">
+        <div class="wb-space-name" style="font-size:13px;">History</div>
+        <div class="wb-space-chevron" id="shoppingHistoryChevron">▸</div>
+      </div>
+      <div id="shoppingHistoryBody" style="display:none; margin-top:10px;"></div>
+    </div>
+
+    <hr class="divider">
     <div class="section-label">Spaces</div>
     <div class="habit-date-nav">
       <button class="date-nav-btn" onclick="shiftWellbeingDate(-1)">◀</button>
@@ -970,6 +990,9 @@
     if (!Array.isArray(d.weightEntries)) d.weightEntries = [];  // { id, date, value, unit }
     if (!Array.isArray(d.bowelEntries)) d.bowelEntries = [];    // { id, date, time, type, note }
     if (!Array.isArray(d.exerciseEntries)) d.exerciseEntries = []; // { id, date, type, minutes, intensity, note, time, ts }
+    if (!d.shoppingList || typeof d.shoppingList !== 'object') d.shoppingList = { items: [], history: [] };
+    if (!Array.isArray(d.shoppingList.items)) d.shoppingList.items = [];       // { id, name, addedAt }
+    if (!Array.isArray(d.shoppingList.history)) d.shoppingList.history = [];   // { id, name, boughtAt, dateKey }
     if (!d.moodLogs) d.moodLogs = {};          // { "2026-09-17": 4 }
     if (!d.profile) d.profile = { birthDate: '1989-12-16', birthTime: '20:50', birthPlace: 'Nakhon Ratchasima, Thailand' };
     if (!d.wellbeing) d.wellbeing = defaultWellbeing();
@@ -2374,8 +2397,130 @@
     space.tasks = space.tasks.filter(t => t.id !== taskId);
     saveData(); renderWellbeing(); renderToday();
   }
+  // ---------- Shopping list ----------
+  const SHOPPING_CATEGORIES = [
+    { key: 'grocery',   emoji: '🛒', label: 'Grocery' },
+    { key: 'supplements', emoji: '💊', label: 'Supplements' },
+    { key: 'makeup',    emoji: '💄', label: 'Makeup' },
+    { key: 'skincare',  emoji: '🧴', label: 'Skincare & Cosmetics' },
+    { key: 'book',      emoji: '📚', label: 'Book' },
+    { key: 'clothes',   emoji: '👕', label: 'Clothes' },
+    { key: 'household', emoji: '🧹', label: 'Household' },
+    { key: 'other',     emoji: '✨', label: 'Other' }
+  ];
+  function getShoppingCategory(key) {
+    return SHOPPING_CATEGORIES.find(c => c.key === key) || SHOPPING_CATEGORIES[SHOPPING_CATEGORIES.length - 1];
+  }
+  let shoppingCategorySelectReady = false;
+  function ensureShoppingCategorySelect() {
+    const sel = document.getElementById('newShoppingCategory');
+    if (!sel || shoppingCategorySelectReady) return;
+    sel.innerHTML = SHOPPING_CATEGORIES.map(c => `<option value="${c.key}">${c.emoji} ${escapeHtml(c.label)}</option>`).join('');
+    shoppingCategorySelectReady = true;
+  }
+  let shoppingHistoryOpen = false;
+  function toggleOtherCategoryInput() {
+    const sel = document.getElementById('newShoppingCategory');
+    const otherInput = document.getElementById('newShoppingOtherInput');
+    if (!sel || !otherInput) return;
+    otherInput.style.display = sel.value === 'other' ? 'block' : 'none';
+    if (sel.value !== 'other') otherInput.value = '';
+  }
+  function addShoppingItem() {
+    const input = document.getElementById('newShoppingInput');
+    const name = input.value.trim();
+    if (!name) return;
+    const category = document.getElementById('newShoppingCategory').value || 'other';
+    const customCategory = category === 'other' ? document.getElementById('newShoppingOtherInput').value.trim() : '';
+    const item = { id: uid(), name, category, addedAt: new Date().toISOString() };
+    if (customCategory) item.customCategory = customCategory;
+    data.shoppingList.items.push(item);
+    input.value = '';
+    document.getElementById('newShoppingOtherInput').value = '';
+    saveData(); renderShoppingList();
+  }
+  function toggleShoppingItem(id) {
+    const idx = data.shoppingList.items.findIndex(i => i.id === id);
+    if (idx === -1) return;
+    const item = data.shoppingList.items[idx];
+    data.shoppingList.items.splice(idx, 1);
+    data.shoppingList.history.unshift({ id: item.id, name: item.name, category: item.category, customCategory: item.customCategory, boughtAt: new Date().toISOString(), dateKey: todayKey() });
+    saveData(); renderShoppingList();
+    showToast(`${item.name} ✓`);
+  }
+  function deleteShoppingItem(id) {
+    data.shoppingList.items = data.shoppingList.items.filter(i => i.id !== id);
+    saveData(); renderShoppingList();
+  }
+  function deleteShoppingHistoryItem(id) {
+    data.shoppingList.history = data.shoppingList.history.filter(i => i.id !== id);
+    saveData(); renderShoppingList();
+  }
+  function reAddShoppingItem(id) {
+    const hist = data.shoppingList.history.find(i => i.id === id);
+    if (!hist) return;
+    const reItem = { id: uid(), name: hist.name, category: hist.category, addedAt: new Date().toISOString() };
+    if (hist.customCategory) reItem.customCategory = hist.customCategory;
+    data.shoppingList.items.push(reItem);
+    saveData(); renderShoppingList();
+    showToast(`${hist.name} added back to the list`);
+  }
+  function toggleShoppingHistory() {
+    shoppingHistoryOpen = !shoppingHistoryOpen;
+    renderShoppingList();
+  }
+  function renderShoppingList() {
+    const list = document.getElementById('shoppingList');
+    if (!list) return; // Well-being view not mounted yet
+    ensureShoppingCategorySelect();
+    if (data.shoppingList.items.length === 0) {
+      list.innerHTML = '<div class="empty-note">List is empty — add something above.</div>';
+    } else {
+      list.innerHTML = data.shoppingList.items.map(item => {
+        const cat = getShoppingCategory(item.category);
+        const label = item.customCategory || cat.label;
+        return `
+        <div class="entry">
+          <button class="check" onclick="toggleShoppingItem('${item.id}')"></button>
+          <div class="entry-body">
+            <div class="entry-title">${cat.emoji} ${escapeHtml(item.name)}</div>
+            <div class="shopping-cat-badge">${escapeHtml(label)}</div>
+          </div>
+          <button class="entry-del" onclick="deleteShoppingItem('${item.id}')">✕</button>
+        </div>`;
+      }).join('');
+    }
+
+    const chevron = document.getElementById('shoppingHistoryChevron');
+    const body = document.getElementById('shoppingHistoryBody');
+    if (chevron) chevron.style.transform = shoppingHistoryOpen ? 'rotate(90deg)' : 'rotate(0deg)';
+    if (body) {
+      body.style.display = shoppingHistoryOpen ? 'block' : 'none';
+      if (shoppingHistoryOpen) {
+        if (data.shoppingList.history.length === 0) {
+          body.innerHTML = '<div class="empty-note">Nothing bought yet.</div>';
+        } else {
+          body.innerHTML = data.shoppingList.history.slice(0, 50).map(h => {
+            const cat = getShoppingCategory(h.category);
+            const label = h.customCategory || cat.label;
+            return `
+            <div class="entry">
+              <div class="entry-body">
+                <div class="entry-title">${cat.emoji} ${escapeHtml(h.name)}</div>
+                <div class="entry-sub">${escapeHtml(label)} · Bought ${formatDate(h.dateKey)}</div>
+              </div>
+              <button class="news-lang-btn" onclick="reAddShoppingItem('${h.id}')">+ Add again</button>
+              <button class="entry-del" onclick="deleteShoppingHistoryItem('${h.id}')">✕</button>
+            </div>`;
+          }).join('');
+        }
+      }
+    }
+  }
+
   function renderWellbeing() {
     renderWellbeingDateLabel();
+    renderShoppingList();
     // Due today, aggregated
     const dueCard = document.getElementById('wbDueCard');
     const dueItems = [];
