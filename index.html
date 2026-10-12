@@ -180,7 +180,7 @@
   .card-sub { font-size: 12px; color: var(--ink-soft); margin: 0; }
 
   .stat-row { display: flex; gap: 12px; }
-  .stat-box { flex: 1; }
+  .stat-box { flex: 1; min-width: 0; }
   .stat-num { font-family: 'Source Serif 4', serif; font-size: 26px; font-weight: 600; line-height: 1.1; }
   .stat-num.clay { color: var(--clay); }
   .stat-num.sage { color: var(--sage); }
@@ -209,7 +209,7 @@
     content: "✓"; position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
     color: var(--paper-raised); font-size: 12px;
   }
-  .entry-body { flex: 1; }
+  .entry-body { flex: 1; min-width: 0; overflow-wrap: anywhere; }
   .entry-title { font-size: 13.5px; }
   .entry-sub { font-size: 11px; color: var(--ink-soft); margin-top: 1px; }
   .entry-del {
@@ -233,11 +233,17 @@
 
   /* ---------- Weight ---------- */
   .weight-form { display: flex; gap: 8px; align-items: flex-end; margin-bottom: 4px; }
-  .field { flex: 1; }
+  .field { flex: 1; min-width: 0; }
   .field label { display: block; font-size: 11px; color: var(--ink-soft); margin-bottom: 4px; }
   .field input, .field select {
-    width: 100%; border: 1px solid var(--line); background: var(--paper); border-radius: 6px;
+    display: block; width: 100%; min-width: 0; max-width: 100%; box-sizing: border-box; margin: 0; height: 38px;
+    border: 1px solid var(--line); background: var(--paper); border-radius: 6px;
     padding: 9px 10px; font-family: inherit; font-size: 13.5px; color: var(--ink);
+  }
+  /* iPhone Safari sizes date/time inputs from their inner text and then ignores width, so they poke out of
+     their column. Flattening them makes them behave like the text inputs next to them. */
+  .field input[type="date"], .field input[type="time"] {
+    -webkit-appearance: none; appearance: none; text-align: left; line-height: 1.3;
   }
   .sparkline-wrap { margin: 14px 0 4px; }
   .weight-list-row {
@@ -251,7 +257,7 @@
   .diff-down { color: var(--sage); }
 
   /* ---------- Bowel log ---------- */
-  .bristol-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 12px; }
+  .bristol-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; margin-bottom: 12px; }
   .bristol-opt {
     border: 1.5px solid var(--line); background: var(--paper); border-radius: 8px;
     padding: 10px 4px; text-align: center; cursor: pointer; font-size: 10.5px; color: var(--ink-soft);
@@ -326,6 +332,7 @@
   .wb-add-task-row { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--line-soft); }
   .wb-add-task-row .row2 { display: flex; gap: 8px; }
   .wb-add-task-row input, .wb-add-task-row select {
+    min-width: 0; max-width: 100%; box-sizing: border-box;
     border: 1px solid var(--line); background: var(--paper); border-radius: 6px;
     padding: 8px 9px; font-family: inherit; font-size: 12.5px; color: var(--ink);
   }
@@ -347,7 +354,7 @@
   .bowel-type-row { display: flex; justify-content: space-between; font-size: 13px; padding: 6px 0; }
 
   /* ---------- Exercise ---------- */
-  .exercise-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 12px; }
+  .exercise-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; margin-bottom: 12px; }
   .exercise-opt {
     border: 1.5px solid var(--line); background: var(--paper); border-radius: 8px;
     padding: 10px 4px; text-align: center; cursor: pointer; font-size: 10.5px; color: var(--ink-soft);
@@ -372,6 +379,7 @@
 
   /* ---------- Health sub-tabs ---------- */
   .subtabs { display: flex; gap: 6px; margin-bottom: 16px; }
+  .subtabs .subtab { min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .habit-date-nav {
     display: flex; align-items: center; justify-content: space-between;
     margin-bottom: 10px; padding: 0 2px;
@@ -424,6 +432,17 @@
     padding: 6px 12px; font-family: inherit; font-size: 11.5px; cursor: pointer;
   }
   .fortune-subtitle { font-size: 11.5px; color: var(--ink-soft); margin: -4px 0 10px; }
+  .fortune-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+  .fortune-chip {
+    display: inline-flex; align-items: center; gap: 5px; max-width: 100%;
+    font-size: 11px; line-height: 1.3; padding: 4px 9px; border-radius: 999px;
+    border: 1px solid var(--gold); background: var(--paper-raised); color: var(--ink);
+  }
+  .fortune-reading { border-top: 1px dashed var(--gold); padding-top: 10px; margin-bottom: 12px; }
+  .fortune-reading-title { font-size: 11px; font-weight: 600; color: var(--ink-soft); margin-bottom: 4px; }
+  .fortune-reading-line { display: flex; gap: 8px; align-items: flex-start; font-size: 12.5px; line-height: 1.5; padding: 3px 0; }
+  .fortune-reading-line > span:first-child { flex: none; }
+  .fortune-reading-line > span:last-child { min-width: 0; overflow-wrap: anywhere; }
 
 
   .theme-swatches { display: flex; gap: 10px; margin-top: 6px; }
@@ -553,6 +572,8 @@
       <div class="fortune-label">🔮 Today's little fortune</div>
       <div class="fortune-subtitle" id="fortuneSubtitle"></div>
       <div class="fortune-text" id="fortuneText"></div>
+      <div class="fortune-chips" id="fortuneChips"></div>
+      <div class="fortune-reading" id="fortuneReading"></div>
       <button class="fortune-shuffle" onclick="shuffleFortune()">🔀 Shuffle for fun</button>
     </div>
 
@@ -805,12 +826,17 @@
   <div class="view" id="view-news">
     <button class="back-link" onclick="goTo('more')">← More</button>
     <div class="greeting">News 📰</div>
-    <div class="card-sub" id="newsUpdatedLine" style="margin:-10px 0 10px;"></div>
 
     <button class="btn btn-sage btn-block" id="refreshNewsBtn" onclick="refreshLiveNews()" style="margin-bottom:16px;">🔄 Refresh with live news</button>
 
-    <div class="section-label">Today's world roundup</div>
-    <div id="newsList"></div>
+    <div class="section-label">🇹🇭 Thailand roundup</div>
+    <div class="card-sub" id="newsUpdatedLine-thailand" style="margin:-6px 0 10px;"></div>
+    <div id="newsList-thailand"></div>
+
+    <hr class="divider">
+    <div class="section-label">🌍 World roundup</div>
+    <div class="card-sub" id="newsUpdatedLine-world" style="margin:-6px 0 10px;"></div>
+    <div id="newsList-world"></div>
 
     <hr class="divider">
     <div class="section-label">🧠 Random know-how</div>
@@ -819,7 +845,7 @@
       <button class="fortune-shuffle" onclick="shuffleTrivia()">🔀 Another one</button>
     </div>
 
-    <div class="empty-note" id="newsFootnote" style="margin-top:16px;">These headlines are a snapshot from when this was last put together — ask in chat any time to refresh them with the latest news, or tap Refresh above for live headlines (once configured).</div>
+    <div class="empty-note" id="newsFootnote" style="margin-top:16px;">Snapshots are hand-picked when they're put together — ask in chat for a fresh one. Tap Refresh above for live headlines (Thailand from Google News, world from BBC News).</div>
   </div>
 
   <!-- MORE -->
@@ -1427,15 +1453,24 @@
 
   // ---------- Exercise ----------
   const EXERCISE_TYPES = [
-    { key: 'walk',  emoji: '🚶', label: 'Walk' },
-    { key: 'run',   emoji: '🏃', label: 'Run' },
-    { key: 'cycle', emoji: '🚴', label: 'Cycle' },
-    { key: 'gym',   emoji: '🏋️', label: 'Gym' },
-    { key: 'yoga',  emoji: '🧘', label: 'Yoga' },
-    { key: 'swim',  emoji: '🏊', label: 'Swim' },
-    { key: 'sport', emoji: '⚽', label: 'Sport' },
-    { key: 'other', emoji: '✨', label: 'Other' }
+    { key: 'walk',   emoji: '🚶', label: 'Walk' },
+    { key: 'run',    emoji: '🏃', label: 'Run' },
+    { key: 'gym',    emoji: '🏋️', label: 'Gym' },
+    { key: 'yoga',   emoji: '🧘', label: 'Yoga' },
+    { key: 'swim',   emoji: '🏊', label: 'Swim' },
+    { key: 'dance',  emoji: '💃', label: 'Dance' },
+    { key: 'boxing', emoji: '🥊', label: 'Boxing' },
+    { key: 'other',  emoji: '✨', label: 'Other' }
   ];
+  // Types that were removed from the picker. Workouts already logged with them keep
+  // their original icon and name instead of silently turning into "Other".
+  const RETIRED_EXERCISE_TYPES = {
+    cycle: { key: 'cycle', emoji: '🚴', label: 'Cycle' },
+    sport: { key: 'sport', emoji: '⚽', label: 'Sport' }
+  };
+  function getExerciseType(key) {
+    return EXERCISE_TYPES.find(x => x.key === key) || RETIRED_EXERCISE_TYPES[key] || EXERCISE_TYPES[EXERCISE_TYPES.length - 1];
+  }
   let selectedExerciseType = null;
   function renderExerciseTypeGrid() {
     const grid = document.getElementById('exerciseTypeGrid');
@@ -1510,7 +1545,7 @@
     }
     const todayStr = todayKey();
     recent.forEach(e => {
-      const t = EXERCISE_TYPES.find(x => x.key === e.type) || EXERCISE_TYPES[EXERCISE_TYPES.length - 1];
+      const t = getExerciseType(e.type);
       const dateLabel = e.date === todayStr ? 'Today' : formatDate(e.date);
       const bits = [dateLabel + (e.time ? ' · ' + e.time : ''), e.intensity];
       if (e.note) bits.push(escapeHtml(e.note));
@@ -1698,7 +1733,8 @@
     const key = todayKey();
     data.moodLogs[key] = (data.moodLogs[key] === value) ? undefined : value;
     if (data.moodLogs[key] === undefined) delete data.moodLogs[key];
-    saveData(); renderMood();
+    fortuneOverride = null; // a mood change starts the fortune afresh (it may switch pools)
+    saveData(); renderMood(); renderFortune();
   }
 
   // ---------- Daily fortune (just for fun, not real astrology) ----------
@@ -1788,24 +1824,195 @@
     for (let i = 0; i < str.length; i++) h = (h * 31 + str.charCodeAt(i)) >>> 0;
     return h;
   }
-  let currentFortuneIndex = hashStr(todayKey()) % FORTUNES.length;
+  // ---------- Daily fortune: a gentler pool, cosmic bits, and a reading from your own logs ----------
+  // Used instead of FORTUNES when today's mood check-in is low — no "your energy is contagious!" on a rough day.
+  const GENTLE_FORTUNES = [
+    "It's okay to have a quiet day. One kind thing for yourself is plenty.",
+    "Hard days pass. Today only needs a little from you.",
+    "You don't have to do it all — pick one thing and let the rest wait.",
+    "Be as gentle with yourself as you'd be with a friend today.",
+    "Water, something to eat, a breath of fresh air — start there.",
+    "A slow day is still a day you showed up for.",
+    "Nothing needs to be solved before bedtime.",
+    "Rest counts as progress too.",
+    "Small steps still move you forward, even the tiniest ones.",
+    "If today feels heavy, tell someone you trust — you don't have to carry it alone.",
+    "Lower the bar today. Meeting it will still count.",
+    "Feelings are weather: this one will move on."
+  ];
+
+  // One playful line per moon phase (keys match the names getMoonPhase() returns). The phase name itself
+  // is shown by the moon chip, so these read as standalone sentences.
+  const MOON_NOTES = {
+    'New Moon':        'A quiet day for planting small seeds.',
+    'Waxing Crescent': 'Momentum is building — take one small step.',
+    'First Quarter':   'Decision energy: choose, then commit.',
+    'Waxing Gibbous':  'Refine and polish — you are nearly there.',
+    'Full Moon':       'Peak energy — celebrate what is done.',
+    'Waning Gibbous':  'A good day to share what you have learned.',
+    'Last Quarter':    'Let go of what is not working.',
+    'Waning Crescent': 'Rest and reset before the next cycle.'
+  };
+
+  function daysBetweenKeys(a, b) { return Math.round((parseKey(b) - parseKey(a)) / 86400000); }
+
+  // Consecutive days a habit was done. Counts back from today if it's done today, otherwise from yesterday —
+  // so a streak that is alive but not yet ticked today still counts (that's the one worth protecting).
+  function habitStreak(habitId) {
+    const done = k => (data.habitLogs[k] || []).includes(habitId);
+    const doneToday = done(todayKey());
+    let days = 0;
+    for (let i = doneToday ? 0 : 1; i < 400; i++) {
+      if (done(dateKeyDaysAgo(i))) days++; else break;
+    }
+    return { days, doneToday };
+  }
+  function checkinStreak() {
+    const has = k => !!data.moodLogs[k];
+    let days = 0;
+    for (let i = has(todayKey()) ? 0 : 1; i < 400; i++) {
+      if (has(dateKeyDaysAgo(i))) days++; else break;
+    }
+    return days;
+  }
+  function homeTaskNudges() {
+    const overdue = [], dueToday = [], soon = [];
+    data.wellbeing.spaces.forEach(space => space.tasks.forEach(task => {
+      const type = task.frequency.type;
+      if (type === 'daily') return;          // daily chores would nag every single day
+      const s = computeTaskStatus(task);     // never-started interval tasks are neither overdue nor upcoming, so they stay quiet
+      if (s.overdue) overdue.push({ space, task, s });
+      else if (type === 'weekly' && s.dueToday) dueToday.push({ space, task, s });
+      else if (type === 'interval' && s.upcoming) soon.push({ space, task, s });
+    }));
+    soon.sort((a, b) => a.s.daysUntil - b.s.daysUntil);
+    return { overdue, dueToday, soon };
+  }
+  function hasAnyActivity() {
+    return Object.values(data.habitLogs).some(a => a && a.length) ||
+      data.exerciseEntries.length > 0 ||
+      Object.keys(data.moodLogs).length > 0 ||
+      data.wellbeing.spaces.some(s => s.tasks.some(t => t.lastDone));
+  }
+
+  // Builds today's reading from the app's own data. Deliberately uses habits, exercise, mood, home tasks and
+  // the shopping list only — never weight or bowel logs. Everything is computed on this device.
+  function buildReading() {
+    const today = todayKey();
+    const mood = data.moodLogs[today];
+    if (mood && mood <= 2) {
+      return [{ emoji: '🤍', text: 'Easy does it today — one small thing is enough. Everything else can wait.' }];
+    }
+    const moon = getMoonPhase(new Date());
+    const cosmic = { emoji: moon.emoji, text: MOON_NOTES[moon.name] || moon.name };
+
+    const cands = [];
+    const add = (weight, emoji, text) => cands.push({ weight, emoji, text });
+
+    const home = homeTaskNudges();
+    if (home.overdue.length === 1) {
+      const o = home.overdue[0];
+      add(90, '🧹', `“${o.task.name}” (${o.space.name}) is overdue — a small step today?`);
+    } else if (home.overdue.length > 1) {
+      add(90, '🧹', `${home.overdue.length} home tasks are overdue — start with “${home.overdue[0].task.name}”.`);
+    }
+    if (home.dueToday.length === 1) {
+      const d = home.dueToday[0];
+      add(70, '🗓️', `“${d.task.name}” (${d.space.name}) is on today's list.`);
+    } else if (home.dueToday.length > 1) {
+      add(70, '🗓️', `${home.dueToday.length} home tasks are on today's list — e.g. “${home.dueToday[0].task.name}”.`);
+    }
+    if (home.soon.length) {
+      const s = home.soon[0];
+      add(50, '📅', `“${s.task.name}” (${s.space.name}) is due in ${s.s.daysUntil} day${s.s.daysUntil === 1 ? '' : 's'}.`);
+    }
+
+    let best = null;   // the longest habit streak worth mentioning (3+ days)
+    data.habits.forEach(hb => {
+      const st = habitStreak(hb.id);
+      if (st.days >= 3 && (!best || st.days > best.days)) best = { days: st.days, doneToday: st.doneToday, name: hb.name };
+    });
+    if (best) {
+      if (best.doneToday) add(40, '🔥', `${best.days} days in a row on “${best.name}” — lovely rhythm.`);
+      else add(85, '🔥', `${best.days}-day streak on “${best.name}” — not done yet today, don't break it!`);
+    }
+
+    if (data.exerciseEntries.length) {
+      const movedToday = data.exerciseEntries.filter(e => e.date === today).reduce((sum, e) => sum + e.minutes, 0);
+      if (movedToday > 0) {
+        add(45, '💪', `You moved today (${movedToday} min) — well done.`);
+      } else {
+        const last = data.exerciseEntries.reduce((m, e) => (e.date > m ? e.date : m), '');
+        const gap = daysBetweenKeys(last, today);
+        if (gap >= 3) add(60, '🚶', `${gap} days since your last workout — even 10 minutes counts.`);
+      }
+    }
+
+    const streak = checkinStreak();
+    if (streak >= 3) add(30, '📓', `${streak} mood check-ins in a row.`);
+
+    const shopCount = data.shoppingList && data.shoppingList.items ? data.shoppingList.items.length : 0;
+    if (shopCount > 0) add(20, '🛒', `${shopCount} item${shopCount === 1 ? '' : 's'} waiting on your shopping list.`);
+
+    cands.sort((a, b) => b.weight - a.weight);
+    const personal = cands.slice(0, 2);
+    if (personal.length === 0) {
+      personal.push(hasAnyActivity()
+        ? { emoji: '🌿', text: 'Nothing is overdue — enjoy the breathing room.' }
+        : { emoji: '✨', text: 'Log a habit, a workout or your mood, and this reading starts to know you.' });
+    }
+    return [cosmic, ...personal];
+  }
+
+  // Which fortune pool applies today, and the one the person shuffled to (if any).
+  let fortuneOverride = null; // { pool, index } — set by Shuffle, ignored once the pool changes (e.g. mood changes)
+  function fortunePool() {
+    const mood = data.moodLogs[todayKey()];
+    return (mood && mood <= 2) ? GENTLE_FORTUNES : FORTUNES;
+  }
+  function currentFortuneIndex(pool) {
+    return (fortuneOverride && fortuneOverride.pool === pool) ? fortuneOverride.index : hashStr(todayKey()) % pool.length;
+  }
+
+  function renderFortuneChips(chart) {
+    const el = document.getElementById('fortuneChips');
+    if (!el) return;
+    const now = new Date();
+    const moon = getMoonPhase(now);
+    const lucky = (hashStr(todayKey() + ((data.profile && data.profile.birthDate) || '')) % 99) + 1;
+    const chips = [
+      `<span class="fortune-chip">${moon.emoji} ${moon.name}</span>`,
+      `<span class="fortune-chip">🔢 Lucky ${lucky}</span>`
+    ];
+    if (chart && chart.weekday === WEEKDAYS[now.getDay()]) chips.push('<span class="fortune-chip">🎂 Your birth weekday</span>');
+    el.innerHTML = chips.join('');
+  }
+  function renderFortuneReading() {
+    const el = document.getElementById('fortuneReading');
+    if (!el) return;
+    el.innerHTML = '<div class="fortune-reading-title">Your reading today</div>' +
+      buildReading().map(l => `<div class="fortune-reading-line"><span>${l.emoji}</span><span>${escapeHtml(l.text)}</span></div>`).join('');
+  }
   function renderFortune() {
     const chart = getBirthChart();
     const subtitleEl = document.getElementById('fortuneSubtitle');
-    if (chart) {
-      subtitleEl.textContent = `✨ ${chart.sign.symbol} ${chart.sign.name} · ${chart.chinese.emoji} ${chart.chinese.element} ${chart.chinese.animal}`;
-    } else {
-      subtitleEl.textContent = '';
-    }
-    let text = FORTUNES[currentFortuneIndex];
-    text = text.replace(/\{sign\}/g, chart ? chart.sign.name : 'your');
+    if (!subtitleEl) return;
+    subtitleEl.textContent = chart
+      ? `✨ ${chart.sign.symbol} ${chart.sign.name} · ${chart.chinese.emoji} ${chart.chinese.element} ${chart.chinese.animal}`
+      : '';
+    const pool = fortunePool();
+    const text = pool[currentFortuneIndex(pool)].replace(/\{sign\}/g, chart ? chart.sign.name : 'your');
     document.getElementById('fortuneText').textContent = text;
+    renderFortuneChips(chart);
+    renderFortuneReading();
   }
   function shuffleFortune() {
-    if (FORTUNES.length <= 1) return;
+    const pool = fortunePool();
+    if (pool.length <= 1) return;
+    const current = currentFortuneIndex(pool);
     let idx;
-    do { idx = Math.floor(Math.random() * FORTUNES.length); } while (idx === currentFortuneIndex);
-    currentFortuneIndex = idx;
+    do { idx = Math.floor(Math.random() * pool.length); } while (idx === current);
+    fortuneOverride = { pool, index: idx };
     renderFortune();
   }
 
@@ -1950,26 +2157,108 @@
       source: 'Al Jazeera', url: 'https://www.aljazeera.com/news/2026/9/10/algeria-says-cutting-diplomatic-ties-with-uae'
     }
   ];
-  const newsLangState = {};
+  // ---------- News: Thailand snapshot (hand-picked, with Thai text) ----------
+  // Sourced from The Nation Thailand, 8 Oct 2026. Ask in chat for a fresh one.
+  const THAI_NEWS_UPDATED = '2026-10-08';
+  const THAI_NEWS_ITEMS = [
+    {
+      emoji: '🌧️', category: 'Thailand / Weather',
+      en: "The Thai Meteorological Department has issued a five-day warning for thundershowers, gusty winds, hail and isolated heavy to very heavy rain across parts of Thailand from October 9 to 13. Bangkok and surrounding provinces are covered on October 10–11, while the South is affected throughout. Authorities warn of flash floods and rapid run-off near foothills and waterways, and of waves above two metres in the Andaman Sea and Gulf of Thailand.",
+      th: 'กรมอุตุนิยมวิทยาประกาศเตือนพายุฝนฟ้าคะนอง ลมกระโชกแรง ลูกเห็บ และฝนตกหนักถึงหนักมากเป็นบางพื้นที่ ในช่วงวันที่ 9–13 ตุลาคม โดยกรุงเทพฯ และปริมณฑลอยู่ในพื้นที่เตือนภัยวันที่ 10–11 ตุลาคม ส่วนภาคใต้ได้รับผลกระทบตลอดทั้ง 5 วัน ทางการเตือนให้ระวังน้ำป่าไหลหลากและน้ำท่วมฉับพลันบริเวณเชิงเขาและริมลำน้ำ รวมถึงคลื่นสูงเกิน 2 เมตรในทะเลอันดามันและอ่าวไทย',
+      source: 'The Nation Thailand', url: 'https://www.nationthailand.com/news/general/40071984'
+    },
+    {
+      emoji: '🏭', category: 'Thailand / Economy',
+      en: "Flooding at Amata City Chonburi Industrial Estate has halted production at more than 10 auto-parts factories, disrupting mainly Japanese carmakers such as Toyota, although their assembly plants were not flooded themselves. Suppliers and carmakers are provisionally aiming to restart around October 12. The Federation of Thai Industries now puts preliminary industrial flood losses at nearly 6 billion baht, up from 1.5 billion baht a week earlier.",
+      th: 'น้ำท่วมนิคมอุตสาหกรรมอมตะซิตี้ ชลบุรี ทำให้โรงงานชิ้นส่วนยานยนต์กว่า 10 แห่งต้องหยุดผลิต กระทบค่ายรถญี่ปุ่นเป็นหลัก เช่น โตโยต้า แม้โรงงานประกอบรถเองจะไม่ได้ถูกน้ำท่วมโดยตรง ผู้ผลิตชิ้นส่วนและค่ายรถวางแผนเบื้องต้นว่าจะกลับมาผลิตประมาณวันที่ 12 ตุลาคม ขณะที่สภาอุตสาหกรรมแห่งประเทศไทยประเมินความเสียหายภาคอุตสาหกรรมเบื้องต้นเกือบ 6 พันล้านบาท เพิ่มจาก 1.5 พันล้านบาทเมื่อสัปดาห์ก่อน',
+      source: 'The Nation Thailand', url: 'https://www.nationthailand.com/business/automobile/40071986'
+    },
+    {
+      emoji: '✈️', category: 'Thailand / Policy',
+      en: "Finance Minister Ekniti Nitithanprapas defended a proposed 1,000-baht departure tax on air travellers of all nationalities, arguing it would encourage Thais to holiday at home and keep tourism spending in the country. The Association of Thai Travel Agents objects, warning of overlapping charges on top of airport fees and a planned 450-baht tourist-entry fee. The Revenue Department's public consultation on the draft law runs until October 29.",
+      th: 'รัฐมนตรีว่าการกระทรวงการคลัง เอกนิติ นิติทัณฑ์ประภาศ ออกมาปกป้องแนวคิดเก็บภาษีเดินทางออกนอกประเทศ 1,000 บาทต่อคน สำหรับผู้เดินทางทางอากาศทุกสัญชาติ โดยระบุว่าจะช่วยกระตุ้นให้คนไทยเที่ยวในประเทศและรักษาเม็ดเงินท่องเที่ยวไว้ในประเทศ ด้านสมาคมไทยธุรกิจท่องเที่ยว (ATTA) คัดค้าน เตือนว่าจะเป็นภาระซ้ำซ้อนกับค่าธรรมเนียมสนามบินและค่าธรรมเนียมเข้าประเทศ 450 บาทที่วางแผนไว้ ทั้งนี้ กรมสรรพากรเปิดรับฟังความคิดเห็นต่อร่างกฎหมายถึงวันที่ 29 ตุลาคม',
+      source: 'The Nation Thailand', url: 'https://www.nationthailand.com/news/tourism/40071975'
+    },
+    {
+      emoji: '🏛️', category: 'Thailand / Politics',
+      en: "Thailand's opposition is preparing to file a no-confidence motion this week against more than 10 ministers, all from the Bhumjaithai Party, with Prime Minister Anutin Charnvirakul to be challenged in his capacity as interior minister. According to opposition sources, the debate topics include alleged collusion in the Senate election, the handling of the floods and alleged cheating in local-government exams. The approach is also meant to test whether coalition partners, particularly Pheu Thai, will keep supporting the targeted ministers.",
+      th: 'ฝ่ายค้านเตรียมยื่นญัตติอภิปรายไม่ไว้วางใจรัฐมนตรีรายบุคคลมากกว่า 10 คน ซึ่งทั้งหมดมาจากพรรคภูมิใจไทย ภายในสัปดาห์นี้ โดยจะอภิปรายนายกรัฐมนตรี อนุทิน ชาญวีรกูล ในฐานะรัฐมนตรีว่าการกระทรวงมหาดไทย ตามข้อมูลจากแหล่งข่าวฝ่ายค้าน ประเด็นที่เตรียมอภิปรายได้แก่ ข้อกล่าวหาเรื่องการฮั้วเลือก สว. การบริหารจัดการน้ำท่วม และข้อกล่าวหาเรื่องการทุจริตการสอบท้องถิ่น ขณะเดียวกันฝ่ายค้านต้องการทดสอบว่าพรรคร่วมรัฐบาล โดยเฉพาะพรรคเพื่อไทย จะยังสนับสนุนรัฐมนตรีที่ถูกอภิปรายหรือไม่',
+      source: 'The Nation Thailand', url: 'https://www.nationthailand.com/news/politics/40071981'
+    },
+    {
+      emoji: '🏦', category: 'Thailand / Economy',
+      en: "Bangkok's Queen Sirikit National Convention Center will close to the public from October 11 to 18 as it prepares to host the 2026 IMF–World Bank annual meetings, with normal operations resuming on October 19. Thailand is hosting the global gathering again after 35 years.",
+      th: 'ศูนย์การประชุมแห่งชาติสิริกิติ์ในกรุงเทพฯ จะปิดไม่ให้ประชาชนเข้าตั้งแต่วันที่ 11–18 ตุลาคม เพื่อเตรียมความพร้อมเป็นเจ้าภาพการประชุมประจำปี IMF–ธนาคารโลก 2026 และจะกลับมาเปิดให้บริการตามปกติในวันที่ 19 ตุลาคม ไทยกลับมาเป็นเจ้าภาพการประชุมระดับโลกนี้อีกครั้งหลังผ่านไป 35 ปี',
+      source: 'The Nation Thailand', url: 'https://www.nationthailand.com/thailand/bangkok/40071995'
+    }
+  ];
 
-  // ---------- News: live refresh (rss2json + BBC World News) + on-demand translation (MyMemory) ----------
-  // Both are free, need no signup, and work with CORS from any real domain —
-  // unlike some news APIs (GNews included) whose free tiers only allow CORS
-  // from localhost. Neither works from inside the claude.ai preview (blocked
-  // by its sandbox); both work fine once this page is deployed on its own
-  // domain (e.g. GitHub Pages).
-  const RSS_FEED_URL = 'https://feeds.bbci.co.uk/news/rss.xml'; // BBC Top Stories — mixed categories
-  const LIVE_NEWS_CACHE_KEY = 'moriarty_live_news_v1';
-  let liveNewsItems = null; // null = showing the static snapshot; array = showing live results
-  try {
-    const cachedLiveNews = localStorage.getItem(LIVE_NEWS_CACHE_KEY);
-    if (cachedLiveNews) liveNewsItems = JSON.parse(cachedLiveNews);
-  } catch (e) { /* ignore, just stay on the static snapshot */ }
+  // ---------- News: sections (Thailand + World) ----------
+  // Each section has a hand-written snapshot (with Thai text) plus an optional
+  // live feed pulled on demand through rss2json, and its own cache, timestamp
+  // and EN/TH toggle state — so one feed failing never affects the other.
+  // Live fetching and on-demand translation (MyMemory) need real internet
+  // access, so they work once deployed on your own domain, not inside the
+  // claude.ai preview.
+  const NEWS_SECTIONS = {
+    thailand: {
+      name: 'Thailand',
+      staticItems: THAI_NEWS_ITEMS,
+      staticUpdated: THAI_NEWS_UPDATED,
+      // Google News "Nation" topic for the Thailand (English) edition. Bangkok
+      // Post's own RSS answers server requests with HTTP 451, so it would fail
+      // through rss2json. For native Thai headlines instead, use
+      // https://news.google.com/rss/headlines/section/topic/NATION?hl=th&gl=TH&ceid=TH:th
+      rssUrl: 'https://news.google.com/rss/headlines/section/topic/NATION?hl=en-TH&gl=TH&ceid=TH:en',
+      cacheKey: 'moriarty_live_news_th_v1',
+      mapItem: a => {
+        // Google News titles look like "Headline text - Publisher name"
+        const full = (a.title || '').trim();
+        if (!full) return null;
+        const cut = full.lastIndexOf(' - ');
+        return {
+          emoji: '📰',
+          category: 'Thailand',
+          en: cut > 0 ? full.slice(0, cut).trim() : full,
+          source: cut > 0 ? full.slice(cut + 3).trim() : 'Google News',
+          url: a.link
+        };
+      },
+      live: null,
+      lang: {}
+    },
+    world: {
+      name: 'World',
+      staticItems: NEWS_ITEMS,
+      staticUpdated: NEWS_UPDATED,
+      rssUrl: 'https://feeds.bbci.co.uk/news/rss.xml', // BBC Top Stories — mixed categories
+      cacheKey: 'moriarty_live_news_v1', // unchanged, so headlines cached before this update still load
+      mapItem: a => ({
+        emoji: '📰',
+        category: (a.categories && a.categories[0]) || 'BBC News',
+        en: stripHtml(a.description) || a.title,
+        source: 'BBC News',
+        url: a.link
+      }),
+      live: null,
+      lang: {}
+    }
+  };
+  Object.values(NEWS_SECTIONS).forEach(sec => {
+    try {
+      const cached = JSON.parse(localStorage.getItem(sec.cacheKey) || 'null');
+      if (Array.isArray(cached) && cached.length) sec.live = cached;
+    } catch (e) { /* ignore, just stay on the snapshot */ }
+  });
 
   function stripHtml(html) {
     const tmp = document.createElement('div');
     tmp.innerHTML = html || '';
     return (tmp.textContent || tmp.innerText || '').trim();
+  }
+  // Links come from external feeds, so only ever emit plain http(s) URLs.
+  function safeHref(url) {
+    return /^https?:\/\//i.test(url || '') ? String(url).replace(/"/g, '%22') : '#';
   }
 
   async function translateToThai(text) {
@@ -1981,95 +2270,110 @@
     return translated;
   }
 
+  async function fetchLiveSection(sec) {
+    const res = await fetch(`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(sec.rssUrl)}`);
+    if (!res.ok) throw new Error('rss2json request failed: ' + res.status);
+    const json = await res.json();
+    if (json.status && json.status !== 'ok') throw new Error('rss2json: ' + (json.message || json.status));
+    const fetchedAt = new Date().toISOString();
+    const seen = new Set();
+    const out = [];
+    for (const a of (json.items || [])) {
+      const mapped = sec.mapItem(a);
+      if (!mapped || !mapped.en) continue;
+      const dedupeKey = mapped.en.toLowerCase();
+      if (seen.has(dedupeKey)) continue; // feeds sometimes repeat a story
+      seen.add(dedupeKey);
+      out.push({ ...mapped, th: null, fetchedAt }); // th is translated on demand
+      if (out.length === 5) break;
+    }
+    if (out.length === 0) throw new Error('No usable articles returned');
+    return out;
+  }
+
   async function refreshLiveNews() {
     const btn = document.getElementById('refreshNewsBtn');
     btn.disabled = true;
     btn.textContent = '🔄 Fetching latest news…';
-    try {
-      const res = await fetch(`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(RSS_FEED_URL)}`);
-      if (!res.ok) throw new Error('rss2json request failed: ' + res.status);
-      const json = await res.json();
-      const items = json.items || [];
-      if (items.length === 0) throw new Error('No articles returned');
-      liveNewsItems = items.slice(0, 5).map(a => ({
-        emoji: '📰',
-        category: (a.categories && a.categories[0]) || 'BBC News',
-        en: stripHtml(a.description) || a.title,
-        th: null, // translated on demand
-        source: 'BBC News',
-        url: a.link,
-        fetchedAt: new Date().toISOString()
-      }));
-      try { localStorage.setItem(LIVE_NEWS_CACHE_KEY, JSON.stringify(liveNewsItems)); } catch (e) {}
-      showToast('Loaded live headlines');
-      renderNews();
-    } catch (e) {
-      console.warn('Live news fetch failed', e);
-      showToast('Could not fetch live news right now — showing the snapshot instead');
-    }
+    const ids = Object.keys(NEWS_SECTIONS);
+    const results = await Promise.allSettled(ids.map(id => fetchLiveSection(NEWS_SECTIONS[id])));
+    const failed = [];
+    results.forEach((r, idx) => {
+      const sec = NEWS_SECTIONS[ids[idx]];
+      if (r.status === 'fulfilled') {
+        sec.live = r.value;
+        sec.lang = {};
+        try { localStorage.setItem(sec.cacheKey, JSON.stringify(sec.live)); } catch (e) {}
+      } else {
+        console.warn(`Live news fetch failed (${sec.name})`, r.reason);
+        failed.push(sec.name);
+      }
+    });
+    if (failed.length === 0) showToast('Loaded live headlines');
+    else if (failed.length === ids.length) showToast('Could not fetch live news right now — showing the snapshots instead');
+    else showToast(`Couldn't refresh ${failed.join(' & ')} right now`);
+    renderNews();
     btn.disabled = false;
     btn.textContent = '🔄 Refresh with live news';
   }
 
-  function toggleNewsLang(i) {
-    const items = liveNewsItems || NEWS_ITEMS;
+  function toggleNewsLang(sectionId, i) {
+    const sec = NEWS_SECTIONS[sectionId];
+    if (!sec) return;
+    const items = sec.live || sec.staticItems;
     const item = items[i];
-    const current = newsLangState[i] || 'en';
-    if (current === 'en') {
-      if (item.th) {
-        newsLangState[i] = 'th';
-        renderNews();
-      } else if (liveNewsItems) {
-        // Live item with no cached translation yet — fetch it on demand.
-        newsLangState[i] = 'loading';
-        renderNews();
-        translateToThai(item.en).then(translated => {
-          item.th = translated;
-          newsLangState[i] = 'th';
-          renderNews();
-        }).catch(e => {
-          console.warn('Translation failed', e);
-          newsLangState[i] = 'en';
-          renderNews();
-          showToast('Translation unavailable right now');
-        });
-      } else {
-        newsLangState[i] = 'th';
-        renderNews();
-      }
-    } else if (current === 'th') {
-      newsLangState[i] = 'en';
+    if (!item) return;
+    const current = sec.lang[i] || 'en';
+    if (current === 'loading') return;
+    if (current === 'th') { sec.lang[i] = 'en'; renderNews(); return; }
+    if (item.th) { sec.lang[i] = 'th'; renderNews(); return; }
+    // Live item with no translation yet — fetch it on demand.
+    sec.lang[i] = 'loading';
+    renderNews();
+    translateToThai(item.en).then(translated => {
+      item.th = translated;
+      if (sec.live) { try { localStorage.setItem(sec.cacheKey, JSON.stringify(sec.live)); } catch (e) {} }
+      sec.lang[i] = 'th';
       renderNews();
-    }
+    }).catch(e => {
+      console.warn('Translation failed', e);
+      sec.lang[i] = 'en';
+      renderNews();
+      showToast('Translation unavailable right now');
+    });
   }
-  function renderNews() {
-    const items = liveNewsItems || NEWS_ITEMS;
-    if (liveNewsItems) {
+
+  function renderNewsSection(id) {
+    const sec = NEWS_SECTIONS[id];
+    const list = document.getElementById('newsList-' + id);
+    const updated = document.getElementById('newsUpdatedLine-' + id);
+    if (!sec || !list || !updated) return;
+    const items = sec.live || sec.staticItems;
+    if (sec.live) {
       const fetchedAt = items[0] && items[0].fetchedAt ? new Date(items[0].fetchedAt) : new Date();
       const dateStr = fetchedAt.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
       const timeStr = fetchedAt.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
-      document.getElementById('newsUpdatedLine').textContent = `Live — fetched ${dateStr} at ${timeStr}`;
-      document.getElementById('newsFootnote').textContent = 'These are live results from BBC News. Tap Refresh again any time for the latest.';
+      updated.textContent = `Live — fetched ${dateStr} at ${timeStr}`;
     } else {
-      document.getElementById('newsUpdatedLine').textContent =
-        'Updated ' + parseKey(NEWS_UPDATED).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
-      document.getElementById('newsFootnote').textContent = 'These headlines are a snapshot from when this was last put together — ask in chat any time to refresh them with the latest news, or tap Refresh above for live headlines (once configured).';
+      updated.textContent = 'Updated ' + parseKey(sec.staticUpdated).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
     }
-    const list = document.getElementById('newsList');
     list.innerHTML = items.map((item, i) => {
-      const lang = newsLangState[i] || 'en';
-      const showTh = lang === 'th';
+      const lang = sec.lang[i] || 'en';
+      const showTh = lang === 'th' && !!item.th;
       const langBtnLabel = lang === 'loading' ? 'กำลังแปล…' : (showTh ? 'English' : 'แปลไทย');
       return `
         <div class="news-card">
           <div class="news-cat">${item.emoji} ${escapeHtml(item.category)}</div>
           <div class="news-summary">${escapeHtml(showTh ? item.th : item.en)}</div>
           <div class="news-footer">
-            <a class="news-source" href="${item.url}" target="_blank" rel="noopener">${escapeHtml(item.source)} ↗</a>
-            <button class="news-lang-btn" onclick="toggleNewsLang(${i})" ${lang === 'loading' ? 'disabled' : ''}>${langBtnLabel}</button>
+            <a class="news-source" href="${safeHref(item.url)}" target="_blank" rel="noopener">${escapeHtml(item.source)} ↗</a>
+            <button class="news-lang-btn" onclick="toggleNewsLang('${id}', ${i})" ${lang === 'loading' ? 'disabled' : ''}>${langBtnLabel}</button>
           </div>
         </div>`;
     }).join('');
+  }
+  function renderNews() {
+    Object.keys(NEWS_SECTIONS).forEach(renderNewsSection);
     renderTrivia();
   }
 
@@ -2197,6 +2501,7 @@
 
   // ---------- Today snapshot ----------
   function renderToday() {
+    renderFortune();
     const key = todayKey();
     const doneToday = (data.habitLogs[key] || []).length;
     document.getElementById('snapHabits').textContent = `${doneToday}/${data.habits.length}`;
@@ -2401,7 +2706,6 @@
   const SHOPPING_CATEGORIES = [
     { key: 'grocery',   emoji: '🛒', label: 'Grocery' },
     { key: 'supplements', emoji: '💊', label: 'Supplements' },
-    { key: 'makeup',    emoji: '💄', label: 'Makeup' },
     { key: 'skincare',  emoji: '🧴', label: 'Skincare & Cosmetics' },
     { key: 'book',      emoji: '📚', label: 'Book' },
     { key: 'clothes',   emoji: '👕', label: 'Clothes' },
@@ -2409,6 +2713,9 @@
     { key: 'other',     emoji: '✨', label: 'Other' }
   ];
   function getShoppingCategory(key) {
+    // 'makeup' was merged into Skincare & Cosmetics — items saved under the old
+    // key keep a sensible label instead of falling through to "Other".
+    if (key === 'makeup') key = 'skincare';
     return SHOPPING_CATEGORIES.find(c => c.key === key) || SHOPPING_CATEGORIES[SHOPPING_CATEGORIES.length - 1];
   }
   let shoppingCategorySelectReady = false;
