@@ -298,20 +298,23 @@
   }
   .wb-due-row:last-child { border-bottom: none; }
   .wb-due-icon { font-size: 17px; flex: none; }
-  .wb-due-body { flex: 1; }
+  .wb-due-body { flex: 1; min-width: 0; overflow-wrap: anywhere; }
   .wb-due-title { font-size: 13px; }
   .wb-due-sub { font-size: 11px; color: var(--ink-soft); }
-  .wb-due-badge { font-size: 10px; padding: 3px 8px; border-radius: 999px; background: var(--clay-soft); color: var(--clay); font-weight: 600; }
+  .wb-due-badge { font-size: 10px; padding: 3px 8px; border-radius: 999px; background: var(--clay-soft); color: var(--clay); font-weight: 600; flex: none; white-space: nowrap; }
   .wb-due-badge.upcoming { background: var(--gold-soft); color: var(--gold); }
+  .wb-due-badge.ok { background: var(--sage-soft); color: var(--sage); }
+  .wb-due-badge.none { background: var(--line-soft); color: var(--ink-soft); }
+  .wb-due-badge.overdue { background: transparent; color: var(--danger); box-shadow: inset 0 0 0 1px var(--danger); }
 
   .wb-space-card { background: var(--paper-raised); border: 1px solid var(--line-soft); border-radius: 8px; margin-bottom: 12px; overflow: hidden; }
   .wb-space-header {
     display: flex; align-items: center; gap: 10px; padding: 14px 16px; cursor: pointer;
   }
   .wb-space-icon { font-size: 18px; flex: none; }
-  .wb-space-name { flex: 1; font-size: 14px; font-weight: 600; }
-  .wb-space-count { font-size: 11px; color: var(--ink-soft); }
-  .wb-space-chevron { color: var(--ink-soft); font-size: 12px; transition: transform 0.15s ease; }
+  .wb-space-name { flex: 1; min-width: 0; overflow-wrap: anywhere; font-size: 14px; font-weight: 600; }   /* may shrink and wrap, so a long name can't push the chevron out */
+  .wb-space-count { font-size: 11px; color: var(--ink-soft); flex: 0 1 auto; max-width: 45%; overflow-wrap: anywhere; text-align: right; }
+  .wb-space-chevron { color: var(--ink-soft); font-size: 12px; transition: transform 0.15s ease; flex: none; }
   .wb-space-body { display: none; padding: 0 16px 14px; }
   .wb-space-card.open .wb-space-body { display: block; }
   .wb-space-card.open .wb-space-chevron { transform: rotate(90deg); }
@@ -320,7 +323,7 @@
     display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px dashed var(--line);
   }
   .wb-task-row:last-child { border-bottom: none; }
-  .wb-task-body { flex: 1; }
+  .wb-task-body { flex: 1; min-width: 0; overflow-wrap: anywhere; }
   .wb-task-name { font-size: 13px; }
   .wb-task-freq { font-size: 11px; color: var(--ink-soft); margin-top: 1px; }
   .wb-task-status { font-size: 10.5px; font-weight: 600; margin-top: 2px; }
@@ -337,6 +340,42 @@
     padding: 8px 9px; font-family: inherit; font-size: 12.5px; color: var(--ink);
   }
   .wb-space-remove { background: none; border: none; color: var(--ink-soft); font-size: 15px; cursor: pointer; }
+
+  /* ---------- Love & Self-Care ---------- */
+  .sc-card-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 8px; }
+  .sc-steps { font-size: 12.5px; line-height: 1.4; margin-top: 1px; overflow-wrap: anywhere; }
+  .sc-week-row { display: grid; grid-template-columns: 34px minmax(0, 1fr) minmax(0, 1fr); gap: 8px; padding: 7px 6px; border-bottom: 1px dashed var(--line); border-radius: 6px; font-size: 12px; line-height: 1.4; align-items: start; }
+  .sc-week-row:last-child { border-bottom: none; }
+  .sc-week-row > span { min-width: 0; overflow-wrap: anywhere; }
+  .sc-week-row.head { font-size: 10.5px; font-weight: 600; color: var(--ink-soft); border-bottom: 1px solid var(--line); border-radius: 0; }
+  .sc-week-row.sel { background: var(--sage-soft); }
+  .sc-day { font-weight: 600; color: var(--ink-soft); }
+  .sc-edit-day { padding: 10px 0; border-bottom: 1px dashed var(--line); }
+  .sc-edit-name { font-size: 12.5px; font-weight: 600; margin-bottom: 6px; }
+  .sc-edit-day .field { margin-bottom: 6px; }
+  .sc-dots { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 4px; text-align: center; margin: 10px 0 4px; }
+  .sc-dot-day { font-size: 10.5px; color: var(--ink-soft); }
+  .sc-dot-col.today .sc-dot-day { color: var(--ink); font-weight: 700; }
+  .sc-dot { display: block; width: 13px; height: 13px; border-radius: 50%; border: 1.5px solid var(--line); margin: 5px auto 0; }
+  .sc-dot.done { background: var(--sage); border-color: var(--sage); }
+  .sc-dot.none { border-style: dotted; opacity: 0.45; }
+  .sc-attn { display: flex; gap: 8px; align-items: flex-start; font-size: 12.5px; line-height: 1.45; padding: 8px 0 2px; margin-top: 6px; border-top: 1px dashed var(--line); cursor: pointer; }
+  .sc-attn > span:last-child { min-width: 0; overflow-wrap: anywhere; }
+  .entry + .sc-attn { border-top: none; margin-top: 0; }   /* the row above already draws a dashed line */
+  .cr-row { padding: 12px 0; border-bottom: 1px dashed var(--line); }
+  .cr-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
+  .cr-title { font-size: 13.5px; font-weight: 600; min-width: 0; overflow-wrap: anywhere; }
+  .cr-sub { font-size: 11.5px; color: var(--ink-soft); margin-top: 3px; line-height: 1.45; overflow-wrap: anywhere; }
+  .cr-actions { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+  .cr-panel { margin-top: 10px; padding: 10px; background: var(--paper); border: 1px solid var(--line-soft); border-radius: 8px; }
+  .cr-panel .entry:last-child { border-bottom: none; }
+  .cr-form-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 8px; }
+  .cr-form-row:last-child { margin-bottom: 0; }
+  .cr-form-row > .field { flex: 1 1 130px; }
+  .cr-add { padding-top: 12px; }
+  .cr-add + .cr-panel, .cr-row + .cr-panel { margin-top: 12px; }
+  .news-lang-btn.on { background: var(--sage); color: var(--paper-raised); }
+  #healthCareCard.open #healthCareSummary { display: none; }   /* the open card shows the same status in its row */
 
   /* ---------- Insights ---------- */
   .mood-chart { display: flex; align-items: flex-end; gap: 4px; height: 90px; }
@@ -374,6 +413,7 @@
     background: var(--sage-soft); color: var(--sage); border: none; border-radius: 999px;
     padding: 4px 10px; font-size: 11px; font-weight: 600; cursor: pointer; font-family: inherit;
   }
+  .news-error { font-size: 11px; line-height: 1.45; color: var(--danger); margin: -4px 0 10px; overflow-wrap: anywhere; }
   .trivia-card { background: var(--clay-soft); border-color: var(--clay); }
   .trivia-text { font-size: 13.5px; line-height: 1.55; margin-bottom: 10px; }
 
@@ -601,6 +641,10 @@
     </button>
 
     <hr class="divider">
+    <div class="section-label">Self-care</div>
+    <div class="card" id="scTodayCard"></div>
+
+    <hr class="divider">
     <div class="section-label">Well-being</div>
     <div class="card" id="wbTodayCard" onclick="goTo('wellbeing')" style="cursor:pointer;"></div>
 
@@ -611,6 +655,16 @@
   <!-- HEALTH -->
   <div class="view" id="view-health">
     <div class="greeting">Health 🌱</div>
+
+    <div class="wb-space-card" id="healthCareCard" style="margin-bottom:14px;">
+      <div class="wb-space-header" onclick="toggleHealthCare()">
+        <div class="wb-space-icon">🩺</div>
+        <div class="wb-space-name" id="healthCareName">Check-ups</div>
+        <div class="wb-space-count" id="healthCareSummary"></div>
+        <div class="wb-space-chevron">▸</div>
+      </div>
+      <div class="wb-space-body" id="careList-health"></div>
+    </div>
 
     <div class="subtabs">
       <button class="subtab active" data-sub="habits" onclick="setHealthSub('habits')">Habits</button>
@@ -822,6 +876,43 @@
     <div class="card" id="bowelInsightsCard"></div>
   </div>
 
+  <!-- LOVE & SELF-CARE -->
+  <div class="view" id="view-selfcare">
+    <button class="back-link" onclick="goTo('more')">← More</button>
+    <div class="greeting">Love & Self-Care 🌷</div>
+    <div class="card-sub" style="margin:-10px 0 18px;">Small rituals, kept up</div>
+
+    <div class="section-label">🧴 Face — skin cycling</div>
+    <div class="habit-date-nav">
+      <button class="date-nav-btn" onclick="shiftCareDate(-1)">◀</button>
+      <div class="date-nav-picker">
+        <div class="date-nav-label" id="scDateLabel">Today</div>
+        <input type="date" class="date-nav-hidden-input" id="scDateInput" onchange="setCareDate(this.value)">
+      </div>
+      <button type="button" class="date-nav-btn" onclick="openCalendarPicker('scDateInput')" aria-label="Open calendar">📅</button>
+      <button class="date-nav-btn" id="scDateNextBtn" onclick="shiftCareDate(1)">▶</button>
+    </div>
+    <div class="empty-note" id="scDateHint" style="display:none; margin-top:-8px;"></div>
+    <div class="card" id="scRoutineCard"></div>
+    <div class="card">
+      <div class="sc-card-head"><div class="card-title">Weekly schedule</div><button class="news-lang-btn" id="scEditBtn" onclick="toggleSkinEdit()">Edit</button></div>
+      <div id="scWeek"></div>
+    </div>
+    <div class="card">
+      <div class="card-title">Last 7 days</div>
+      <div id="scAdherence"></div>
+    </div>
+
+    <hr class="divider">
+    <div class="section-label">🦷 Teeth</div>
+    <div class="card" id="careList-teeth"></div>
+
+    <hr class="divider">
+    <div class="section-label">✨ Aesthetic treatments</div>
+    <div class="card-sub" style="margin:-6px 0 10px;">Intervals are starting points — tap Edit on any treatment to match your clinic's advice. Nothing nags until you log a first visit.</div>
+    <div class="card" id="careList-aesthetic"></div>
+  </div>
+
   <!-- NEWS -->
   <div class="view" id="view-news">
     <button class="back-link" onclick="goTo('more')">← More</button>
@@ -831,11 +922,13 @@
 
     <div class="section-label">🇹🇭 Thailand roundup</div>
     <div class="card-sub" id="newsUpdatedLine-thailand" style="margin:-6px 0 10px;"></div>
+    <div class="news-error" id="newsError-thailand" style="display:none;"></div>
     <div id="newsList-thailand"></div>
 
     <hr class="divider">
     <div class="section-label">🌍 World roundup</div>
     <div class="card-sub" id="newsUpdatedLine-world" style="margin:-6px 0 10px;"></div>
+    <div class="news-error" id="newsError-world" style="display:none;"></div>
     <div id="newsList-world"></div>
 
     <hr class="divider">
@@ -845,7 +938,7 @@
       <button class="fortune-shuffle" onclick="shuffleTrivia()">🔀 Another one</button>
     </div>
 
-    <div class="empty-note" id="newsFootnote" style="margin-top:16px;">Snapshots are hand-picked when they're put together — ask in chat for a fresh one. Tap Refresh above for live headlines (Thailand from Google News, world from BBC News).</div>
+    <div class="empty-note" id="newsFootnote" style="margin-top:16px;">Snapshots are hand-picked when they're put together — ask in chat for a fresh one. Tap Refresh above for live headlines (Thailand from Google News and Thai news sites, world from BBC News).</div>
   </div>
 
   <!-- MORE -->
@@ -1003,6 +1096,64 @@
   // Fills in any missing fields with defaults. Used for local data, cloud-synced
   // data and imported backups alike, so data saved by an older version of the
   // app never breaks a newer one.
+  // ---- Love & Self-Care data (literals only: this runs while saved data loads) ----
+  function defaultSkinRoutine() {
+    return {
+      0: { am: ['Recovery'], pm: ['Body/Facial Scrub', 'AHA'] },   // Sunday
+      1: { am: ['Vit C'],    pm: ['Retinoid'] },
+      2: { am: ['Recovery'], pm: ['Recovery'] },
+      3: { am: ['Vit C'],    pm: ['Recovery'] },
+      4: { am: ['BHA'],      pm: ['Mask'] },
+      5: { am: ['Vit C'],    pm: ['Retinoid'] },
+      6: { am: ['Recovery'], pm: ['Recovery'] }
+    };
+  }
+  function normaliseSkinRoutine(r) {
+    const def = defaultSkinRoutine();
+    const clean = a => (Array.isArray(a) ? a : []).map(s => String(s).trim().slice(0, 40)).filter(Boolean).slice(0, 8);
+    const out = {};
+    for (let d = 0; d < 7; d++) {
+      const src = r && typeof r === 'object' ? r[d] : null;
+      out[d] = (src && (Array.isArray(src.am) || Array.isArray(src.pm))) ? { am: clean(src.am), pm: clean(src.pm) } : def[d];
+    }
+    return out;
+  }
+  function defaultCareReminders() {
+    // Intervals are starting points — each one is editable in the app, and nothing nags until a first visit is logged.
+    const mk = (id, group, name, months, leadDays) => ({ id, group, name, months, leadDays, history: [] });
+    return [
+      mk('cr-teeth-scaling', 'teeth', 'Dental scaling', 6, 14),
+      mk('cr-botox-lines', 'aesthetic', 'Botox — fine lines', 4, 14),
+      mk('cr-botox-neck', 'aesthetic', 'Botox — neck & shoulder', 4, 14),
+      mk('cr-thermage', 'aesthetic', 'Thermage', 12, 14),
+      mk('cr-emface', 'aesthetic', 'EM face', 6, 14),
+      mk('cr-morpheus', 'aesthetic', 'Morpheus8', 12, 14),
+      mk('cr-health-annual', 'health', 'Annual health check', 12, 30)
+    ];
+  }
+  function normaliseCareReminders(list) {
+    const out = [], seen = new Set();
+    (Array.isArray(list) ? list : []).forEach(r => {
+      if (!r || typeof r !== 'object') return;
+      const id = String(r.id || '').replace(/[^A-Za-z0-9_-]/g, '');   // ids end up inside onclick="…" attributes
+      const name = String(r.name || '').trim().slice(0, 50);
+      if (!id || !name || seen.has(id)) return;
+      seen.add(id);
+      const byDate = new Map();
+      (Array.isArray(r.history) ? r.history : []).forEach(x => {
+        if (x && /^\d{4}-\d{2}-\d{2}$/.test(String(x.date))) byDate.set(x.date, { date: x.date, note: String(x.note || '').slice(0, 80) });
+      });
+      out.push({
+        id, name,
+        group: ['teeth', 'aesthetic', 'health'].includes(r.group) ? r.group : 'aesthetic',
+        months: Math.min(60, Math.max(1, parseInt(r.months, 10) || 6)),
+        leadDays: Math.min(90, Math.max(1, parseInt(r.leadDays, 10) || 14)),
+        history: [...byDate.values()].sort((a, b) => b.date.localeCompare(a.date))
+      });
+    });
+    return out;
+  }
+
   function ensureDataShape(d) {
     if (!d || typeof d !== 'object') d = {};
     if (!Array.isArray(d.habits)) {
@@ -1020,6 +1171,10 @@
     if (!Array.isArray(d.shoppingList.items)) d.shoppingList.items = [];       // { id, name, addedAt }
     if (!Array.isArray(d.shoppingList.history)) d.shoppingList.history = [];   // { id, name, boughtAt, dateKey }
     if (!d.moodLogs) d.moodLogs = {};          // { "2026-09-17": 4 }
+    if (!d.selfCare || typeof d.selfCare !== 'object') d.selfCare = {};
+    d.selfCare.skinRoutine = normaliseSkinRoutine(d.selfCare.skinRoutine);          // { 0..6 (Sunday=0): { am: [steps], pm: [steps] } }
+    if (!d.selfCare.skinLogs || typeof d.selfCare.skinLogs !== 'object') d.selfCare.skinLogs = {};  // { "2026-10-08": { am, pm } }
+    d.careReminders = Array.isArray(d.careReminders) ? normaliseCareReminders(d.careReminders) : defaultCareReminders(); // { id, group, name, months, leadDays, history: [{date, note}] }
     if (!d.profile) d.profile = { birthDate: '1989-12-16', birthTime: '20:50', birthPlace: 'Nakhon Ratchasima, Thailand' };
     if (!d.wellbeing) d.wellbeing = defaultWellbeing();
     else if (d.wellbeing.version !== 2) d.wellbeing = migrateWellbeingV2(d.wellbeing);
@@ -1248,6 +1403,8 @@
     renderBowel();
     renderPillarGrid();
     renderToday();
+    renderCareAll();
+    renderSelfCare();
     renderSyncCard();
     initHealthDateDefaults();
   }
@@ -1283,12 +1440,14 @@
   function goTo(view) {
     document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
     document.getElementById('view-' + view).classList.add('active');
-    const navKey = (view === 'wellbeing' || view === 'insights' || view === 'news') ? 'more' : view;
+    const navKey = (view === 'wellbeing' || view === 'insights' || view === 'news' || view === 'selfcare') ? 'more' : view;
     document.querySelectorAll('.nav-btn').forEach(b => b.classList.toggle('active', b.dataset.view === navKey));
     if (view === 'today') renderToday();
     if (view === 'wellbeing') renderWellbeing();
     if (view === 'insights') renderInsights();
     if (view === 'news') renderNews();
+    if (view === 'selfcare') renderSelfCare();
+    if (view === 'health') { renderCareGroup('health'); renderHealthCareSummary(); }   // statuses depend on today's date
   }
   function setHealthSub(sub) {
     document.querySelectorAll('.subtab').forEach(t => t.classList.toggle('active', t.dataset.sub === sub));
@@ -2194,54 +2353,78 @@
   ];
 
   // ---------- News: sections (Thailand + World) ----------
-  // Each section has a hand-written snapshot (with Thai text) plus an optional
-  // live feed pulled on demand through rss2json, and its own cache, timestamp
-  // and EN/TH toggle state — so one feed failing never affects the other.
-  // Live fetching and on-demand translation (MyMemory) need real internet
-  // access, so they work once deployed on your own domain, not inside the
-  // claude.ai preview.
+  // Each section has a hand-written snapshot (with Thai text) plus live feeds pulled on demand through
+  // rss2json, with its own cache, timestamp, error note and EN/TH toggle state — so one section failing
+  // never affects the other. A section can list several live sources: they are all asked at once and the
+  // first one in the list that works wins, so one publisher blocking the relay can't leave it empty.
+  // Live fetching and on-demand translation (MyMemory) need real internet access, so they work once
+  // deployed on your own domain, not inside the claude.ai preview.
+  function stripHtml(html) {
+    // DOMParser documents are inert (nothing loads, no handlers run). Setting innerHTML on a real element is
+    // not: an <img onerror> in a feed would fire even on a detached element.
+    const doc = new DOMParser().parseFromString(String(html || ''), 'text/html');
+    doc.querySelectorAll('script, style, noscript, template').forEach(el => el.remove()); // their code isn't text to show
+    return (doc.body.textContent || '').replace(/\s+/g, ' ').trim();
+  }
+  // Links come from external feeds, so only ever emit plain http(s) URLs.
+  function safeHref(url) {
+    return /^https?:\/\//i.test(url || '') ? String(url).replace(/"/g, '%22') : '#';
+  }
+  const googleNewsSearch = q => `https://news.google.com/rss/search?q=${encodeURIComponent(q)}&hl=en-US&gl=US&ceid=US:en`;
+  function mapGoogleHeadline(a) {
+    // Google News titles look like "Headline text - Publisher name"
+    const full = stripHtml(a.title);
+    if (!full) return null;
+    const cut = full.lastIndexOf(' - ');
+    return {
+      emoji: '📰', category: 'Thailand',
+      en: cut > 0 ? full.slice(0, cut).trim() : full,
+      source: cut > 0 ? full.slice(cut + 3).trim() : 'Google News',
+      url: a.link
+    };
+  }
+  const mapPublisher = name => a => {
+    const title = stripHtml(a.title);
+    return title ? { emoji: '📰', category: 'Thailand', en: title, source: name, url: a.link } : null;
+  };
+
   const NEWS_SECTIONS = {
     thailand: {
       name: 'Thailand',
       staticItems: THAI_NEWS_ITEMS,
       staticUpdated: THAI_NEWS_UPDATED,
-      // Google News "Nation" topic for the Thailand (English) edition. Bangkok
-      // Post's own RSS answers server requests with HTTP 451, so it would fail
-      // through rss2json. For native Thai headlines instead, use
-      // https://news.google.com/rss/headlines/section/topic/NATION?hl=th&gl=TH&ceid=TH:th
-      rssUrl: 'https://news.google.com/rss/headlines/section/topic/NATION?hl=en-TH&gl=TH&ceid=TH:en',
       cacheKey: 'moriarty_live_news_th_v1',
-      mapItem: a => {
-        // Google News titles look like "Headline text - Publisher name"
-        const full = (a.title || '').trim();
-        if (!full) return null;
-        const cut = full.lastIndexOf(' - ');
-        return {
-          emoji: '📰',
-          category: 'Thailand',
-          en: cut > 0 ? full.slice(0, cut).trim() : full,
-          source: cut > 0 ? full.slice(cut + 3).trim() : 'Google News',
-          url: a.link
-        };
-      },
+      // Best first. Bangkok Post's own RSS answers server requests with HTTP 451, so it isn't listed. For native
+      // Thai headlines, a Google News search in the Thai edition works too (hl=th&gl=TH&ceid=TH:th).
+      sources: [
+        { name: 'Google News (Thai outlets)', mapItem: mapGoogleHeadline,
+          rssUrl: googleNewsSearch('Thailand (site:nationthailand.com OR site:bangkokpost.com OR site:thaipbsworld.com OR site:thethaiger.com OR site:khaosodenglish.com) when:2d') },
+        { name: 'Google News', mapItem: mapGoogleHeadline, rssUrl: googleNewsSearch('Thailand') },
+        { name: 'Thai PBS World', mapItem: mapPublisher('Thai PBS World'), rssUrl: 'https://www.thaipbsworld.com/feed/' },
+        { name: 'thailandnews.co', mapItem: mapPublisher('thailandnews.co'), rssUrl: 'https://thailandnews.co/feed/' }
+      ],
       live: null,
-      lang: {}
+      lang: {},
+      error: null
     },
     world: {
       name: 'World',
       staticItems: NEWS_ITEMS,
       staticUpdated: NEWS_UPDATED,
-      rssUrl: 'https://feeds.bbci.co.uk/news/rss.xml', // BBC Top Stories — mixed categories
       cacheKey: 'moriarty_live_news_v1', // unchanged, so headlines cached before this update still load
-      mapItem: a => ({
-        emoji: '📰',
-        category: (a.categories && a.categories[0]) || 'BBC News',
-        en: stripHtml(a.description) || a.title,
-        source: 'BBC News',
-        url: a.link
-      }),
+      sources: [
+        { name: 'BBC News', rssUrl: 'https://feeds.bbci.co.uk/news/rss.xml', // Top Stories — mixed categories
+          mapItem: a => ({
+            emoji: '📰',
+            category: stripHtml(a.categories && a.categories[0]) || 'BBC News',
+            en: stripHtml(a.description) || stripHtml(a.title),
+            source: 'BBC News',
+            url: a.link
+          }) }
+      ],
       live: null,
-      lang: {}
+      lang: {},
+      error: null
     }
   };
   Object.values(NEWS_SECTIONS).forEach(sec => {
@@ -2250,16 +2433,6 @@
       if (Array.isArray(cached) && cached.length) sec.live = cached;
     } catch (e) { /* ignore, just stay on the snapshot */ }
   });
-
-  function stripHtml(html) {
-    const tmp = document.createElement('div');
-    tmp.innerHTML = html || '';
-    return (tmp.textContent || tmp.innerText || '').trim();
-  }
-  // Links come from external feeds, so only ever emit plain http(s) URLs.
-  function safeHref(url) {
-    return /^https?:\/\//i.test(url || '') ? String(url).replace(/"/g, '%22') : '#';
-  }
 
   async function translateToThai(text) {
     const res = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=en|th`);
@@ -2270,25 +2443,63 @@
     return translated;
   }
 
-  async function fetchLiveSection(sec) {
-    const res = await fetch(`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(sec.rssUrl)}`);
-    if (!res.ok) throw new Error('rss2json request failed: ' + res.status);
-    const json = await res.json();
-    if (json.status && json.status !== 'ok') throw new Error('rss2json: ' + (json.message || json.status));
-    const fetchedAt = new Date().toISOString();
-    const seen = new Set();
-    const out = [];
-    for (const a of (json.items || [])) {
-      const mapped = sec.mapItem(a);
-      if (!mapped || !mapped.en) continue;
-      const dedupeKey = mapped.en.toLowerCase();
-      if (seen.has(dedupeKey)) continue; // feeds sometimes repeat a story
-      seen.add(dedupeKey);
-      out.push({ ...mapped, th: null, fetchedAt }); // th is translated on demand
-      if (out.length === 5) break;
+  let newsFetchTimeoutMs = 10000; // a source that hangs is given up on after this long
+  // Fetches one RSS feed through rss2json. Always rejects with a short, human-readable reason.
+  async function fetchFeedViaRss2json(rssUrl) {
+    const ctrl = new AbortController();
+    const timer = setTimeout(() => ctrl.abort(), newsFetchTimeoutMs);
+    try {
+      const res = await fetch(`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`, { signal: ctrl.signal });
+      let json = null;
+      try { json = await res.json(); } catch (e) { /* not JSON */ }
+      if (!res.ok) throw new Error(`HTTP ${res.status}` + (json && json.message ? ` (${json.message})` : ''));
+      if (!json) throw new Error('unreadable reply');
+      if (json.status && json.status !== 'ok') throw new Error(`rss2json said “${json.message || json.status}”`);
+      return json.items || [];
+    } catch (e) {
+      throw new Error(e && e.name === 'AbortError' ? 'timed out' : (e instanceof TypeError ? 'network error' : (e && e.message) || 'failed'));
+    } finally {
+      clearTimeout(timer);
     }
-    if (out.length === 0) throw new Error('No usable articles returned');
-    return out;
+  }
+
+  // Asks every source of a section at once and resolves with the first source *in list order* that works,
+  // as soon as that is known (it doesn't wait for slower, lower-priority sources). Rejects with .details
+  // listing why each source failed.
+  function fetchLiveSection(sec) {
+    const n = sec.sources.length;
+    const results = new Array(n).fill(null);
+    return new Promise((resolve, reject) => {
+      const decide = () => {
+        for (let i = 0; i < n; i++) {
+          if (results[i] === null) return;                       // a higher-priority source hasn't answered yet
+          if (results[i].ok) return resolve(results[i].value);
+        }
+        const err = new Error('all sources failed');
+        err.details = results.map((r, i) => `${sec.sources[i].name}: ${r.error}`).join(' · ');
+        reject(err);
+      };
+      sec.sources.forEach((src, i) => {
+        fetchFeedViaRss2json(src.rssUrl).then(items => {
+          const fetchedAt = new Date().toISOString();
+          const seen = new Set();
+          const out = [];
+          for (const a of items) {
+            const mapped = src.mapItem(a);
+            if (!mapped || !mapped.en) continue;
+            const key = mapped.en.toLowerCase();
+            if (seen.has(key)) continue; // feeds sometimes repeat a story
+            seen.add(key);
+            out.push({ ...mapped, th: null, via: src.name, fetchedAt }); // th is translated on demand
+            if (out.length === 5) break;
+          }
+          if (out.length === 0) throw new Error('no usable stories');
+          results[i] = { ok: true, value: out };
+        }).catch(e => {
+          results[i] = { ok: false, error: (e && e.message) || 'failed' };
+        }).then(decide);
+      });
+    });
   }
 
   async function refreshLiveNews() {
@@ -2303,9 +2514,11 @@
       if (r.status === 'fulfilled') {
         sec.live = r.value;
         sec.lang = {};
+        sec.error = null;
         try { localStorage.setItem(sec.cacheKey, JSON.stringify(sec.live)); } catch (e) {}
       } else {
         console.warn(`Live news fetch failed (${sec.name})`, r.reason);
+        sec.error = (r.reason && (r.reason.details || r.reason.message)) || 'unknown error';
         failed.push(sec.name);
       }
     });
@@ -2353,9 +2566,16 @@
       const fetchedAt = items[0] && items[0].fetchedAt ? new Date(items[0].fetchedAt) : new Date();
       const dateStr = fetchedAt.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
       const timeStr = fetchedAt.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
-      updated.textContent = `Live — fetched ${dateStr} at ${timeStr}`;
+      updated.textContent = `Live — fetched ${dateStr} at ${timeStr}` + (items[0] && items[0].via ? ` · via ${items[0].via}` : '');
     } else {
       updated.textContent = 'Updated ' + parseKey(sec.staticUpdated).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+    }
+    const errEl = document.getElementById('newsError-' + id);
+    if (errEl) {
+      errEl.style.display = sec.error ? 'block' : 'none';
+      errEl.textContent = sec.error
+        ? `Couldn't load live headlines — still showing the ${sec.live ? 'last live set' : 'snapshot'}. Details: ${sec.error}`
+        : '';
     }
     list.innerHTML = items.map((item, i) => {
       const lang = sec.lang[i] || 'en';
@@ -2502,6 +2722,7 @@
   // ---------- Today snapshot ----------
   function renderToday() {
     renderFortune();
+    renderTodaySelfCare();   // the routine and reminder statuses depend on today's date, so refresh whenever Today does
     const key = todayKey();
     const doneToday = (data.habitLogs[key] || []).length;
     document.getElementById('snapHabits').textContent = `${doneToday}/${data.habits.length}`;
@@ -2541,13 +2762,368 @@
     }
   }
 
+  // ---------- Love & Self-Care ----------
+  const FULL_DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  const CARE_GROUPS = {
+    teeth:     { icon: '🦷', placeholder: 'e.g. Retainer check', defaultMonths: 6,  defaultLead: 14 },
+    aesthetic: { icon: '✨', placeholder: 'e.g. Laser or filler', defaultMonths: 6,  defaultLead: 14 },
+    health:    { icon: '🩺', placeholder: 'e.g. Eye exam',        defaultMonths: 12, defaultLead: 30 }
+  };
+  const CARE_MONTH_CHOICES = [1, 2, 3, 4, 5, 6, 9, 12, 18, 24, 36];
+  const CARE_LEAD_CHOICES = [7, 14, 21, 30, 60];
+
+  function dateToKey(d) {
+    return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+  }
+  function longDate(key) { return parseKey(key).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }); }
+  function escapeAttr(s) { return escapeHtml(s).replace(/"/g, '&quot;').replace(/'/g, '&#39;'); }
+  function intervalLabel(m) {
+    if (m % 12 === 0) { const y = m / 12; return y === 1 ? 'year' : `${y} years`; }
+    return m === 1 ? 'month' : `${m} months`;
+  }
+  function optionsHtml(choices, selected, labeller) {
+    const list = choices.includes(selected) ? choices : [...choices, selected].sort((a, b) => a - b);
+    return list.map(v => `<option value="${v}"${v === selected ? ' selected' : ''}>${labeller(v)}</option>`).join('');
+  }
+  const monthLabel = m => (m === 1 ? 'Every month' : m % 12 === 0 ? (m === 12 ? 'Every year' : `Every ${m / 12} years`) : `Every ${m} months`);
+  const leadLabel = d => `${d} days before`;
+
+  // ----- skin routine -----
+  let selectedCareDate = todayKey();
+  let skinEditing = false;
+  let skinResetArmed = false;
+  function skinLogFor(key) { const l = data.selfCare.skinLogs[key]; return { am: !!(l && l.am), pm: !!(l && l.pm) }; }
+  function toggleSkinLogOn(dateKey, period) {
+    const next = skinLogFor(dateKey);
+    next[period] = !next[period];
+    if (!next.am && !next.pm) delete data.selfCare.skinLogs[dateKey]; else data.selfCare.skinLogs[dateKey] = next;
+    saveData(); renderSelfCare(); renderTodaySelfCare();
+  }
+  function toggleSkinLog(period) { toggleSkinLogOn(selectedCareDate, period); }
+
+  function shiftCareDate(delta) {
+    const newKey = addDaysToKey(selectedCareDate, delta);
+    if (newKey > todayKey()) return;            // never log the future
+    selectedCareDate = newKey;
+    renderSelfCare();
+  }
+  function setCareDate(val) {
+    if (!val) return;
+    if (val > todayKey()) { showToast("Can't log a future date"); renderSelfCare(); return; }
+    selectedCareDate = val;
+    renderSelfCare();
+  }
+  function renderCareDateLabel() {
+    const label = document.getElementById('scDateLabel');
+    if (!label) return;
+    const isToday = selectedCareDate === todayKey();
+    label.textContent = isToday ? 'Today' : parseKey(selectedCareDate).toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+    const nextBtn = document.getElementById('scDateNextBtn');
+    if (nextBtn) nextBtn.disabled = isToday;
+    const hint = document.getElementById('scDateHint');
+    if (hint) {
+      hint.style.display = isToday ? 'none' : 'block';
+      hint.textContent = `Checking a box logs it for ${label.textContent}, not today.`;
+    }
+    const input = document.getElementById('scDateInput');
+    if (input) { input.value = selectedCareDate; input.max = todayKey(); }
+  }
+  function stepsHtml(steps) {
+    return steps.length ? escapeHtml(steps.join(' + ')) : '<span style="color:var(--ink-soft)">—</span>';
+  }
+  function renderSkinRoutineCard() {
+    const el = document.getElementById('scRoutineCard');
+    if (!el) return;
+    const dow = parseKey(selectedCareDate).getDay();
+    const day = data.selfCare.skinRoutine[dow];
+    const log = skinLogFor(selectedCareDate);
+    const row = (period, icon, label, steps) => steps.length
+      ? `<div class="entry">
+           <button class="check ${log[period] ? 'done' : ''}" onclick="toggleSkinLog('${period}')" aria-label="Mark ${label.toLowerCase()} routine done"></button>
+           <div class="entry-body"><div class="entry-title">${icon} ${label}</div><div class="sc-steps">${escapeHtml(steps.join(' + '))}</div></div>
+         </div>`
+      : `<div class="entry"><div class="entry-body"><div class="entry-title">${icon} ${label}</div><div class="entry-sub">Nothing planned</div></div></div>`;
+    el.innerHTML = `<div class="card-title" style="margin-bottom:4px;">Routine for ${FULL_DAYS[dow]}</div>` +
+      row('am', '☀️', 'Morning', day.am) + row('pm', '🌙', 'Night', day.pm);
+  }
+  function parseSteps(text) {
+    return String(text || '').split(',').map(s => s.trim().slice(0, 40)).filter(Boolean).slice(0, 8);
+  }
+  function toggleSkinEdit() { skinEditing = !skinEditing; skinResetArmed = false; renderSkinWeek(); }
+  function saveSkinSchedule() {
+    const next = {};
+    for (let d = 0; d < 7; d++) {
+      next[d] = { am: parseSteps(document.getElementById(`scEdit-${d}-am`).value), pm: parseSteps(document.getElementById(`scEdit-${d}-pm`).value) };
+    }
+    data.selfCare.skinRoutine = next;
+    skinEditing = false; skinResetArmed = false;
+    saveData(); renderSelfCare(); renderTodaySelfCare();
+    showToast('Schedule saved');
+  }
+  function resetSkinSchedule() {
+    if (!skinResetArmed) { skinResetArmed = true; renderSkinWeek(); return; }   // first tap arms it, second tap does it
+    data.selfCare.skinRoutine = defaultSkinRoutine();
+    skinEditing = false; skinResetArmed = false;
+    saveData(); renderSelfCare(); renderTodaySelfCare();
+    showToast('Schedule reset to the default routine');
+  }
+  function renderSkinWeek() {
+    const el = document.getElementById('scWeek');
+    if (!el) return;
+    const btn = document.getElementById('scEditBtn');
+    if (btn) btn.textContent = skinEditing ? 'Cancel' : 'Edit';
+    if (!skinEditing) {
+      const sel = parseKey(selectedCareDate).getDay();
+      el.innerHTML = '<div class="sc-week-row head"><span></span><span>☀️ Morning</span><span>🌙 Night</span></div>' +
+        [0, 1, 2, 3, 4, 5, 6].map(d => {
+          const day = data.selfCare.skinRoutine[d];
+          return `<div class="sc-week-row${d === sel ? ' sel' : ''}"><span class="sc-day">${WEEKDAYS[d]}</span><span>${stepsHtml(day.am)}</span><span>${stepsHtml(day.pm)}</span></div>`;
+        }).join('');
+    } else {
+      el.innerHTML = '<div class="card-sub" style="margin-bottom:6px;">Separate steps with commas. Leave a box empty for a rest period.</div>' +
+        [0, 1, 2, 3, 4, 5, 6].map(d => {
+          const day = data.selfCare.skinRoutine[d];
+          return `<div class="sc-edit-day">
+            <div class="sc-edit-name">${FULL_DAYS[d]}</div>
+            <div class="field"><label>☀️ Morning</label><input type="text" id="scEdit-${d}-am" maxlength="120" value="${escapeAttr(day.am.join(', '))}"></div>
+            <div class="field"><label>🌙 Night</label><input type="text" id="scEdit-${d}-pm" maxlength="120" value="${escapeAttr(day.pm.join(', '))}"></div>
+          </div>`;
+        }).join('') +
+        `<div style="display:flex; gap:8px; margin-top:12px; flex-wrap:wrap;">
+           <button class="btn btn-sage" onclick="saveSkinSchedule()">Save schedule</button>
+           <button class="btn btn-ghost" ${skinResetArmed ? 'style="color:var(--danger); border-color:var(--danger);"' : ''} onclick="resetSkinSchedule()">${skinResetArmed ? 'Tap again to reset' : 'Reset to default'}</button>
+         </div>`;
+    }
+  }
+  function renderSkinAdherence() {
+    const el = document.getElementById('scAdherence');
+    if (!el) return;
+    const today = todayKey();
+    let amDone = 0, pmDone = 0, amPlanned = 0, pmPlanned = 0;
+    const cols = [];
+    for (let i = 6; i >= 0; i--) {
+      const key = dateKeyDaysAgo(i);
+      const dow = parseKey(key).getDay();
+      const plan = data.selfCare.skinRoutine[dow];
+      const log = skinLogFor(key);
+      const dot = period => {
+        if (!plan[period].length) return '<span class="sc-dot none"></span>';
+        if (period === 'am') amPlanned++; else pmPlanned++;
+        if (log[period]) { if (period === 'am') amDone++; else pmDone++; }
+        return `<span class="sc-dot${log[period] ? ' done' : ''}"></span>`;
+      };
+      cols.push(`<div class="sc-dot-col${key === today ? ' today' : ''}"><div class="sc-dot-day">${WEEKDAYS[dow][0]}</div>${dot('am')}${dot('pm')}</div>`);
+    }
+    el.innerHTML = `<div class="sc-dots">${cols.join('')}</div>
+      <div class="insight-line">☀️ ${amDone}/${amPlanned} mornings · 🌙 ${pmDone}/${pmPlanned} nights</div>
+      <div class="card-sub" style="text-align:center; margin-top:2px;">Top dot = morning, bottom dot = night</div>`;
+  }
+
+  // ----- care reminders (teeth, aesthetic treatments, health check-ups) -----
+  const careOpen = {};          // reminder id -> 'log' | 'history' | 'edit'
+  const careAddOpen = {};       // group -> true while its "add" form is showing
+  let careRemoveArmed = null;   // reminder id waiting for a second tap to confirm removal
+  function findCare(id) { return data.careReminders.find(r => r.id === id); }
+  function careLastDone(r) { return r.history.length ? r.history[0].date : null; }   // history is kept newest-first
+  // kind: none (never logged) | ok | upcoming (inside its lead time) | due (today) | overdue
+  function careStatus(r) {
+    const last = careLastDone(r);
+    if (!last) return { kind: 'none', badge: 'Not logged yet', last: null, next: null, days: null };
+    const next = dateToKey(addMonths(parseKey(last), r.months));
+    const days = daysBetweenKeys(todayKey(), next);
+    let kind, badge;
+    if (days < 0) { kind = 'overdue'; badge = `Overdue ${-days} day${days === -1 ? '' : 's'}`; }
+    else if (days === 0) { kind = 'due'; badge = 'Due today'; }
+    else if (days <= r.leadDays) { kind = 'upcoming'; badge = `Due in ${days} day${days === 1 ? '' : 's'}`; }
+    else { kind = 'ok'; badge = 'Next ' + formatDate(next); }
+    return { kind, badge, last, next, days };
+  }
+  // Reminders that need a look: overdue first (most overdue at the top), then due today, then soonest upcoming.
+  function careAttention() {
+    return data.careReminders.map(r => ({ r, st: careStatus(r) }))
+      .filter(x => x.st.kind === 'overdue' || x.st.kind === 'due' || x.st.kind === 'upcoming')
+      .sort((a, b) => a.st.days - b.st.days);
+  }
+
+  function openCarePanel(id, panel) {
+    careOpen[id] = careOpen[id] === panel ? null : panel;
+    careRemoveArmed = null;
+    renderCareAll();
+  }
+  function toggleCareAdd(group) { careAddOpen[group] = !careAddOpen[group]; renderCareGroup(group); }
+  function saveCareVisit(id) {
+    const r = findCare(id);
+    if (!r) return;
+    const date = document.getElementById('crDate-' + id).value || todayKey();
+    if (date > todayKey()) { showToast("Can't log a visit in the future"); return; }
+    if (r.history.some(h => h.date === date)) { showToast('That day is already logged'); return; }
+    r.history.push({ date, note: document.getElementById('crNote-' + id).value.trim().slice(0, 80) });
+    r.history.sort((a, b) => b.date.localeCompare(a.date));
+    careOpen[id] = null;
+    saveData(); renderCareAll();
+    showToast('Visit logged');
+  }
+  function deleteCareVisit(id, date) {
+    const r = findCare(id);
+    if (!r) return;
+    r.history = r.history.filter(h => h.date !== date);
+    saveData(); renderCareAll();
+  }
+  function saveCareEdit(id) {
+    const r = findCare(id);
+    if (!r) return;
+    const name = document.getElementById('crName-' + id).value.trim().slice(0, 50);
+    if (!name) { showToast('Give it a name first'); return; }
+    r.name = name;
+    r.months = parseInt(document.getElementById('crMonths-' + id).value, 10) || r.months;
+    r.leadDays = parseInt(document.getElementById('crLead-' + id).value, 10) || r.leadDays;
+    careOpen[id] = null; careRemoveArmed = null;
+    saveData(); renderCareAll();
+    showToast('Saved');
+  }
+  function removeCareReminder(id) {
+    if (careRemoveArmed !== id) { careRemoveArmed = id; renderCareAll(); return; }   // first tap arms it, second tap does it
+    data.careReminders = data.careReminders.filter(r => r.id !== id);
+    delete careOpen[id]; careRemoveArmed = null;
+    saveData(); renderCareAll();
+    showToast('Removed');
+  }
+  function addCareReminder(group) {
+    const name = document.getElementById('crNewName-' + group).value.trim().slice(0, 50);
+    if (!name) { showToast('Give it a name first'); return; }
+    data.careReminders.push({
+      id: 'cr-' + uid(), group, name,
+      months: parseInt(document.getElementById('crNewMonths-' + group).value, 10) || CARE_GROUPS[group].defaultMonths,
+      leadDays: parseInt(document.getElementById('crNewLead-' + group).value, 10) || CARE_GROUPS[group].defaultLead,
+      history: []
+    });
+    careAddOpen[group] = false;
+    saveData(); renderCareAll();
+    showToast('Added');
+  }
+
+  function carePanelHtml(r, panel) {
+    if (panel === 'log') {
+      return `<div class="cr-panel">
+        <div class="cr-form-row">
+          <div class="field"><label>Date of visit</label><input type="date" id="crDate-${r.id}" value="${todayKey()}" max="${todayKey()}"></div>
+          <div class="field"><label>Note (optional)</label><input type="text" id="crNote-${r.id}" maxlength="80" placeholder="Clinic, areas, cost…"></div>
+        </div>
+        <div class="cr-form-row"><button class="btn btn-sage" onclick="saveCareVisit('${r.id}')">Save visit</button><button class="btn btn-ghost" onclick="openCarePanel('${r.id}', null)">Cancel</button></div>
+      </div>`;
+    }
+    if (panel === 'history') {
+      return `<div class="cr-panel">${r.history.length
+        ? r.history.map(x => `<div class="entry"><div class="entry-body"><div class="entry-title">${longDate(x.date)}</div>${x.note ? `<div class="entry-sub">${escapeHtml(x.note)}</div>` : ''}</div><button class="entry-del" onclick="deleteCareVisit('${r.id}','${x.date}')" aria-label="Delete this visit">✕</button></div>`).join('')
+        : '<div class="empty-note">No visits logged yet.</div>'}</div>`;
+    }
+    if (panel === 'edit') {
+      const armed = careRemoveArmed === r.id;
+      return `<div class="cr-panel">
+        <div class="field" style="margin-bottom:8px;"><label>Name</label><input type="text" id="crName-${r.id}" maxlength="50" value="${escapeAttr(r.name)}"></div>
+        <div class="cr-form-row">
+          <div class="field"><label>Repeats</label><select id="crMonths-${r.id}">${optionsHtml(CARE_MONTH_CHOICES, r.months, monthLabel)}</select></div>
+          <div class="field"><label>Remind me</label><select id="crLead-${r.id}">${optionsHtml(CARE_LEAD_CHOICES, r.leadDays, leadLabel)}</select></div>
+        </div>
+        <div class="cr-form-row">
+          <button class="btn btn-sage" onclick="saveCareEdit('${r.id}')">Save</button>
+          <button class="btn btn-ghost" onclick="openCarePanel('${r.id}', null)">Cancel</button>
+          <button class="btn btn-ghost" style="color:var(--danger); border-color:var(--danger);" onclick="removeCareReminder('${r.id}')">${armed ? 'Tap again to remove' : 'Remove'}</button>
+        </div>
+      </div>`;
+    }
+    return '';
+  }
+  function careRowHtml(r) {
+    const st = careStatus(r);
+    const panel = careOpen[r.id] || null;
+    const bits = [`Every ${intervalLabel(r.months)}`, st.last ? `Last: ${longDate(st.last)}` : 'No visit logged yet'];
+    if (st.next) bits.push(`Next: ${longDate(st.next)}`);
+    const btn = (p, label) => `<button class="news-lang-btn${panel === p ? ' on' : ''}" onclick="openCarePanel('${r.id}','${p}')">${label}</button>`;
+    return `<div class="cr-row">
+      <div class="cr-head"><div class="cr-title">${escapeHtml(r.name)}</div><div class="wb-due-badge ${st.kind}">${escapeHtml(st.badge)}</div></div>
+      <div class="cr-sub">${escapeHtml(bits.join(' · '))}</div>
+      <div class="cr-actions">${btn('log', '✓ Log visit')}${btn('history', `History (${r.history.length})`)}${btn('edit', 'Edit')}</div>
+      ${panel ? carePanelHtml(r, panel) : ''}
+    </div>`;
+  }
+  function careAddHtml(group) {
+    const cfg = CARE_GROUPS[group];
+    if (!careAddOpen[group]) return `<div class="cr-add"><button class="news-lang-btn" onclick="toggleCareAdd('${group}')">＋ Add</button></div>`;
+    return `<div class="cr-panel">
+      <div class="field" style="margin-bottom:8px;"><label>Name</label><input type="text" id="crNewName-${group}" maxlength="50" placeholder="${escapeAttr(cfg.placeholder)}"></div>
+      <div class="cr-form-row">
+        <div class="field"><label>Repeats</label><select id="crNewMonths-${group}">${optionsHtml(CARE_MONTH_CHOICES, cfg.defaultMonths, monthLabel)}</select></div>
+        <div class="field"><label>Remind me</label><select id="crNewLead-${group}">${optionsHtml(CARE_LEAD_CHOICES, cfg.defaultLead, leadLabel)}</select></div>
+      </div>
+      <div class="cr-form-row"><button class="btn btn-sage" onclick="addCareReminder('${group}')">Add</button><button class="btn btn-ghost" onclick="toggleCareAdd('${group}')">Cancel</button></div>
+    </div>`;
+  }
+  function renderCareGroup(group) {
+    const el = document.getElementById('careList-' + group);
+    if (!el) return;
+    const list = data.careReminders.filter(r => r.group === group);
+    el.innerHTML = (list.length ? list.map(careRowHtml).join('') : '<div class="empty-note">Nothing here yet.</div>') + careAddHtml(group);
+  }
+  function toggleHealthCare() {
+    const card = document.getElementById('healthCareCard');
+    if (card) card.classList.toggle('open');
+  }
+  // The Health page keeps check-ups in a collapsed card; its header shows the most urgent status at a glance.
+  function renderHealthCareSummary() {
+    const nameEl = document.getElementById('healthCareName'), sumEl = document.getElementById('healthCareSummary');
+    if (!nameEl || !sumEl) return;
+    const list = data.careReminders.filter(r => r.group === 'health').map(r => ({ r, st: careStatus(r) }));
+    if (!list.length) { nameEl.textContent = 'Check-ups'; sumEl.textContent = ''; return; }
+    const urgent = list.filter(x => x.st.kind === 'overdue' || x.st.kind === 'due' || x.st.kind === 'upcoming').sort((a, b) => a.st.days - b.st.days)[0];
+    const pick = urgent || list[0];
+    nameEl.textContent = list.length === 1 ? pick.r.name : 'Check-ups';
+    sumEl.textContent = (list.length === 1 ? '' : pick.r.name + ': ') + pick.st.badge;
+  }
+
+  function renderTodaySelfCare() {
+    const el = document.getElementById('scTodayCard');
+    if (!el) return;
+    const key = todayKey();
+    const dow = parseKey(key).getDay();
+    const day = data.selfCare.skinRoutine[dow];
+    const log = skinLogFor(key);
+    const row = (period, icon, label, steps) => steps.length
+      ? `<div class="entry">
+           <button class="check ${log[period] ? 'done' : ''}" onclick="toggleSkinLogOn('${key}','${period}')" aria-label="Mark ${label.toLowerCase()} routine done"></button>
+           <div class="entry-body"><div class="entry-title">${icon} ${label}</div><div class="sc-steps">${escapeHtml(steps.join(' + '))}</div></div>
+         </div>`
+      : '';
+    const rows = row('am', '☀️', 'Morning', day.am) + row('pm', '🌙', 'Night', day.pm);
+    const att = careAttention();
+    const attHtml = att.slice(0, 2).map(x =>
+      `<div class="sc-attn" onclick="goTo('${x.r.group === 'health' ? 'health' : 'selfcare'}')"><span>${CARE_GROUPS[x.r.group].icon}</span><span>${escapeHtml(x.r.name)} — ${escapeHtml(x.st.badge.toLowerCase())}</span></div>`).join('') +
+      (att.length > 2 ? `<div class="sc-attn" onclick="goTo('selfcare')"><span>➕</span><span>${att.length - 2} more</span></div>` : '');
+    el.innerHTML = `<div class="card-title" style="cursor:pointer; margin-bottom:4px;" onclick="goTo('selfcare')">💗 Self-care · ${FULL_DAYS[dow]} →</div>` +
+      (rows || '<div class="card-sub" style="margin:6px 0;">Rest day — nothing planned for your face.</div>') + attHtml;
+  }
+
+  function renderCareAll() {
+    renderCareGroup('teeth'); renderCareGroup('aesthetic'); renderCareGroup('health');
+    renderHealthCareSummary();
+    renderTodaySelfCare();
+  }
+  function renderSelfCare() {
+    renderCareDateLabel();
+    renderSkinRoutineCard();
+    renderSkinWeek();
+    renderSkinAdherence();
+    renderCareGroup('teeth');
+    renderCareGroup('aesthetic');
+  }
+
   // ---------- More / pillars ----------
   const OTHER_PILLARS = [
     { icon: '🪙', name: 'Wealth' },
     { icon: '📖', name: 'Knowledge' },
     { icon: '🌤️', name: 'Well-being', view: 'wellbeing' },
     { icon: '🧭', name: 'Career' },
-    { icon: '🌷', name: 'Love & Self-Care' },
+    { icon: '🌷', name: 'Love & Self-Care', view: 'selfcare' },
     { icon: '🎨', name: 'Hobbies' },
     { icon: '🕊️', name: 'Mind' },
     { icon: '📰', name: 'News', view: 'news' }
@@ -2580,7 +3156,11 @@
   }
   function addMonths(dateObj, n) {
     const d = new Date(dateObj);
+    const day = d.getDate();
+    d.setDate(1);                                   // avoid overflowing into the next month while we move
     d.setMonth(d.getMonth() + n);
+    const lastDay = new Date(d.getFullYear(), d.getMonth() + 1, 0).getDate();
+    d.setDate(Math.min(day, lastDay));              // 31 Aug + 6 months -> 28 Feb
     return d;
   }
   function sameDay(a, b) {
